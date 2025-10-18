@@ -57,7 +57,7 @@ void Cola::encolar(Pedido pd)
     final= nuevo;
     if(!frente) frente = nuevo;
 }
-
+//Desencolar
 Pedido Cola::desencolar()
 {
     pNodo nodo;
