@@ -1,6 +1,5 @@
 #include <iostream>
 
-
 using namespace std;
 bool esEntero(string entrada){
     if(entrada.empty())return false;
@@ -54,4 +53,5 @@ int main()
     cout<<"Fin del programa."<<endl<<endl;
     return 0;
 }
+
 
