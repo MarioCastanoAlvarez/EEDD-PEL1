@@ -4,7 +4,7 @@
 //Creación de estructura Pedido
 struct Pedido{
     int id_editorial;
-    int id_pedido;
+    string id_pedido;
     string cod_libro;
     string materia;
     int unidades;
