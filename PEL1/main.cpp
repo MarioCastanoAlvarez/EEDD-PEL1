@@ -1,5 +1,4 @@
 #include <iostream>
-//NOTAS: El programa no esta protegido contra la introducci�n de car�cteres no v�lidos para ser registrados como integers (ej: "a").
 
 using namespace std;
 bool esEntero(string entrada){
@@ -54,3 +53,5 @@ int main()
     cout<<"Fin del programa."<<endl<<endl;
     return 0;
 }
+
+
