@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 bool esEntero(string entrada){
@@ -9,6 +10,7 @@ bool esEntero(string entrada){
 };
 int main()
 {
+    srand(time(NULL));
     string entrada;
     int i;
     do{
