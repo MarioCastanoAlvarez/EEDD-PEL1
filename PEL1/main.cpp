@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include "editorial.h"
 
 using namespace std;
 bool esEntero(string entrada);
@@ -42,14 +43,18 @@ int main()
         case 0:
             cout<<"Se ha elegido: 0) Salir"<<endl<<endl;
             break;
-        case 1:
-            cout<<"Introduzca la cantidad de pedidos que desea generar"<<endl
-            getline(cin, npedidos); cout<<endl;
+        case 1:{
+        string npedidos;
+            cout<<"Introduzca la cantidad de pedidos que desea generar"<<endl;
+            getline(cin, npedidos);
+
             if (esEntero(npedidos)) {
-                for (int j; j<npedidos; j++) {QIniciado::encolar(opcion1()); cout<<pedido.estado<<endl;}
+
+                for (int j; j<std::stoi(npedidos); j++) {/*QIniciado.encolar(opcion1());**/}
             }
             cout<<"Se ha elegido: 1) Generar N pedidos"<<endl<<endl;
             break;
+        }
         case 2:
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
             break;

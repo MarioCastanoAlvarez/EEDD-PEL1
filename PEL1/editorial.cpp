@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctime>
+#include "editorial.h"
 
 using namespace std;
 
@@ -63,7 +64,7 @@ int unidadesRandom(){
 
 //Funciones de ejecución segun la opcion seleccionada en el menu.
 //Fucion si se elige la opcion 1.
-void opcion1(){
+Pedido opcion1(){
 //    string entrada;
 //    int i;
 //    cout<<"N: "<<endl;
@@ -77,7 +78,9 @@ void opcion1(){
         p.cod_libro=cod_libroRandom();
         p.materia=materiaRandom();
         p.unidades=unidadesRandom();
+
+        return p;
 //    };
-    cout<<"Generados "<<i<<" pedidos en QIniciado."<<endl;
+//    cout<<"Generados "<<i<<" pedidos en QIniciado."<<endl;
     cout<<"QIniciado: "<<endl;
 };
