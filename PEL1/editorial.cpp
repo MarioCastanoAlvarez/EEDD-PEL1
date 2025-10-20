@@ -20,7 +20,7 @@ int digitoRandom(){
 
 //Devuleve un int (0-9) aleatorio que representa la id de la editorial. Está comprobado que funciona correctamente.
 int id_editorialRandom(){
-    int resultado = digitoRandom();
+    int resultado = rand()%LIBRERIAS;
     return resultado;
 };
 
@@ -64,5 +64,20 @@ int unidadesRandom(){
 //Funciones de ejecución segun la opcion seleccionada en el menu.
 //Fucion si se elige la opcion 1.
 void opcion1(){
-
+    string entrada;
+    int i;
+    cout<<"N: "<<endl;
+    getline(cin, entrada); cout<<endl;
+    if (esEntero(entrada)){
+        i = stoi(entrada);};
+    for (i;0<i;--i){
+        Pedido p;
+        p.id_editorial=id_editorialRandom();
+        p.id_pedido=id_pedidoRandom();
+        p.cod_libro=cod_libroRandom();
+        p.materia=materiaRandom();
+        p.unidades=unidadesRandom();
+    };
+    cout<<"Generados "<<i<<" pedidos en QIniciado."<<endl;
+    cout<<"QIniciado: "<<endl;
 };
