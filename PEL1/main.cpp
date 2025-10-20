@@ -2,12 +2,8 @@
 #include <ctime>
 
 using namespace std;
-bool esEntero(string entrada){
-    if(entrada.empty())return false;
-    for (char c : entrada){
-        if(!isdigit(c))return false;
-    } return true;
-};
+bool esEntero(string entrada);
+
 int main()
 {
     srand(time(NULL));

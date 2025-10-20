@@ -1,11 +1,16 @@
-struct Pedido{
-    int id_editorial;
-    string id_pedido;
-    string cod_libro;
-    string materia;
-    int unidades;
-    string estado;
+#include <iostream>
+#include <ctime>
+
+using namespace std;
+
+//Funcion para verificar si una entrada es un entero o no.
+bool esEntero(string entrada){
+    if(entrada.empty())return false;
+    for (char c : entrada){
+        if(!isdigit(c))return false;
+    } return true;
 };
+
 //Todas las funcionas que generan de forma aleatoria los atributos previos. Para todas estas funciones, debe estar la linea de codigo "srand(time(NULL));" en el main().
 //Funcion auxiliar que genera un digito (0-9) aleatorio. Está comprobado que funciona correctamente.
 int digitoRandom(){
@@ -40,7 +45,6 @@ string cod_libroRandom(){
 };
 
 //Devuleve un string aleatorio que representa una materia de entre las siguietes: Matemáticas, Física, Tecnología, Música, Historia y Lengua. Está comprobado que funciona correctamente.
-string cod_libroRandom(){
 string materiaRandom(){
     string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
     string resultado = materias[rand()%6];
@@ -54,4 +58,11 @@ int unidadesRandom(){
 };
 
 //Obviamente no hay funcion de generación aleatoria de "estado".
+//Fin de las funcionas que generan de forma aleatoria los atributos previos.
 
+
+//Funciones de ejecución segun la opcion seleccionada en el menu.
+//Fucion si se elige la opcion 1.
+void opcion1(){
+
+};
