@@ -1,6 +1,28 @@
 #ifndef CABECERA_H_INCLUDED
 #define CABECERA_H_INCLUDED
 
+//Definicion de constantes
+#define MAX_TITULOS 10
+#define N_PEDIDOS_PASO 12
+#define TAM_LOTE 10
+#define LIBRERIAS 6
+#define CAP_CAJA 5
+
+//Prototipos de funciones
+bool esEntero(string entrada);
+int digitoRandom();
+int id_editorialRandom();
+string id_pedidoRandom();
+string cod_libroRandom();
+string materiaRandom();
+int unidadesRandom();
+void opcion1();
+void opcion2();
+void opcion3();
+void opcion4();
+void opcion5();
+
+
 //Creación de estructura Pedido
 struct Pedido{
     int id_editorial;

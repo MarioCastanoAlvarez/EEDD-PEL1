@@ -6,6 +6,21 @@ bool esEntero(string entrada);
 
 int main()
 {
+    Cola QIniciado;
+    Cola QAlmacen;
+    Cola QImprenta;
+    Cola QListo;
+
+    Pila PCaja0;
+    Pila PCaja1;
+    Pila PCaja2;
+    Pila PCaja3;
+    Pila PCaja4;
+    Pila PCaja5;
+
+    Pila PStock;
+
+
     srand(time(NULL));
     string entrada;
     int i;
@@ -28,6 +43,11 @@ int main()
             cout<<"Se ha elegido: 0) Salir"<<endl<<endl;
             break;
         case 1:
+            cout<<"Introduzca la cantidad de pedidos que desea generar"<<endl
+            getline(cin, npedidos); cout<<endl;
+            if (esEntero(npedidos)) {
+                for (int j; j<npedidos; j++) {QIniciado::encolar(opcion1()); cout<<pedido.estado<<endl;}
+            }
             cout<<"Se ha elegido: 1) Generar N pedidos"<<endl<<endl;
             break;
         case 2:
