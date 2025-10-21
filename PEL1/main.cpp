@@ -45,27 +45,25 @@ int main()
             cout<<"Se ha elegido: 0) Salir"<<endl<<endl;
             break;
         case 1:{
-            while (comp){
+            bool valido=false;
+            while (!valido){
             string npedidos;
-            cout<<"Introduzca la cantidad de pedidos que desea generar"<<endl;
+            cout<<"Introduzca la cantidad de pedidos que desea generar: ";
             getline(cin, npedidos);
 
 
             if (esEntero(npedidos)) {
 
-                for (int j; j<stoi(npedidos); j++) {
+                for (int j=0; j<stoi(npedidos); j++) {
                         pedido_aux = opcion1();
                         QIniciado.encolar(pedido_aux);
-                        comp = false
-                } else {
-                    printf("Por favor, introduzca un numero entero.")
-                }
+                        }valido=true;
+            }
+            else{
+                cout<<"Se ha introducido un valor no valido. Porfavor, introduzca un valor entero."<<endl<<endl;
+            }
+            }break;}
 
-            }
-            cout<<"Se ha elegido: 1) Generar N pedidos"<<endl<<endl;
-            break;
-            }
-        }
         case 2:
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
             break;
