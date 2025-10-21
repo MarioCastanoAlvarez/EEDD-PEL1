@@ -25,6 +25,7 @@ int main()
     srand(time(NULL));
     string entrada;
     int i;
+    Pedido pedido_aux;
     do{
     cout<<"=== MENU ==="<<endl
     <<"1) Generar N pedidos"<<endl
@@ -44,16 +45,26 @@ int main()
             cout<<"Se ha elegido: 0) Salir"<<endl<<endl;
             break;
         case 1:{
-        string npedidos;
+            while (comp){
+            string npedidos;
             cout<<"Introduzca la cantidad de pedidos que desea generar"<<endl;
             getline(cin, npedidos);
 
+
             if (esEntero(npedidos)) {
 
-                for (int j; j<std::stoi(npedidos); j++) {/*QIniciado.encolar(opcion1());**/}
+                for (int j; j<stoi(npedidos); j++) {
+                        pedido_aux = opcion1();
+                        QIniciado.encolar(pedido_aux);
+                        comp = false
+                } else {
+                    printf("Por favor, introduzca un numero entero.")
+                }
+
             }
             cout<<"Se ha elegido: 1) Generar N pedidos"<<endl<<endl;
             break;
+            }
         }
         case 2:
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
