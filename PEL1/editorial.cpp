@@ -94,6 +94,32 @@ Pedido Cola::desencolar()
 Cola::~Cola(){
     while(frente) desencolar();
 }
+
+//Funcion para obtener el frente de la cola
+Pedido Cola::getFrente()
+{
+    return frente->pedido;
+}
+
+//Funcion para imprimir cada elemnto de la cola con sus atributos
+void Cola::imprimirCola()
+{
+    cout << "------------------------------------------------" << endl;
+    cout << setw(3) << "Lib|" << setw(8) << "Id|"
+    << setw(8) << "Codigo|" << setw(13) << "Materia|" << setw(4)
+    << "U|" << setw(11) << "Estado|" << endl;
+    cout << "------------------------------------------------" << endl;
+    pNodo nodo_aux = frente;
+    while(nodo_aux){
+
+    cout << " " << setw(2) << nodo_aux->pedido.id_editorial << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
+    << setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(3)
+    << nodo_aux->pedido.unidades << "|" << setw(10) << nodo_aux->pedido.estado << "|" << endl;
+
+    nodo_aux = nodo_aux -> siguiente;
+
+    }
+}
 //Funciones de Pilas.
 //Funcion apilar.
 void Pila::apilar(Pedido pd)
