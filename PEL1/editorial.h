@@ -69,8 +69,7 @@ class Cola
         pNodo frente, final;
 };
 
-Cola::~Cola()
-{
+Cola::~Cola(){
     while(frente) desencolar();
 }
 
@@ -129,7 +128,7 @@ Pedido Pila::desapilar()
 {
     pNodo nodo;
     Pedido pd;
-    Pedido vacio = {0,0,"","",0,""};
+    Pedido vacio = {0,"","","",0,""};
 
     if(!cima) return vacio;
 

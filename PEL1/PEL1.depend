@@ -4,11 +4,15 @@
 
 1760425220 source:c:\users\admin\documents\c++\pel1\editorial.cpp
 
-1760810031 source:c:\users\admin\documents\github\eedd-pel1\pel1\editorial.cpp
-
-1760972377 source:c:\users\admin\documents\github\eedd-pel1\pel1\main.cpp
+1761026766 source:c:\users\admin\documents\github\eedd-pel1\pel1\editorial.cpp
 	<iostream>
 	<ctime>
+	"editorial.h"
+
+1761026766 source:c:\users\admin\documents\github\eedd-pel1\pel1\main.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
 
 1760994979 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.cpp
 	<iostream>
@@ -16,4 +20,6 @@
 	"editorial.h"
 
 1760995347 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.h
+
+1761027004 c:\users\admin\documents\github\eedd-pel1\pel1\editorial.h
 
