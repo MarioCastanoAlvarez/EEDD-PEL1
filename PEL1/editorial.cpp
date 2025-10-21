@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include "editorial.h"
+#include "iomanip"
 
 using namespace std;
 

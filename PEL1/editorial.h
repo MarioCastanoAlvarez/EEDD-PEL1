@@ -64,6 +64,8 @@ class Cola
         ~Cola();
         void encolar(Pedido pd);
         Pedido desencolar();
+        Pedido getFrente();
+        void imprimirCola();
 
     private:
         pNodo frente, final;

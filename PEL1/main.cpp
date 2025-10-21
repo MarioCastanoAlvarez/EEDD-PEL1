@@ -56,12 +56,15 @@ int main()
 
                 for (int j=0; j<stoi(npedidos); j++) {
                         pedido_aux = opcion1();
+                        pedido_aux.estado = "Iniciado";
                         QIniciado.encolar(pedido_aux);
                         }valido=true;
             }
             else{
                 cout<<"Se ha introducido un valor no valido. Porfavor, introduzca un valor entero."<<endl<<endl;
             }
+            cout << "QIniciado:" << endl;
+            QIniciado.imprimirCola();
             }break;}
 
         case 2:
