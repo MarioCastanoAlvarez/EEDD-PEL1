@@ -61,6 +61,73 @@ int unidadesRandom(){
 //Obviamente no hay funcion de generación aleatoria de "estado".
 //Fin de las funcionas que generan de forma aleatoria los atributos previos.
 
+//Funciones de Colas.
+//Funcion encolar.
+void Cola::encolar(Pedido pd)
+{
+    pNodo nuevo;
+    nuevo = new Nodo(pd);
+
+    if(final) final->siguiente = nuevo;
+    final= nuevo;
+    if(!frente) frente = nuevo;
+}
+
+//Funcion desencolar.
+Pedido Cola::desencolar()
+{
+    pNodo nodo;
+    Pedido pd;
+    Pedido vacio = {0,0,"","",0,""};
+    if (!frente) return vacio; //Evita el acceso a un nodo vacío.
+    nodo = frente;
+    frente = nodo->siguiente;
+    pd = nodo->pedido;
+
+    delete nodo;
+
+    if(!frente) final = NULL;
+    return pd;
+}
+
+//Funcion destructor.
+Cola::~Cola(){
+    while(frente) desencolar();
+}
+//Funciones de Pilas.
+//Funcion apilar.
+void Pila::apilar(Pedido pd)
+{
+    pNodo nuevo;
+
+    nuevo = new Nodo(pd, cima);
+
+    cima = nuevo;
+}
+
+//Funcion desapilar.
+Pedido Pila::desapilar()
+{
+    pNodo nodo;
+    Pedido pd;
+    Pedido vacio = {0,"","","",0,""};
+
+    if(!cima) return vacio;
+
+    nodo = cima;
+    cima = nodo->siguiente;
+    pd = nodo->pedido;
+
+    delete nodo;
+    return pd;
+}
+
+
+//Funcion destructor.
+Pila::~Pila()
+{
+    while(cima) desapilar();
+}
 
 //Funciones de ejecución segun la opcion seleccionada en el menu.
 //Fucion si se elige la opcion 1.

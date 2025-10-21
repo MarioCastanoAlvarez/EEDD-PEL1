@@ -69,34 +69,7 @@ class Cola
         pNodo frente, final;
 };
 
-Cola::~Cola(){
-    while(frente) desencolar();
-}
 
-void Cola::encolar(Pedido pd)
-{
-    pNodo nuevo;
-    nuevo = new Nodo(pd);
-
-    if(final) final->siguiente = nuevo;
-    final= nuevo;
-    if(!frente) frente = nuevo;
-}
-//Desencolar
-Pedido Cola::desencolar()
-{
-    pNodo nodo;
-    Pedido pd;
-    Pedido vacio = {0,0,"","",0,""};
-    nodo = frente;
-    frente = nodo->siguiente;
-    pd = nodo->pedido;
-
-    delete nodo;
-
-    if(!frente) final = NULL;
-    return pd;
-}
 
 //Creación de clase pila
 class Pila
@@ -110,35 +83,7 @@ class Pila
         Pedido desapilar();
 };
 
-Pila::~Pila()
-{
-    while(cima) desapilar();
-}
 
-void Pila::apilar(Pedido pd)
-{
-    pNodo nuevo;
-
-    nuevo = new Nodo(pd, cima);
-
-    cima = nuevo;
-}
-
-Pedido Pila::desapilar()
-{
-    pNodo nodo;
-    Pedido pd;
-    Pedido vacio = {0,"","","",0,""};
-
-    if(!cima) return vacio;
-
-    nodo = cima;
-    cima = nodo->siguiente;
-    pd = nodo->pedido;
-
-    delete nodo;
-    return pd;
-}
 
 #endif // CABECERA_H_INCLUDED
 
