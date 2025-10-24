@@ -79,7 +79,7 @@ Pedido Cola::desencolar()
 {
     pNodo nodo;
     Pedido pd;
-    Pedido vacio = {0,0,"","",0,""};
+    Pedido vacio = VACIO;
     if (!frente) return vacio; //Evita el acceso a un nodo vacío.
     nodo = frente;
     frente = nodo->siguiente;
@@ -99,9 +99,23 @@ Cola::~Cola(){
 //Funcion para obtener el frente de la cola
 Pedido Cola::getFrente()
 {
-    return frente->pedido;
+    Pedido pd = frente->pedido;
+
+    if (!frente){ return VACIO; }
+    else { return pd; }
 }
 
+int Cola::contarCola()
+{
+    pNodo nodo_aux = frente;
+    int contador = 0;
+    while (nodo_aux){
+        contador++;
+        nodo_aux = nodo_aux -> siguiente;
+    }
+    return contador;
+
+}
 //Funcion para imprimir cada elemnto de la cola con sus atributos
 void Cola::imprimirCola()
 {
@@ -137,7 +151,7 @@ Pedido Pila::desapilar()
 {
     pNodo nodo;
     Pedido pd;
-    Pedido vacio = {0,"","","",0,""};
+    Pedido vacio = VACIO;
 
     if(!cima) return vacio;
 

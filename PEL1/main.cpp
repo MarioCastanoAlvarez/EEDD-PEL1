@@ -24,7 +24,7 @@ int main()
 
     srand(time(NULL));
     string entrada;
-    int i;
+    int i = -1;
     Pedido pedido_aux;
     do{
     cout<<"=== MENU ==="<<endl
@@ -45,13 +45,16 @@ int main()
             cout<<"Se ha elegido: 0) Salir"<<endl<<endl;
             break;
         case 1:{
+
             bool valido=false;
             while (!valido){
+
+            //Numero de pedidos a generar
             string npedidos;
             cout<<"Introduzca la cantidad de pedidos que desea generar: ";
             getline(cin, npedidos);
 
-
+            //Bucle que genera pedidos y los mete en la cola de iniciado
             if (esEntero(npedidos)) {
 
                 for (int j=0; j<stoi(npedidos); j++) {
@@ -65,11 +68,33 @@ int main()
             }
             cout << "QIniciado:" << endl;
             QIniciado.imprimirCola();
-            }break;}
-
-        case 2:
-            cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
+            }
             break;
+            }
+
+        case 2:{
+            cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
+            int npedidos = QIniciado.contarCola();
+
+            //Bucle que pasa pedidos de la cola "Iniciado" a la cola "Almacen"
+            if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
+                if (npedidos < N_PEDIDOS_PASO) {
+                    for (int j = 0; j < npedidos; j++){
+                        Pedido pedido = QIniciado.desencolar();
+                        QAlmacen.encolar(pedido);
+                    }
+                } else {
+                    for (int j = 0; j < N_PEDIDOS_PASO; j++) {
+                        Pedido pedido = QIniciado.desencolar();
+                        QAlmacen.encolar(pedido);
+                    }
+                }
+            }
+
+            QAlmacen.imprimirCola();
+            //Bulce que pasa pedidos de la cola
+            break;
+            }
         case 3:
             cout<<"Se ha elegido: 3) Mostrar estado "<<endl<<endl;
             break;

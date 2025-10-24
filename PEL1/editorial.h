@@ -9,6 +9,7 @@ using namespace std;
 #define TAM_LOTE 10
 #define LIBRERIAS 6
 #define CAP_CAJA 5
+#define VACIO Pedido{0, "", "", "", 0, ""}
 
 //Creación de estructura Pedido
 struct Pedido{
@@ -65,6 +66,7 @@ class Cola
         void encolar(Pedido pd);
         Pedido desencolar();
         Pedido getFrente();
+        int contarCola();
         void imprimirCola();
 
     private:
