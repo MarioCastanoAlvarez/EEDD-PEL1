@@ -26,13 +26,13 @@ int main()
     string entrada;
     int i = -1;
     Pedido pedido_aux;
+    PStock.generarStock();
     do{
     cout<<"=== MENU ==="<<endl
     <<"1) Generar N pedidos"<<endl
     <<"2) Paso (una FASE)"<<endl
     <<"3) Mostrar estado"<<endl
-    <<"4) Paso COMPLETO (4 fases)"<<endl
-    <<"5) Ver caja de una libreria"<<endl
+    <<"4) Ver caja de una libreria"<<endl
     <<"0) Salir"<<endl<<endl
     <<"Opcion: ";
 
@@ -58,7 +58,7 @@ int main()
             if (esEntero(npedidos)) {
 
                 for (int j=0; j<stoi(npedidos); j++) {
-                        pedido_aux = opcion1();
+                        pedido_aux = generarPedido();
                         pedido_aux.estado = "Iniciado";
                         QIniciado.encolar(pedido_aux);
                         }valido=true;
@@ -81,27 +81,43 @@ int main()
                 if (npedidos < N_PEDIDOS_PASO) {
                     for (int j = 0; j < npedidos; j++){
                         Pedido pedido = QIniciado.desencolar();
+                        pedido.estado = "Almacen";
                         QAlmacen.encolar(pedido);
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
                         Pedido pedido = QIniciado.desencolar();
+                        pedido.estado = "Almacen";
                         QAlmacen.encolar(pedido);
                     }
                 }
             }
-
-            QAlmacen.imprimirCola();
-            //Bulce que pasa pedidos de la cola
+            //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
+            //en funcion de la necesidad de impresion de mas copias
             break;
             }
         case 3:
             cout<<"Se ha elegido: 3) Mostrar estado "<<endl<<endl;
+
+            //Se imprimen todas las colas
+            cout << "QIniciado:" << endl;
+            QIniciado.imprimirCola();
+
+            cout << "QAlmacen:" << endl;
+            QAlmacen.imprimirCola();
+
+            cout << "QImprenta:" << endl;
+            QImprenta.imprimirCola();
+
+            cout << "QListo:" << endl;
+            QListo.imprimirCola();
+
+            //Se imprime el stock
+            cout << "== Stock ==" << endl;
+            PStock.imprimirStock();
+
             break;
         case 4:
-            cout<<"Se ha elegido: 4) Paso COMPLETO (4 fases)"<<endl<<endl;
-            break;
-        case 5:
             cout<<"Se ha elegido: 5) Ver caja de una libreria"<<endl<<endl;
             break;
         default:

@@ -29,11 +29,8 @@ string id_pedidoRandom();
 string cod_libroRandom();
 string materiaRandom();
 int unidadesRandom();
-Pedido opcion1();
-void opcion2();
-void opcion3();
-void opcion4();
-void opcion5();
+Pedido generarPedido();
+
 
 
 
@@ -85,6 +82,9 @@ class Pila
         ~Pila();
         void apilar(Pedido pd);
         Pedido desapilar();
+        void generarStock();
+        void imprimirStock();
+        void imprimirPila();
 };
 
 

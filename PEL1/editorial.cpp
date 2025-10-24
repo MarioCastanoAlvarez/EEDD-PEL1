@@ -105,6 +105,7 @@ Pedido Cola::getFrente()
     else { return pd; }
 }
 
+//Funcion para contar elementos de una Cola
 int Cola::contarCola()
 {
     pNodo nodo_aux = frente;
@@ -134,6 +135,7 @@ void Cola::imprimirCola()
     nodo_aux = nodo_aux -> siguiente;
 
     }
+    cout << endl;
 }
 //Funciones de Pilas.
 //Funcion apilar.
@@ -170,9 +172,55 @@ Pila::~Pila()
     while(cima) desapilar();
 }
 
+//Funcion para imprimir cada elemento de una pila
+void Pila::imprimirPila()
+{
+    cout << "------------------------------------------------" << endl;
+    cout << setw(3) << "Lib|" << setw(8) << "Id|"
+    << setw(8) << "Codigo|" << setw(13) << "Materia|" << setw(4)
+    << "U|" << setw(11) << "Estado|" << endl;
+    cout << "------------------------------------------------" << endl;
+    pNodo nodo_aux = cima;
+    while(nodo_aux){
+
+    cout << " " << setw(2) << nodo_aux->pedido.id_editorial << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
+    << setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(3)
+    << nodo_aux->pedido.unidades << "|" << setw(10) << nodo_aux->pedido.estado << "|" << endl;
+
+    nodo_aux = nodo_aux -> siguiente;
+
+    }
+    cout << endl;
+}
+//Funcion para generar un stock (Pila)
+void Pila::generarStock()
+{
+    for (int i = 0; i < (digitoRandom()*7); i++){ apilar(generarPedido()); }
+}
+
+//Funcion para imprimr cada elemento del stock
+void Pila::imprimirStock()
+{
+    cout << "----------------------------------" << endl;
+    cout << setw(9) << "Codigo|" << setw(13) << "Materia|" << setw(12)
+    << "Unidades|" << endl;
+    cout << "----------------------------------" << endl;
+
+    pNodo nodo_aux = cima;
+    while(nodo_aux){
+
+    cout << " " <<  setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(11)
+    << nodo_aux->pedido.unidades << "|"<< endl;
+
+    nodo_aux = nodo_aux -> siguiente;
+
+    }
+    cout << endl;
+}
+
 //Funciones de ejecución segun la opcion seleccionada en el menu.
 //Fucion si se elige la opcion 1.
-Pedido opcion1(){
+Pedido generarPedido(){
 //    string entrada;
 //    int i;
 //    cout<<"N: "<<endl;
