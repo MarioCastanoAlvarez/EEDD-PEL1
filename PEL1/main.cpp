@@ -74,9 +74,14 @@ int main()
 
         case 2:{
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
-            int npedidos = QIniciado.contarCola();
+
+
+            //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
+            //en funcion de la necesidad de impresion de mas copias
+
 
             //Bucle que pasa pedidos de la cola "Iniciado" a la cola "Almacen"
+            int npedidos = QIniciado.contarCola();
             if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
                 if (npedidos < N_PEDIDOS_PASO) {
                     for (int j = 0; j < npedidos; j++){
@@ -92,8 +97,7 @@ int main()
                     }
                 }
             }
-            //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
-            //en funcion de la necesidad de impresion de mas copias
+
             break;
             }
         case 3:

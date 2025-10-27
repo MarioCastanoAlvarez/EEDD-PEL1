@@ -91,12 +91,12 @@ Pedido Cola::desencolar()
     return pd;
 }
 
-//Funcion destructor.
+//Funcion destructor de Cola.
 Cola::~Cola(){
     while(frente) desencolar();
 }
 
-//Funcion para obtener el frente de la cola
+//Funcion para obtener el frente de la Cola.
 Pedido Cola::getFrente()
 {
     Pedido pd = frente->pedido;
@@ -105,7 +105,7 @@ Pedido Cola::getFrente()
     else { return pd; }
 }
 
-//Funcion para contar elementos de una Cola
+//Funcion para contar elementos de una Cola.
 int Cola::contarCola()
 {
     pNodo nodo_aux = frente;
@@ -117,7 +117,7 @@ int Cola::contarCola()
     return contador;
 
 }
-//Funcion para imprimir cada elemnto de la cola con sus atributos
+//Funcion para imprimir cada elemnto de la Cola con sus atributos.
 void Cola::imprimirCola()
 {
     cout << "------------------------------------------------" << endl;
@@ -137,6 +137,8 @@ void Cola::imprimirCola()
     }
     cout << endl;
 }
+//Fin de las funciones de Colas.
+
 //Funciones de Pilas.
 //Funcion apilar.
 void Pila::apilar(Pedido pd)
@@ -166,13 +168,13 @@ Pedido Pila::desapilar()
 }
 
 
-//Funcion destructor.
+//Funcion destructor de Pila.
 Pila::~Pila()
 {
     while(cima) desapilar();
 }
 
-//Funcion para imprimir cada elemento de una pila
+//Funcion para imprimir cada elemento de una Pila.
 void Pila::imprimirPila()
 {
     cout << "------------------------------------------------" << endl;
@@ -192,13 +194,16 @@ void Pila::imprimirPila()
     }
     cout << endl;
 }
-//Funcion para generar un stock (Pila)
+//Fin de las funciones de Pilas.
+
+//Funciones del Stock.
+//Funcion para generar un Stock (Pila)
 void Pila::generarStock()
 {
-    for (int i = 0; i < (digitoRandom()*7); i++){ apilar(generarPedido()); }
+    for (int i = 0; i < (digitoRandom()*10); i++){ apilar(generarPedido()); }
 }
 
-//Funcion para imprimr cada elemento del stock
+//Funcion para imprimr cada elemento del Stock.
 void Pila::imprimirStock()
 {
     cout << "----------------------------------" << endl;
@@ -217,17 +222,12 @@ void Pila::imprimirStock()
     }
     cout << endl;
 }
+//Fin de las funciones del Stock.
 
 //Funciones de ejecución segun la opcion seleccionada en el menu.
-//Fucion si se elige la opcion 1.
+//Fucion para generar un libro de un pedido.
 Pedido generarPedido(){
-//    string entrada;
-//    int i;
-//    cout<<"N: "<<endl;
-//    getline(cin, entrada); cout<<endl;
-//    if (esEntero(entrada)){
-//        i = stoi(entrada);};
-//    for (i;0<i;--i){
+
         Pedido p;
         p.id_editorial=id_editorialRandom();
         p.id_pedido=id_pedidoRandom();
@@ -236,7 +236,4 @@ Pedido generarPedido(){
         p.unidades=unidadesRandom();
 
         return p;
-//    };
-//    cout<<"Generados "<<i<<" pedidos en QIniciado."<<endl;
-    cout<<"QIniciado: "<<endl;
 };
