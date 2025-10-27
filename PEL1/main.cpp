@@ -12,12 +12,12 @@ int main()
     Cola QImprenta;
     Cola QListo;
 
+    Pila PCaja0;
     Pila PCaja1;
     Pila PCaja2;
     Pila PCaja3;
     Pila PCaja4;
     Pila PCaja5;
-    Pila PCaja6;
 
     Pila PStock;
 
@@ -58,13 +58,7 @@ int main()
             if (esEntero(npedidos)) {
 
                 for (int j=0; j<stoi(npedidos); j++) {
-                        int pos = digitoRandom();
-                        pedido_aux = PStock.elemento_pos(pos);
-
-                        pedido_aux.id_editorial = id_editorialRandom();
-                        pedido_aux.id_pedido = id_pedidoRandom();
-                        pedido_aux.unidades = unidadesRandom();
-
+                        pedido_aux = generarPedido();
                         pedido_aux.estado = "Iniciado";
                         QIniciado.encolar(pedido_aux);
                         }valido=true;
@@ -81,23 +75,6 @@ int main()
         case 2:{
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
             int npedidos = QIniciado.contarCola();
-            //Bucle qie pasa pedidos de la cola "Listo" a cada caja
-            pNodo nodo_aux = QListo.getFrente();
-            for (int j = 0; j<QListo.contarCola(); j++){
-                int caja = nodo_aux.getPedido()->id_editorial;
-                if (caja == 1 && PCaja1.contarPila() < CAP_CAJA){ PCaja1.apilar(QListo.desencolar()); }
-                if (caja == 2 && PCaja1.contarPila() < CAP_CAJA){ PCaja2.apilar(QListo.desencolar()); }
-                if (caja == 3 && PCaja1.contarPila() < CAP_CAJA){ PCaja3.apilar(QListo.desencolar()); }
-                if (caja == 4 && PCaja1.contarPila() < CAP_CAJA){ PCaja4.apilar(QListo.desencolar()); }
-                if (caja == 5 && PCaja1.contarPila() < CAP_CAJA){ PCaja5.apilar(QListo.desencolar()); }
-                if (caja == 6 && PCaja1.contarPila() < CAP_CAJA){ PCaja6.apilar(QListo.desencolar()); }
-
-
-            }
-            //Bucle que pasa pedidos de la cola "Imprenta" a la cola "Listo")
-            for (int j = 0; j < QImprenta.contarCola(); j++){ QListo.encolar(QImprenta.desencolar()); }
-            //Bucle que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
-            //en funcion de la necesidad de impresion de mas copias
 
             //Bucle que pasa pedidos de la cola "Iniciado" a la cola "Almacen"
             if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
@@ -115,7 +92,8 @@ int main()
                     }
                 }
             }
-
+            //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
+            //en funcion de la necesidad de impresion de mas copias
             break;
             }
         case 3:

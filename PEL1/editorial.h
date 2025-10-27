@@ -51,7 +51,6 @@ private:
             pedido = pd;
             siguiente = sig;
         }
-        Pedido getPedido();
 };
 typedef Nodo *pNodo;
 
@@ -63,7 +62,7 @@ class Cola
         ~Cola();
         void encolar(Pedido pd);
         Pedido desencolar();
-        pNodo getFrente();
+        Pedido getFrente();
         int contarCola();
         void imprimirCola();
 
@@ -82,9 +81,7 @@ class Pila
         Pila() : cima(NULL) {}
         ~Pila();
         void apilar(Pedido pd);
-        Pedido elemento_pos(int pos);
         Pedido desapilar();
-        int contarPila();
         void generarStock();
         void imprimirStock();
         void imprimirPila();
