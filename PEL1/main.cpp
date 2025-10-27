@@ -61,7 +61,8 @@ int main()
                         pedido_aux = generarPedido();
                         pedido_aux.estado = "Iniciado";
                         QIniciado.encolar(pedido_aux);
-                        }valido=true;
+                        }
+                valido=true;
             }
             else{
                 cout<<"Se ha introducido un valor no valido. Porfavor, introduzca un valor entero."<<endl<<endl;
