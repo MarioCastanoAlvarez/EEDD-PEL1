@@ -62,6 +62,15 @@ int unidadesRandom(){
 //Obviamente no hay funcion de generación aleatoria de "estado".
 //Fin de las funcionas que generan de forma aleatoria los atributos previos.
 
+//Funciones de nodos
+//Funcion que devuelve el pedido
+Pedido Nodo::getPedido()
+{
+    return pedido;
+}
+
+//Funcion que devuelve el siguiente nodo
+
 //Funciones de Colas.
 //Funcion encolar.
 void Cola::encolar(Pedido pd)
@@ -97,12 +106,10 @@ Cola::~Cola(){
 }
 
 //Funcion para obtener el frente de la cola
-Pedido Cola::getFrente()
+pNodo Cola::getFrente()
 {
-    Pedido pd = frente->pedido;
-
     if (!frente){ return VACIO; }
-    else { return pd; }
+    else { return frente; }
 }
 
 //Funcion para contar elementos de una Cola
@@ -192,10 +199,35 @@ void Pila::imprimirPila()
     }
     cout << endl;
 }
+
+//Funcion para contar el numero de elementos de una Pila
+int Pila::contarPila()
+{
+    pNodo nodo_aux = cima;
+    int contador = 0;
+
+    while(nodo_aux){
+        contador++;
+        nodo_aux = nodo_aux->siguiente;
+    }
+    return contador;
+}
+Pedido Pila::elemento_pos(int pos)
+{
+    pNodo nodo_aux = cima;
+    if (!cima){ return VACIO; }
+    else if (this.contarPila() < pos) {return VACIO;}
+    else (pos<=this.contarPila()){
+        for (int i = 0; i<pos; i++){
+            nodo_aux = nodo_aux->siguiente;
+        }
+        return nodo_aux->pedido;
+    }
+}
 //Funcion para generar un stock (Pila)
 void Pila::generarStock()
 {
-    for (int i = 0; i < (digitoRandom()*7); i++){ apilar(generarPedido()); }
+    for (int i = 0; i < MAX_TITULOS; i++){ apilar(generarPedido()); }
 }
 
 //Funcion para imprimr cada elemento del stock
