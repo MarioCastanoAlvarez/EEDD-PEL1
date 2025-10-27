@@ -14,19 +14,19 @@ bool esEntero(string entrada){
 };
 
 //Todas las funcionas que generan de forma aleatoria los atributos previos. Para todas estas funciones, debe estar la linea de codigo "srand(time(NULL));" en el main().
-//Funcion auxiliar que genera un digito (0-9) aleatorio. Est√° comprobado que funciona correctamente.
+//Funcion auxiliar que genera un digito (0-9) aleatorio. Est· comprobado que funciona correctamente.
 int digitoRandom(){
     int resultado = rand()%10;
     return resultado;
 };
 
-//Devuleve un int (0-9) aleatorio que representa la id de la editorial. Est√° comprobado que funciona correctamente.
+//Devuleve un int (0-9) aleatorio que representa la id de la editorial. Est· comprobado que funciona correctamente.
 int id_editorialRandom(){
     int resultado = rand()%LIBRERIAS;
     return resultado;
 };
 
-//Devuleve un string (PXXXXX; P="literalmente la letra 'P'"; X="un n√∫mero entero 0-9") aleatorio que representa la id del pedido. Est√° comprobado que funciona correctamente.
+//Devuleve un string (PXXXXX; P="literalmente la letra 'P'"; X="un n˙mero entero 0-9") aleatorio que representa la id del pedido. Est· comprobado que funciona correctamente.
 string id_pedidoRandom(){
     string resultado = "P";
     for(int i = 0; i<5; ++i)
@@ -35,7 +35,7 @@ string id_pedidoRandom(){
 };
 
 
-//Devuleve un string (XXXKXX; X="un n√∫mero entero 0-9; K="literalmente la letra 'K') aleatorio que representa el codigo del libro. Est√° comprobado que funciona correctamente.
+//Devuleve un string (XXXKXX; X="un n˙mero entero 0-9; K="literalmente la letra 'K') aleatorio que representa el codigo del libro. Est· comprobado que funciona correctamente.
 string cod_libroRandom(){
     string resultado="";
     for(int i = 0; i<3; ++i)
@@ -46,20 +46,20 @@ string cod_libroRandom(){
     return resultado;
 };
 
-//Devuleve un string aleatorio que representa una materia de entre las siguietes: Matem√°ticas, F√≠sica, Tecnolog√≠a, M√∫sica, Historia y Lengua. Est√° comprobado que funciona correctamente.
+//Devuleve un string aleatorio que representa una materia de entre las siguietes: Matem·ticas, FÌsica, TecnologÌa, M˙sica, Historia y Lengua. Est· comprobado que funciona correctamente.
 string materiaRandom(){
     string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
     string resultado = materias[rand()%6];
     return resultado;
 };
 
-//Devuleve un int (0-20) aleatorio que representa las unidades. Est√° comprobado que funciona correctamente.
+//Devuleve un int (0-20) aleatorio que representa las unidades. Est· comprobado que funciona correctamente.
 int unidadesRandom(){
     int resultado = rand()%21;
     return resultado;
 };
 
-//Obviamente no hay funcion de generaci√≥n aleatoria de "estado".
+//Obviamente no hay funcion de generaciÛn aleatoria de "estado".
 //Fin de las funcionas que generan de forma aleatoria los atributos previos.
 
 //Funciones de Colas.
@@ -80,7 +80,7 @@ Pedido Cola::desencolar()
     pNodo nodo;
     Pedido pd;
     Pedido vacio = VACIO;
-    if (!frente) return vacio; //Evita el acceso a un nodo vac√≠o.
+    if (!frente) return vacio; //Evita el acceso a un nodo vacÌo.
     nodo = frente;
     frente = nodo->siguiente;
     pd = nodo->pedido;
@@ -91,7 +91,7 @@ Pedido Cola::desencolar()
     return pd;
 }
 
-//Funcion destructor de cola.
+//Funcion destructor.
 Cola::~Cola(){
     while(frente) desencolar();
 }
@@ -117,7 +117,7 @@ int Cola::contarCola()
     return contador;
 
 }
-//Funcion para imprimir cada atributo de cada pedido almacenado en una cola.
+//Funcion para imprimir cada elemnto de la cola con sus atributos
 void Cola::imprimirCola()
 {
     cout << "------------------------------------------------" << endl;
@@ -137,8 +137,6 @@ void Cola::imprimirCola()
     }
     cout << endl;
 }
-//Fin de las funciones de Colas.
-
 //Funciones de Pilas.
 //Funcion apilar.
 void Pila::apilar(Pedido pd)
@@ -168,13 +166,13 @@ Pedido Pila::desapilar()
 }
 
 
-//Funcion destructor de pila.
+//Funcion destructor.
 Pila::~Pila()
 {
     while(cima) desapilar();
 }
 
-//Funcion para imprimir cada atributo de cada pedido almacenado en una pila.
+//Funcion para imprimir cada elemento de una pila
 void Pila::imprimirPila()
 {
     cout << "------------------------------------------------" << endl;
@@ -194,16 +192,13 @@ void Pila::imprimirPila()
     }
     cout << endl;
 }
-//Fin de las funciones de Pilas.
-
-//Funciones de Stocks.
-//Funcion para generar un stock (Pila).
+//Funcion para generar un stock (Pila)
 void Pila::generarStock()
 {
     for (int i = 0; i < (digitoRandom()*7); i++){ apilar(generarPedido()); }
 }
 
-//Funcion para imprimr cada elemento del stock.
+//Funcion para imprimr cada elemento del stock
 void Pila::imprimirStock()
 {
     cout << "----------------------------------" << endl;
@@ -222,9 +217,8 @@ void Pila::imprimirStock()
     }
     cout << endl;
 }
-//Fin de las funciones de Stocks.
 
-//Funciones de ejecuci√≥n segun la opcion seleccionada en el menu.
+//Funciones de ejecuciÛn segun la opcion seleccionada en el menu.
 //Fucion si se elige la opcion 1.
 Pedido generarPedido(){
 //    string entrada;
@@ -246,4 +240,3 @@ Pedido generarPedido(){
 //    cout<<"Generados "<<i<<" pedidos en QIniciado."<<endl;
     cout<<"QIniciado: "<<endl;
 };
-
