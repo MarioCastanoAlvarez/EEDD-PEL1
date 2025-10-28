@@ -92,7 +92,7 @@ class Pila
         void imprimirStock();
         void imprimirPila();
         int contarPila();
-        Pedido buscarEnStock(string idDelPedido);
+        Pedido& buscarEnStock(string idDelPedido);
 };
 
 

@@ -42,6 +42,7 @@ int main()
     getline(cin, entrada); cout<<endl;
     if (esEntero(entrada)){
         i = stoi(entrada);
+        int npedidos;
         switch(i){
         case 0:
             cout<<"Se ha elegido: 0) Salir"<<endl<<endl;
@@ -76,30 +77,35 @@ int main()
 
         case 2:{
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
+
             //Bucle que reparte cada pedido en la Cola "Listo" a su respectiva caja
-            int npedido = QListo.contarCola();
+            npedidos = QListo.contarCola();
             if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
                 if (npedidos < N_PEDIDOS_PASO) {
                     for (int j = 0; j < npedidos; j++){
-                        Pedido pedido = QListo.desencolar()
-                        if (cajas(pedido.id_editorial).contarPila() < CAP_CAJA){
+                        Pedido pedido = QListo.desencolar();
+                        if (cajas[pedido.id_editorial].contarPila() < CAP_CAJA){
                                 pedido.estado = "caja";
-                                cajas(pedido.id_editorial).apilar(pedido);
+                                cajas[pedido.id_editorial].apilar(pedido);
                         }
                         else {
-                             cajas(pedido.id_editorial).~Pila();
-                             QListo.encolar(QListo.desencolar(pedido));
+                             cajas[pedido.id_editorial].~Pila();
+                             pedido.estado = "caja";
+                             cajas[pedido.id_editorial].apilar(pedido);
                         }
 
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
-                        Pedido pedido = QListo.desencolar()
-                        if (cajas(pedido.id_editorial).contarPila() < CAP_CAJA){
+                        Pedido pedido = QListo.desencolar();
+                        if (cajas[pedido.id_editorial].contarPila() < CAP_CAJA){
                                 pedido.estado = "caja";
-                                cajas(pedido.id_editorial).apilar(pedido);
+                                cajas[pedido.id_editorial].apilar(pedido);
                         }
-                        else { QListo.encolar(QListo.desencolar(pedido)); }
+                        else {
+                             cajas[pedido.id_editorial].~Pila();
+                             QListo.encolar(QListo.desencolar());
+                        }
                     }
                 }
             }
@@ -107,23 +113,35 @@ int main()
             //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
             //en funcion de la necesidad de impresion de mas copias
 
-            int npedidos = Q.contarCola();
+            npedidos = QAlmacen.contarCola();
             if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
                 if (npedidos < N_PEDIDOS_PASO) {
                     for (int j = 0; j < npedidos; j++){
                         Pedido pedido = QAlmacen.desencolar();
+                        string id = pedido.id_pedido;
+                        if (PStock.buscarEnStock(id).unidades >= pedido.unidades){
+                            pedido.estado = "Listo";
+                            QListo.encolar(pedido);
+                            PStock.buscarEnStock(id).unidades -= pedido.unidades;
+                        } else {
+                            pedido.estado = "Imprenta";
+                            QImprenta.encolar(pedido);
+                            PStock.buscarEnStock(id).unidades = 0;
+                            pedido.unidades -= PStock.buscarEnStock(id).unidades;
+
+                        }
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
-                        Pedido pedido = QIniciado.desencolar();
-                        pedido.estado = "Almacen";
-                        QAlmacen.encolar(pedido);
+                        Pedido pedido = QAlmacen.desencolar();
+                        pedido.estado = "Listo";
+                        QListo.encolar(pedido);
                     }
                 }
             }
 
             //Bucle que pasa pedidos de la cola "Iniciado" a la cola "Almacen"
-            int npedidos = QIniciado.contarCola();
+            npedidos = QIniciado.contarCola();
             if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
                 if (npedidos < N_PEDIDOS_PASO) {
                     for (int j = 0; j < npedidos; j++){
@@ -165,6 +183,26 @@ int main()
             break;
         case 4:
             cout<<"Se ha elegido: 5) Ver caja de una libreria"<<endl<<endl;
+
+            //Se imprimen todas las colas
+            cout << "Caja 0:" << endl;
+            QIniciado.imprimirCola();
+
+            cout << "Caja 1:" << endl;
+            QAlmacen.imprimirCola();
+
+            cout << "Caja 2:" << endl;
+            QImprenta.imprimirCola();
+
+            cout << "Caja 3:" << endl;
+            QListo.imprimirCola();
+
+            cout << "Caja 4:" << endl;
+            QListo.imprimirCola();
+
+            cout << "Caja 5:" << endl;
+            QListo.imprimirCola();
+
             break;
         default:
             cout<<"La opcion seleccionada no esta contemplada, pruebe de nuevo."<<endl<<endl;
