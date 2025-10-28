@@ -214,7 +214,7 @@ void Pila::imprimirPila()
 //Funcion para generar un Stock (Pila)
 void Pila::generarStock()
 {
-    for (int i = 0; i < 10; i++){ apilar(generarPedido()); }
+    for (int i = 0; i < MAX_TITULOS; i++){ apilar(generarPedido()); }
 }
 
 //Funcion para imprimr cada elemento del Stock.
