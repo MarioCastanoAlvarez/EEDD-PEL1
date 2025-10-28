@@ -236,6 +236,17 @@ void Pila::imprimirStock()
     }
     cout << endl;
 }
+
+//Funcion para buscar un pedido dentro del Stock.
+Pedido Pila::buscarEnStock(string idDelPedido){
+
+    pNodo nodo_aux=cima;
+    while(nodo_aux){
+        if(nodo_aux->pedido.id_pedido.compare(idDelPedido)){
+                return nodo_aux->pedido;}
+        else nodo_aux=nodo_aux->siguiente;
+    }
+}
 //Fin de las funciones del Stock.
 
 //Funciones de ejecución segun la opcion seleccionada en el menu.
