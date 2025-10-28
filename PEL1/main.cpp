@@ -21,6 +21,8 @@ int main()
 
     Pila PStock;
 
+    Pila cajas[] = {PCaja0, PCaja1, PCaja2, PCaja3, PCaja4, PCaja5};
+
 
     srand(time(NULL));
     string entrada;
@@ -74,11 +76,51 @@ int main()
 
         case 2:{
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
+            //Bucle que reparte cada pedido en la Cola "Listo" a su respectiva caja
+            int npedido = QListo.contarCola();
+            if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
+                if (npedidos < N_PEDIDOS_PASO) {
+                    for (int j = 0; j < npedidos; j++){
+                        Pedido pedido = QListo.desencolar()
+                        if (cajas(pedido.id_editorial).contarPila() < CAP_CAJA){
+                                pedido.estado = "caja";
+                                cajas(pedido.id_editorial).apilar(pedido);
+                        }
+                        else {
+                             cajas(pedido.id_editorial).~Pila();
+                             QListo.encolar(QListo.desencolar(pedido));
+                        }
 
+                    }
+                } else {
+                    for (int j = 0; j < N_PEDIDOS_PASO; j++) {
+                        Pedido pedido = QListo.desencolar()
+                        if (cajas(pedido.id_editorial).contarPila() < CAP_CAJA){
+                                pedido.estado = "caja";
+                                cajas(pedido.id_editorial).apilar(pedido);
+                        }
+                        else { QListo.encolar(QListo.desencolar(pedido)); }
+                    }
+                }
+            }
 
             //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
             //en funcion de la necesidad de impresion de mas copias
 
+            int npedidos = Q.contarCola();
+            if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
+                if (npedidos < N_PEDIDOS_PASO) {
+                    for (int j = 0; j < npedidos; j++){
+                        Pedido pedido = QAlmacen.desencolar();
+                    }
+                } else {
+                    for (int j = 0; j < N_PEDIDOS_PASO; j++) {
+                        Pedido pedido = QIniciado.desencolar();
+                        pedido.estado = "Almacen";
+                        QAlmacen.encolar(pedido);
+                    }
+                }
+            }
 
             //Bucle que pasa pedidos de la cola "Iniciado" a la cola "Almacen"
             int npedidos = QIniciado.contarCola();
