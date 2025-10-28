@@ -20,7 +20,7 @@ int digitoRandom(){
     return resultado;
 };
 
-//Devuleve un int (0-9) aleatorio que representa la id de la editorial. Está comprobado que funciona correctamente.
+//Devuleve un int (0-5) aleatorio que representa la id de la editorial. Está comprobado que funciona correctamente.
 int id_editorialRandom(){
     int resultado = rand()%LIBRERIAS;
     return resultado;
@@ -214,7 +214,7 @@ void Pila::imprimirPila()
 //Funcion para generar un Stock (Pila)
 void Pila::generarStock()
 {
-    for (int i = 0; i < (digitoRandom()*10); i++){ apilar(generarPedido()); }
+    for (int i = 0; i < 15; i++){ apilar(generarPedido()); }
 }
 
 //Funcion para imprimr cada elemento del Stock.
@@ -238,7 +238,7 @@ void Pila::imprimirStock()
 }
 
 //Funcion para buscar un pedido dentro del Stock.
-Pedido Pila::buscarEnStock(string idDelPedido){
+Pedido& Pila::buscarEnStock(string idDelPedido){
 
     pNodo nodo_aux=cima;
     while(nodo_aux){
