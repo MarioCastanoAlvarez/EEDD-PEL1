@@ -38,7 +38,7 @@ Pedido generarPedido();
 //Creación de clase Nodo
 class Nodo
 {
-private:
+    private:
 
     Pedido pedido;
     Nodo *siguiente;
@@ -51,6 +51,12 @@ private:
             pedido = pd;
             siguiente = sig;
         }
+        Nodo* getSiguiente(){
+            return siguiente;
+        }
+
+
+
 };
 typedef Nodo *pNodo;
 
@@ -85,6 +91,7 @@ class Pila
         void generarStock();
         void imprimirStock();
         void imprimirPila();
+        int contarPila();
 };
 
 

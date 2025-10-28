@@ -62,6 +62,7 @@ int unidadesRandom(){
 //Obviamente no hay funcion de generación aleatoria de "estado".
 //Fin de las funcionas que generan de forma aleatoria los atributos previos.
 
+
 //Funciones de Colas.
 //Funcion encolar.
 void Cola::encolar(Pedido pd)
@@ -172,6 +173,19 @@ Pedido Pila::desapilar()
 Pila::~Pila()
 {
     while(cima) desapilar();
+}
+
+//Funcion para contar elementos de una Pila.
+int Pila::contarPila()
+{
+    pNodo nodo_aux = cima;
+    int contador = 0;
+    while (nodo_aux){
+        contador++;
+        nodo_aux = nodo_aux -> siguiente;
+    }
+    return contador;
+
 }
 
 //Funcion para imprimir cada elemento de una Pila.
