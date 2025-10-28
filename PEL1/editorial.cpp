@@ -35,7 +35,7 @@ string id_pedidoRandom(){
 };
 
 
-//Devuleve un string (XXXKXX; X="un número entero 0-9; K="literalmente la letra 'K') aleatorio que representa el codigo del libro. Está comprobado que funciona correctamente.
+//Devuleve un string (XXXKXX; X="un número entero 0-9; K="Es una letra aleatoria de entre todo el alfabeto") aleatorio que representa el codigo del libro. Está comprobado que funciona correctamente.
 string cod_libroRandom(){
     string resultado="";
     for(int i = 0; i<3; ++i)
@@ -214,7 +214,7 @@ void Pila::imprimirPila()
 //Funcion para generar un Stock (Pila)
 void Pila::generarStock()
 {
-    for (int i = 0; i < 15; i++){ apilar(generarPedido()); }
+    for (int i = 0; i < 10; i++){ apilar(generarPedido()); }
 }
 
 //Funcion para imprimr cada elemento del Stock.
