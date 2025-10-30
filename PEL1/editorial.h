@@ -21,25 +21,6 @@ struct Pedido{
     string estado;
 };
 
-//Prototipos de funciones
-bool esEntero(string entrada);
-int digitoRandom();
-int id_editorialRandom();
-string id_pedidoRandom();
-string cod_libroRandom();
-string materiaRandom();
-int unidadesRandom();
-Pedido generarPedido();
-Pedido buscarEnStock(string Codigo, Pedido stock[]);
-int buscarPosicion(string codigo, Pedido stock[]);
-void generarStock(Pedido stock[]);
-void imprimirStock(Pedido stock[]);
-
-
-
-
-
-
 //Creación de clase Nodo
 class Nodo
 {
@@ -95,8 +76,23 @@ class Pila
         Pedido desapilar();
         void imprimirPila();
         int contarPila();
+        Pedido getCima();
 };
 
+//Prototipos de funciones
+bool esEntero(string entrada);
+int digitoRandom();
+int id_editorialRandom();
+string id_pedidoRandom();
+string cod_libroRandom();
+string materiaRandom();
+int unidadesRandom();
+Pedido generarPedido();
+Pedido buscarEnStock(string Codigo, Pedido stock[]);
+int buscarPosicion(string codigo, Pedido stock[]);
+void generarStock(Pedido stock[]);
+void imprimirStock(Pedido stock[]);
+void imprimirEstadoCaja(Pila cajas[]);
 
 
 #endif // CABECERA_H_INCLUDED

@@ -62,6 +62,17 @@ int unidadesRandom(){
 //Obviamente no hay funcion de generación aleatoria de "estado".
 //Fin de las funcionas que generan de forma aleatoria los atributos previos.
 
+//Funcion que imprima los estados de las cajas
+void imprimirEstadoCaja(Pila cajas[])
+{
+    for (int i = 0; i < LIBRERIAS; i++){
+        int tam = cajas[i].contarPila();
+        cout << "Libreria " << i << "-> tam=";
+        if(tam == 0){ cout << tam << " top=(vacia)" << endl; }
+        else{ cout << tam << " top=" << cajas[i].getCima().id_pedido << endl; }
+    }
+}
+
 //Funciones del Stock.
 //Funcion para generar un Stock (Pila)
 void generarStock(Pedido Pstock[])
@@ -86,14 +97,7 @@ void imprimirStock(Pedido stock[])
     cout << endl;
 }
 
-//Funcion para buscar un pedido dentro del Stock.
-Pedido buscarEnStock(string codigo, Pedido stock[]){
-
-    for(int i = 0; i < MAX_TITULOS; i++){
-        if(codigo == stock[i].cod_libro){ return stock[i]; }
-    }
-    return VACIO;
-}
+//Funcion para buscar la posicion de un pedido en el stock
 int buscarPosicion(string codigo, Pedido stock[]){
 
     for(int i = 0; i < MAX_TITULOS; i++){
@@ -168,17 +172,20 @@ void Cola::imprimirCola()
     << "U|" << setw(11) << "Estado|" << endl;
     cout << "------------------------------------------------" << endl;
     pNodo nodo_aux = frente;
-    while(nodo_aux){
+    if(!nodo_aux){ cout << "(vacia)" << endl << endl; }
+    else {
+        while(nodo_aux){
 
-    cout << " " << setw(2) << nodo_aux->pedido.id_editorial << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
-    << setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(3)
-    << nodo_aux->pedido.unidades << "|" << setw(10) << nodo_aux->pedido.estado << "|" << endl;
+        cout << " " << setw(2) << nodo_aux->pedido.id_editorial << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
+        << setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(3)
+        << nodo_aux->pedido.unidades << "|" << setw(10) << nodo_aux->pedido.estado << "|" << endl;
 
-    nodo_aux = nodo_aux -> siguiente;
+        nodo_aux = nodo_aux -> siguiente;
 
+        }
+        cout << endl;
+        }
     }
-    cout << endl;
-}
 //Fin de las funciones de Colas.
 
 //Funciones de Pilas.
@@ -227,6 +234,12 @@ int Pila::contarPila()
     }
     return contador;
 
+}
+
+Pedido Pila::getCima()
+{
+    if(cima){ return cima->pedido; }
+    else return VACIO;
 }
 
 //Funcion para imprimir cada elemento de una Pila.

@@ -7,6 +7,7 @@ bool esEntero(string entrada);
 
 int main()
 {
+//Instanciación de variables
     Cola QIniciado;
     Cola QAlmacen;
     Cola QImprenta;
@@ -25,10 +26,16 @@ int main()
 
 
     srand(time(NULL));
+
     string entrada;
     int i = -1;
     Pedido pedido_aux;
     generarStock(stock);
+    int contPedidos;
+
+//Inicio del programa
+
+//Menu
     do{
     cout<<"=== MENU ==="<<endl
     <<"1) Generar N pedidos"<<endl
@@ -39,14 +46,18 @@ int main()
     <<"Opcion: ";
 
 
+//Seleccion de opcion
     getline(cin, entrada); cout<<endl;
     if (esEntero(entrada)){
         i = stoi(entrada);
-        int npedidos;
+
+//Funciones del sistema
         switch(i){
         case 0:
             cout<<"Se ha elegido: 0) Salir"<<endl<<endl;
             break;
+
+//Opcion 1: generar N pedidos
         case 1:{
 
             bool valido=false;
@@ -82,35 +93,36 @@ int main()
             break;
             }
 
+//Opcion 2: Paso de pedidos (12)
         case 2:{
             cout<<"Se ha elegido: 2) Paso (una FASE)"<<endl<<endl;
 
             //Bucle que reparte cada pedido en la Cola "Listo" a su respectiva caja
-            npedidos = QListo.contarCola();
-            if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
-                if (npedidos < N_PEDIDOS_PASO) {
-                    for (int j = 0; j < npedidos; j++){
-                        Pedido pedido = QListo.desencolar();
-                        if (cajas[pedido.id_editorial].contarPila() < CAP_CAJA){
-                                pedido.estado = "caja";
-                                cajas[pedido.id_editorial].apilar(pedido);
+            contPedidos = QListo.contarCola();
+            if (contPedidos != 0){ //Se comprueba si hay pedidos en la cola
+                if (contPedidos < N_PEDIDOS_PASO) {
+                    for (int j = 0; j < contPedidos; j++){
+                        pedido_aux = QListo.desencolar();
+                        if (cajas[pedido_aux.id_editorial].contarPila() < CAP_CAJA - 1){
+                                pedido_aux.estado = "caja";
+                                cajas[pedido_aux.id_editorial].apilar(pedido_aux);
                         }
                         else {
-                             cajas[pedido.id_editorial].~Pila();
-                             pedido.estado = "caja";
-                             cajas[pedido.id_editorial].apilar(pedido);
+                            cajas[pedido_aux.id_editorial].apilar(pedido_aux);
+                            cajas[pedido_aux.id_editorial].~Pila();
+                            cout << "Se ha enviado una caja a la libreria " << pedido_aux.id_editorial << endl;
                         }
 
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
-                        Pedido pedido = QListo.desencolar();
-                        if (cajas[pedido.id_editorial].contarPila() < CAP_CAJA){
-                                pedido.estado = "caja";
-                                cajas[pedido.id_editorial].apilar(pedido);
+                        pedido_aux = QListo.desencolar();
+                        if (cajas[pedido_aux.id_editorial].contarPila() < CAP_CAJA){
+                                pedido_aux.estado = "caja";
+                                cajas[pedido_aux.id_editorial].apilar(pedido_aux);
                         }
                         else {
-                             cajas[pedido.id_editorial].~Pila();
+                             cajas[pedido_aux.id_editorial].~Pila();
                              QListo.encolar(QListo.desencolar());
                         }
                     }
@@ -118,23 +130,24 @@ int main()
             }
             //Bucle que pasa pedidos de la cola "Imprenta" a la cola listo o imprime mas libros para el stock
 
-            npedidos = QImprenta.contarCola();
+            contPedidos = QImprenta.contarCola();
             int max_paso = N_PEDIDOS_PASO;
             int cont = QImprenta.contarCola();
 
-            if (npedidos != 0){
+            if (contPedidos != 0){
 
                     while (max_paso > 0 && cont > 0) {
-                        Pedido pedido = QImprenta.desencolar();
-                        int pos = buscarPosicion(pedido.cod_libro, stock);
+                        pedido_aux = QImprenta.desencolar();
+                        int pos = buscarPosicion(pedido_aux.cod_libro, stock);
 
-                        if (pedido.unidades >= stock[pos].unidades){
+                        if (pedido_aux.unidades >= stock[pos].unidades){
                             stock[pos].unidades += TAM_LOTE;
-                            QImprenta.encolar(pedido);
+                            QImprenta.encolar(pedido_aux);
                             cont--;
                         } else {
-                            stock[pos].unidades -= pedido.unidades;
-                            QListo.encolar(pedido);
+                            stock[pos].unidades -= pedido_aux.unidades;
+                            pedido_aux.estado = "Listo";
+                            QListo.encolar(pedido_aux);
                             cont--; max_paso--;
                         }
 
@@ -144,61 +157,63 @@ int main()
             //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
             //en funcion de la necesidad de impresion de mas copias
 
-            npedidos = QAlmacen.contarCola();
-            if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
-                if (npedidos < N_PEDIDOS_PASO) {
-                    for (int j = 0; j < npedidos; j++){
-                        Pedido pedido = QAlmacen.desencolar();
-                        int pos = buscarPosicion(pedido.cod_libro, stock);
-                        string id = pedido.id_pedido;
+            contPedidos = QAlmacen.contarCola();
+            if (contPedidos != 0){ //Se comprueba si hay pedidos en la cola
+                if (contPedidos < N_PEDIDOS_PASO) {
+                    for (int j = 0; j < contPedidos; j++){
+                        pedido_aux = QAlmacen.desencolar();
+                        int pos = buscarPosicion(pedido_aux.cod_libro, stock);
+                        string id = pedido_aux.id_pedido;
 
-                        if (stock[pos].unidades >= pedido.unidades){
-                            pedido.estado = "Listo";
-                            QListo.encolar(pedido);
-                            libro.unidades -= pedido.unidades;
+                        if (stock[pos].unidades >= pedido_aux.unidades){
+                            pedido_aux.estado = "Listo";
+                            QListo.encolar(pedido_aux);
+                            stock[pos].unidades -= pedido_aux.unidades;
                         } else {
-                            pedido.estado = "Imprenta";
-                            QImprenta.encolar(pedido);
+                            pedido_aux.estado = "Imprenta";
+                            QImprenta.encolar(pedido_aux);
                         }
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
-                        Pedido pedido = QAlmacen.desencolar();
-                        Pedido libro = buscarEnStock(pedido.cod_libro, stock);
-                        string id = pedido.id_pedido;
+                        pedido_aux = QAlmacen.desencolar();
+                        int pos = buscarPosicion(pedido_aux.cod_libro, stock);
+                        string id = pedido_aux.id_pedido;
 
-                        if (libro.unidades >= pedido.unidades){
-                            pedido.estado = "Listo";
-                            QListo.encolar(pedido);
-                            libro.unidades -= pedido.unidades;
+                        if (stock[pos].unidades >= pedido_aux.unidades){
+                            pedido_aux.estado = "Listo";
+                            QListo.encolar(pedido_aux);
+                            stock[pos].unidades -= pedido_aux.unidades;
                         } else {
-                            pedido.estado = "Imprenta";
-                            QImprenta.encolar(pedido);
+                            pedido_aux.estado = "Imprenta";
+                            QImprenta.encolar(pedido_aux);
+                            }
                         }
-                    }
                 }
             }
 
             //Bucle que pasa pedidos de la cola "Iniciado" a la cola "Almacen"
-            npedidos = QIniciado.contarCola();
-            if (npedidos != 0){ //Se comprueba si hay pedidos en la cola
-                if (npedidos < N_PEDIDOS_PASO) {
-                    for (int j = 0; j < npedidos; j++){
-                        Pedido pedido = QIniciado.desencolar();
-                        pedido.estado = "Almacen";
-                        QAlmacen.encolar(pedido);
+            contPedidos = QIniciado.contarCola();
+            if (contPedidos != 0){ //Se comprueba si hay pedidos en la cola
+                if (contPedidos < N_PEDIDOS_PASO) {
+                    for (int j = 0; j < contPedidos; j++){
+                        pedido_aux = QIniciado.desencolar();
+                        pedido_aux.estado = "Almacen";
+                        QAlmacen.encolar(pedido_aux);
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
-                        Pedido pedido = QIniciado.desencolar();
-                        pedido.estado = "Almacen";
-                        QAlmacen.encolar(pedido);
+                        Pedido pedido_aux = QIniciado.desencolar();
+                        pedido_aux.estado = "Almacen";
+                        QAlmacen.encolar(pedido_aux);
                     }
                 }
             }
 
             break;
             }
+
+//Opcion 3: Mostrar estado (Colas, Stock y Cajas)
         case 3:
             cout<<"Se ha elegido: 3) Mostrar estado "<<endl<<endl;
 
@@ -219,9 +234,15 @@ int main()
             cout << "== Stock ==" << endl;
             imprimirStock(stock);
 
+            //Se imprime el estado de las cajas
+            cout << "== CAJAS (pilas por libreria) ==" << endl;
+            imprimirEstadoCaja(cajas);
+
             break;
+
+//Opcion 4: Mostrar pedidos contenidos en cada caja
         case 4:
-            cout<<"Se ha elegido: 5) Ver caja de una libreria"<<endl<<endl;
+            cout<<"Se ha elegido: 4) Ver caja de una libreria"<<endl<<endl;
 
             //Se imprimen todas las colas
             cout << "Caja 0:" << endl;
@@ -244,6 +265,7 @@ int main()
 
             break;
         default:
+//Control de errores
             cout<<"La opcion seleccionada no esta contemplada, pruebe de nuevo."<<endl<<endl;
     }cout<<"======================================================================="<<endl<<endl;
     }else {cout<<"Se ha introducido un valor no valido. Porfavor, introduzca un valor entero."<<endl<<endl;
