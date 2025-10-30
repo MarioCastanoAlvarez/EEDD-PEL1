@@ -19,7 +19,7 @@ int main()
     Pila PCaja4;
     Pila PCaja5;
 
-    Pila PStock;
+    Pedido stock[MAX_TITULOS];
 
     Pila cajas[] = {PCaja0, PCaja1, PCaja2, PCaja3, PCaja4, PCaja5};
 
@@ -28,7 +28,7 @@ int main()
     string entrada;
     int i = -1;
     Pedido pedido_aux;
-    PStock.generarStock();
+    generarStock(stock);
     do{
     cout<<"=== MENU ==="<<endl
     <<"1) Generar N pedidos"<<endl
@@ -59,12 +59,19 @@ int main()
 
             //Bucle que genera pedidos y los mete en la cola de iniciado
             if (esEntero(npedidos)) {
+                int nlibro;
 
                 for (int j=0; j<stoi(npedidos); j++) {
+                        nlibro = digitoRandom();
                         pedido_aux = generarPedido();
+
+                        pedido_aux.cod_libro = stock[nlibro].cod_libro;
+                        pedido_aux.materia = stock[nlibro].materia;
                         pedido_aux.estado = "Iniciado";
+
                         QIniciado.encolar(pedido_aux);
-                        }valido=true;
+                        }
+                    valido=true;
             }
             else{
                 cout<<"Se ha introducido un valor no valido. Porfavor, introduzca un valor entero."<<endl<<endl;
@@ -109,6 +116,30 @@ int main()
                     }
                 }
             }
+            //Bucle que pasa pedidos de la cola "Imprenta" a la cola listo o imprime mas libros para el stock
+
+            npedidos = QImprenta.contarCola();
+            int max_paso = N_PEDIDOS_PASO;
+            int cont = QImprenta.contarCola();
+
+            if (npedidos != 0){
+
+                    while (max_paso > 0 && cont > 0) {
+                        Pedido pedido = QImprenta.desencolar();
+                        int pos = buscarPosicion(pedido.cod_libro, stock);
+
+                        if (pedido.unidades >= stock[pos].unidades){
+                            stock[pos].unidades += TAM_LOTE;
+                            QImprenta.encolar(pedido);
+                            cont--;
+                        } else {
+                            stock[pos].unidades -= pedido.unidades;
+                            QListo.encolar(pedido);
+                            cont--; max_paso--;
+                        }
+
+                    }
+            }
 
             //Bulce que pasa pedidos de la cola "Almacen" a la cola "Imprenta" o a la cola "Listo"
             //en funcion de la necesidad de impresion de mas copias
@@ -118,24 +149,32 @@ int main()
                 if (npedidos < N_PEDIDOS_PASO) {
                     for (int j = 0; j < npedidos; j++){
                         Pedido pedido = QAlmacen.desencolar();
+                        int pos = buscarPosicion(pedido.cod_libro, stock);
                         string id = pedido.id_pedido;
-                        if (PStock.buscarEnStock(id).unidades >= pedido.unidades){
+
+                        if (stock[pos].unidades >= pedido.unidades){
                             pedido.estado = "Listo";
                             QListo.encolar(pedido);
-                            PStock.buscarEnStock(id).unidades -= pedido.unidades;
+                            libro.unidades -= pedido.unidades;
                         } else {
                             pedido.estado = "Imprenta";
                             QImprenta.encolar(pedido);
-                            PStock.buscarEnStock(id).unidades = 0;
-                            pedido.unidades -= PStock.buscarEnStock(id).unidades;
-
                         }
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
                         Pedido pedido = QAlmacen.desencolar();
-                        pedido.estado = "Listo";
-                        QListo.encolar(pedido);
+                        Pedido libro = buscarEnStock(pedido.cod_libro, stock);
+                        string id = pedido.id_pedido;
+
+                        if (libro.unidades >= pedido.unidades){
+                            pedido.estado = "Listo";
+                            QListo.encolar(pedido);
+                            libro.unidades -= pedido.unidades;
+                        } else {
+                            pedido.estado = "Imprenta";
+                            QImprenta.encolar(pedido);
+                        }
                     }
                 }
             }
@@ -178,7 +217,7 @@ int main()
 
             //Se imprime el stock
             cout << "== Stock ==" << endl;
-            PStock.imprimirStock();
+            imprimirStock(stock);
 
             break;
         case 4:
@@ -186,22 +225,22 @@ int main()
 
             //Se imprimen todas las colas
             cout << "Caja 0:" << endl;
-            QIniciado.imprimirCola();
+            cajas[0].imprimirPila();
 
             cout << "Caja 1:" << endl;
-            QAlmacen.imprimirCola();
+            cajas[1].imprimirPila();
 
             cout << "Caja 2:" << endl;
-            QImprenta.imprimirCola();
+            cajas[2].imprimirPila();
 
             cout << "Caja 3:" << endl;
-            QListo.imprimirCola();
+            cajas[3].imprimirPila();
 
             cout << "Caja 4:" << endl;
-            QListo.imprimirCola();
+            cajas[4].imprimirPila();
 
             cout << "Caja 5:" << endl;
-            QListo.imprimirCola();
+            cajas[5].imprimirPila();
 
             break;
         default:

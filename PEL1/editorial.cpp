@@ -62,6 +62,47 @@ int unidadesRandom(){
 //Obviamente no hay funcion de generación aleatoria de "estado".
 //Fin de las funcionas que generan de forma aleatoria los atributos previos.
 
+//Funciones del Stock.
+//Funcion para generar un Stock (Pila)
+void generarStock(Pedido Pstock[])
+{
+    for (int i = 0; i < MAX_TITULOS; i++){ Pstock[i] = generarPedido(); }
+}
+
+//Funcion para imprimr cada elemento del Stock.
+void imprimirStock(Pedido stock[])
+{
+    cout << "----------------------------------" << endl;
+    cout << setw(9) << "Codigo|" << setw(13) << "Materia|" << setw(12)
+    << "Unidades|" << endl;
+    cout << "----------------------------------" << endl;
+
+    for (int i = 0; i < MAX_TITULOS; i++){
+
+    cout << " " <<  setw(7) << stock[i].cod_libro << "|" << setw(12) << stock[i].materia << "|" << setw(11)
+    << stock[i].unidades << "|"<< endl;
+
+    }
+    cout << endl;
+}
+
+//Funcion para buscar un pedido dentro del Stock.
+Pedido buscarEnStock(string codigo, Pedido stock[]){
+
+    for(int i = 0; i < MAX_TITULOS; i++){
+        if(codigo == stock[i].cod_libro){ return stock[i]; }
+    }
+    return VACIO;
+}
+int buscarPosicion(string codigo, Pedido stock[]){
+
+    for(int i = 0; i < MAX_TITULOS; i++){
+        if(codigo == stock[i].cod_libro){ return i; }
+    }
+    return -1;
+}
+//Fin de las funciones del Stock.
+
 
 //Funciones de Colas.
 //Funcion encolar.
@@ -210,44 +251,6 @@ void Pila::imprimirPila()
 }
 //Fin de las funciones de Pilas.
 
-//Funciones del Stock.
-//Funcion para generar un Stock (Pila)
-void Pila::generarStock()
-{
-    for (int i = 0; i < MAX_TITULOS; i++){ apilar(generarPedido()); }
-}
-
-//Funcion para imprimr cada elemento del Stock.
-void Pila::imprimirStock()
-{
-    cout << "----------------------------------" << endl;
-    cout << setw(9) << "Codigo|" << setw(13) << "Materia|" << setw(12)
-    << "Unidades|" << endl;
-    cout << "----------------------------------" << endl;
-
-    pNodo nodo_aux = cima;
-    while(nodo_aux){
-
-    cout << " " <<  setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(11)
-    << nodo_aux->pedido.unidades << "|"<< endl;
-
-    nodo_aux = nodo_aux -> siguiente;
-
-    }
-    cout << endl;
-}
-
-//Funcion para buscar un pedido dentro del Stock.
-Pedido& Pila::buscarEnStock(string idDelPedido){
-
-    pNodo nodo_aux=cima;
-    while(nodo_aux){
-        if(nodo_aux->pedido.id_pedido.compare(idDelPedido)){
-                return nodo_aux->pedido;}
-        else nodo_aux=nodo_aux->siguiente;
-    }
-}
-//Fin de las funciones del Stock.
 
 //Funciones de ejecución segun la opcion seleccionada en el menu.
 //Fucion para generar un libro de un pedido.

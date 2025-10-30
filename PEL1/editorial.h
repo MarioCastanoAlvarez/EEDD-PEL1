@@ -30,6 +30,11 @@ string cod_libroRandom();
 string materiaRandom();
 int unidadesRandom();
 Pedido generarPedido();
+Pedido buscarEnStock(string Codigo, Pedido stock[]);
+int buscarPosicion(string codigo, Pedido stock[]);
+void generarStock(Pedido stock[]);
+void imprimirStock(Pedido stock[]);
+
 
 
 
@@ -88,11 +93,8 @@ class Pila
         ~Pila();
         void apilar(Pedido pd);
         Pedido desapilar();
-        void generarStock();
-        void imprimirStock();
         void imprimirPila();
         int contarPila();
-        Pedido& buscarEnStock(string idDelPedido);
 };
 
 

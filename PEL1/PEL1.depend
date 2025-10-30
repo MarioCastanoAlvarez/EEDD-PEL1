@@ -14,17 +14,17 @@
 	<ctime>
 	"editorial.h"
 
-1761326851 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.cpp
+1761843303 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.cpp
 	<iostream>
 	<ctime>
 	"editorial.h"
 	"iomanip"
 
-1761325805 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.h
+1761843395 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.h
 
 1761029237 c:\users\admin\documents\github\eedd-pel1\pel1\editorial.h
 
-1761326869 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\main.cpp
+1761642154 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\main.cpp
 	<iostream>
 	<ctime>
 	"editorial.h"
