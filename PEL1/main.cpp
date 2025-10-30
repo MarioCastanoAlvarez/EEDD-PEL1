@@ -103,26 +103,26 @@ int main()
                 if (contPedidos < N_PEDIDOS_PASO) {
                     for (int j = 0; j < contPedidos; j++){
                         pedido_aux = QListo.desencolar();
-                        if (cajas[pedido_aux.id_editorial].contarPila() < CAP_CAJA - 1){
+                        if (cajas[pedido_aux.id_libreria].contarPila() < CAP_CAJA - 1){
                                 pedido_aux.estado = "caja";
-                                cajas[pedido_aux.id_editorial].apilar(pedido_aux);
+                                cajas[pedido_aux.id_libreria].apilar(pedido_aux);
                         }
                         else {
-                            cajas[pedido_aux.id_editorial].apilar(pedido_aux);
-                            cajas[pedido_aux.id_editorial].~Pila();
-                            cout << "Se ha enviado una caja a la libreria " << pedido_aux.id_editorial << endl;
+                            cajas[pedido_aux.id_libreria].apilar(pedido_aux);
+                            cajas[pedido_aux.id_libreria].~Pila();
+                            cout << "Se ha enviado una caja a la libreria " << pedido_aux.id_libreria << endl;
                         }
 
                     }
                 } else {
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
                         pedido_aux = QListo.desencolar();
-                        if (cajas[pedido_aux.id_editorial].contarPila() < CAP_CAJA){
+                        if (cajas[pedido_aux.id_libreria].contarPila() < CAP_CAJA){
                                 pedido_aux.estado = "caja";
-                                cajas[pedido_aux.id_editorial].apilar(pedido_aux);
+                                cajas[pedido_aux.id_libreria].apilar(pedido_aux);
                         }
                         else {
-                             cajas[pedido_aux.id_editorial].~Pila();
+                             cajas[pedido_aux.id_libreria].~Pila();
                              QListo.encolar(QListo.desencolar());
                         }
                     }

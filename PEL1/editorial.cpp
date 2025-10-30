@@ -20,8 +20,8 @@ int digitoRandom(){
     return resultado;
 };
 
-//Devuleve un int (0-5) aleatorio que representa la id de la editorial. Está comprobado que funciona correctamente.
-int id_editorialRandom(){
+//Devuleve un int (0-5) aleatorio que representa la id de la libreria. Está comprobado que funciona correctamente.
+int id_libreriaRandom(){
     int resultado = rand()%LIBRERIAS;
     return resultado;
 };
@@ -176,7 +176,7 @@ void Cola::imprimirCola()
     else {
         while(nodo_aux){
 
-        cout << " " << setw(2) << nodo_aux->pedido.id_editorial << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
+        cout << " " << setw(2) << nodo_aux->pedido.id_libreria << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
         << setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(3)
         << nodo_aux->pedido.unidades << "|" << setw(10) << nodo_aux->pedido.estado << "|" << endl;
 
@@ -253,7 +253,7 @@ void Pila::imprimirPila()
     pNodo nodo_aux = cima;
     while(nodo_aux){
 
-    cout << " " << setw(2) << nodo_aux->pedido.id_editorial << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
+    cout << " " << setw(2) << nodo_aux->pedido.id_libreria << "|" << setw(7) << nodo_aux->pedido.id_pedido << "|"
     << setw(7) << nodo_aux->pedido.cod_libro << "|" << setw(12) << nodo_aux->pedido.materia << "|" << setw(3)
     << nodo_aux->pedido.unidades << "|" << setw(10) << nodo_aux->pedido.estado << "|" << endl;
 
@@ -270,7 +270,7 @@ void Pila::imprimirPila()
 Pedido generarPedido(){
 
         Pedido p;
-        p.id_editorial=id_editorialRandom();
+        p.id_libreria=id_libreriaRandom();
         p.id_pedido=id_pedidoRandom();
         p.cod_libro=cod_libroRandom();
         p.materia=materiaRandom();

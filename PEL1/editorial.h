@@ -13,7 +13,7 @@ using namespace std;
 
 //Creación de estructura Pedido
 struct Pedido{
-    int id_editorial;
+    int id_libreria;
     string id_pedido;
     string cod_libro;
     string materia;
@@ -82,7 +82,7 @@ class Pila
 //Prototipos de funciones
 bool esEntero(string entrada);
 int digitoRandom();
-int id_editorialRandom();
+int id_libreriaRandom();
 string id_pedidoRandom();
 string cod_libroRandom();
 string materiaRandom();
