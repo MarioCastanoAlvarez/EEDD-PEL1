@@ -104,7 +104,7 @@ int main()
                     for (int j = 0; j < contPedidos; j++){
                         pedido_aux = QListo.desencolar();
                         if (cajas[pedido_aux.id_libreria].contarPila() < CAP_CAJA - 1){
-                                pedido_aux.estado = "caja";
+                                pedido_aux.estado = "Caja";
                                 cajas[pedido_aux.id_libreria].apilar(pedido_aux);
                         }
                         else {
@@ -118,7 +118,7 @@ int main()
                     for (int j = 0; j < N_PEDIDOS_PASO; j++) {
                         pedido_aux = QListo.desencolar();
                         if (cajas[pedido_aux.id_libreria].contarPila() < CAP_CAJA){
-                                pedido_aux.estado = "caja";
+                                pedido_aux.estado = "Caja";
                                 cajas[pedido_aux.id_libreria].apilar(pedido_aux);
                         }
                         else {
@@ -214,7 +214,7 @@ int main()
             }
 
 //Opcion 3: Mostrar estado (Colas, Stock y Cajas)
-        case 3:
+        case 3:{
             cout<<"Se ha elegido: 3) Mostrar estado "<<endl<<endl;
 
             //Se imprimen todas las colas
@@ -238,32 +238,26 @@ int main()
             cout << "== CAJAS (pilas por libreria) ==" << endl;
             imprimirEstadoCaja(cajas);
 
-            break;
+            break;}
 
-//Opcion 4: Mostrar pedidos contenidos en cada caja
-        case 4:
+//Opcion 4: Mostrar pedidos contenidos en una de las cajas deseada.
+        case 4:{
             cout<<"Se ha elegido: 4) Ver caja de una libreria"<<endl<<endl;
+            bool valido=false;
+            string input;
+            int nCaja;
+            while (!valido){
+            cout<<"Caja de la que se desea ver el contenido: ";
+            getline(cin, input);
+            cout<<endl;
+            if (esEntero(input)){nCaja = stoi(input);if (nCaja>=0 && nCaja<=5){valido = true;}else cout<<"La opcion seleccionada no esta contemplada, pruebe de nuevo."<<endl<<endl;}
+            else cout<<"Se ha introducido un valor no valido. Porfavor, introduzca un valor entero."<<endl<<endl;}
 
-            //Se imprimen todas las colas
-            cout << "Caja 0:" << endl;
-            cajas[0].imprimirPila();
 
-            cout << "Caja 1:" << endl;
-            cajas[1].imprimirPila();
+            cout << "Caja "<<nCaja<<":" << endl;
+            cajas[nCaja].imprimirPila();
 
-            cout << "Caja 2:" << endl;
-            cajas[2].imprimirPila();
-
-            cout << "Caja 3:" << endl;
-            cajas[3].imprimirPila();
-
-            cout << "Caja 4:" << endl;
-            cajas[4].imprimirPila();
-
-            cout << "Caja 5:" << endl;
-            cajas[5].imprimirPila();
-
-            break;
+            break;}
         default:
 //Control de errores
             cout<<"La opcion seleccionada no esta contemplada, pruebe de nuevo."<<endl<<endl;
