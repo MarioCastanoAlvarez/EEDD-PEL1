@@ -54,7 +54,6 @@ class Cola
         ~Cola();
         void encolar(Pedido pd);
         Pedido desencolar();
-        Pedido getFrente();
         int contarCola();
         void imprimirCola();
 

@@ -143,14 +143,6 @@ Cola::~Cola(){
     while(frente) desencolar();
 }
 
-//Funcion para obtener el frente de la Cola.
-Pedido Cola::getFrente()
-{
-    Pedido pd = frente->pedido;
-
-    if (!frente){ return VACIO; }
-    else { return pd; }
-}
 
 //Funcion para contar elementos de una Cola.
 int Cola::contarCola()
