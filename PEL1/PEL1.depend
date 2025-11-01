@@ -4,13 +4,13 @@
 
 1760425220 source:c:\users\admin\documents\c++\pel1\editorial.cpp
 
-1761857945 source:c:\users\admin\documents\github\eedd-pel1\pel1\editorial.cpp
+1762017195 source:c:\users\admin\documents\github\eedd-pel1\pel1\editorial.cpp
 	<iostream>
 	<ctime>
 	"editorial.h"
 	"iomanip"
 
-1762014489 source:c:\users\admin\documents\github\eedd-pel1\pel1\main.cpp
+1762016563 source:c:\users\admin\documents\github\eedd-pel1\pel1\main.cpp
 	<iostream>
 	<ctime>
 	"editorial.h"
