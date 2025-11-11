@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1760427243 source:c:\users\admin\documents\c++\pel1\main.cpp
+	<iostream>
+
+1760425220 source:c:\users\admin\documents\c++\pel1\editorial.cpp
+
+1762017195 source:c:\users\admin\documents\github\eedd-pel1\pel1\editorial.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+	"iomanip"
+
+1762016563 source:c:\users\admin\documents\github\eedd-pel1\pel1\main.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+
+1761852795 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+	"iomanip"
+
+1761850273 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\editorial.h
+
+1762018110 c:\users\admin\documents\github\eedd-pel1\pel1\editorial.h
+
+1761851035 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pel1\main.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+
+1761639047 source:c:\users\admin\documents\universidad\2º\1er cuatrimestre\edd (c++)\eedd-pel1\pel1\main.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+
+1761639088 c:\users\admin\documents\universidad\2º\1er cuatrimestre\edd (c++)\eedd-pel1\pel1\editorial.h
+
