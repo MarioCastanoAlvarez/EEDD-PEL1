@@ -1,6 +1,9 @@
 #ifndef CCONTROL_H_INCLUDED
 #define CCONTROL_H_INCLUDED
 
+#define ASCENDENTE 0
+#define DESCENDENTE 1
+
 //Estructura de árbol binario
 
 class Nodo
@@ -19,15 +22,25 @@ class Nodo
 
 };
 
-class Cola
+
+//Clase Lista
+class Lista
 {
-public:
-    Cola() : frente(NULL), final(NULL) {}
-    ~Cola();
-    void encolar(int v);
-    int desencolar();
 private:
-    pnodo frente, final;
+pnodo cabeza, actual, final;
+public:
+Lista() {cabeza=actual=final=NULL; }
+~Lista();
+void insertarNodo(int v, char c);
+void borrarNodo(char c);
+bool listaVacia();
+void esCabeza();
+void esFinal();
+void esSiguiente();
+void esAnterior();
+bool esActual();
+int valorActual();
+void recorrerLista(int);
 };
 
 
