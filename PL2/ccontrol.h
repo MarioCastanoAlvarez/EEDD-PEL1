@@ -72,6 +72,7 @@ class ArbolABB
         void auxContador(Nodo*);
         void auxAltura(Nodo*, int);
 };
-
+//Prototipos de funciones
+bool esEntero(string entrada);
 
 #endif // CCONTROL_H_INCLUDED
