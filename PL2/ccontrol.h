@@ -52,14 +52,14 @@ class NodoL
     private:
         // Miembros:
         Pedido pedido;
-        NodoL *izquierdo;
-        NodoL *derecho;
+        NodoL *anterior;
+        NodoL *siguiente;
         friend class Lista;
 
     public:
         // Constructor:
-        NodoL(const Pedido ped, NodoL *izq=NULL, NodoL *der=NULL) :
-            pedido(ped), izquierdo(izq), derecho(der) {}
+        NodoL(const Pedido ped, NodoL *ant=NULL, NodoL *sig=NULL) :
+            pedido(ped), anterior(ant), siguiente(sig) {}
 
 };
 typedef NodoL *pnodoL;
@@ -73,7 +73,7 @@ class Lista
     public:
         Lista() {cabeza=actual=final=NULL; }
         ~Lista();
-        void insertarNodo(int v, char c);
+        void insertarNodo(Pedido v, char c);
         void borrarNodo(char c);
         bool listaVacia();
         void esCabeza();
@@ -81,7 +81,7 @@ class Lista
         void esSiguiente();
         void esAnterior();
         bool esActual();
-        int valorActual();
+        Pedido valorActual();
         void recorrerLista(int);
 };
 
@@ -100,11 +100,11 @@ class ArbolABB
         ArbolABB() : raiz(NULL), actual(NULL) {}
         ~ArbolABB();
          // Insertar en árbol ordenado:
-        void Insertar(const int dat);
+        void Insertar(const Libreria lib);
         // Borrar un elemento del árbol:
-        void Borrar(const int dat);
+        void Borrar(const Libreria lib);
         // Función de búsqueda:
-        bool Buscar(const int dat);
+        bool Buscar(const Libreria lib);
         // Comprobar si el árbol está vacío:
         bool Vacio(NodoA *r);
         // Comprobar si es un nodo hoja:
@@ -113,7 +113,7 @@ class ArbolABB
         const int NumeroNodos();
         const int AlturaArbol();
         // Calcular altura de un int:
-        int Altura(const int dat);
+        int Altura(const Libreria lib);
         // Moverse al nodo raiz:
         void Raiz();
         // Aplicar una función a cada elemento del árbol:
@@ -131,5 +131,14 @@ class ArbolABB
 
 //Prototipos de funciones
 bool esEntero(string entrada);
+//Prototipos de funciones
+bool esEntero(string entrada);
+int digitoRandom();
+int id_libreriaRandom();
+string id_pedidoRandom();
+string cod_libroRandom();
+string materiaRandom();
+int unidadesRandom();
+Pedido generarPedido();
 
 #endif // CCONTROL_H_INCLUDED

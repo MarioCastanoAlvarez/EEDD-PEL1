@@ -19,7 +19,7 @@ actual=NULL;
 final=NULL;
 }
 //Inserta un NodoL en la lista.
-void Lista::insertarNodo(int v, char c)
+void Lista::insertarNodo(Pedido v, char c)
 {
 pnodoL aux;
 char tipoInsercion;
@@ -81,7 +81,7 @@ else if(tipoBorrado=='p') { //Eliminación por el Principio
 }
 
 //Recorre toda la lista mostrando sus valores por pantalla
-void Lista::recorrerLista (int orden){
+/* void Lista::recorrerLista (int orden){
 pnodoL aux;
 if (orden == ASCENDENTE) {
     esCabeza();
@@ -100,6 +100,7 @@ else {
     }
 cout << endl;
 }
+*/
 
 //Mira si el puntero Cabeza es Null.
 bool Lista::listaVacia()
@@ -137,10 +138,10 @@ return actual != NULL;
 }
 
 //Devuelve el valor del puntero Actual.
-int Lista::valorActual()
+Pedido Lista::valorActual()
 {
-if (!listaVacia()) return actual->valor;
-else return 0;
+if (!listaVacia()) return actual->pedido;
+else return VACIO;
 }
 
 
@@ -191,33 +192,33 @@ void ArbolABB::Podar(NodoA* &nodo)
 }
 
 // Insertar un int en el árbol ABB
-void ArbolABB::Insertar(const int dat)
+void ArbolABB::Insertar(const Libreria lib)
 {
    NodoA *padre = NULL;
 
    actual = raiz;
    // Buscar el int en el árbol, manteniendo un puntero al nodo padre
-   while(!Vacio(actual) && dat != actual->dato) {
+   while(!Vacio(actual) && lib != actual->libreria) {
       padre = actual;
-      if(dat > actual->dato) actual = actual->derecho;
-      else if(dat < actual->dato) actual = actual->izquierdo;
+      if(lib > actual->libreria) actual = actual->derecho;
+      else if(lib < actual->libreria) actual = actual->izquierdo;
    }
 
    // Si se ha encontrado el elemento, regresar sin insertar
    if(!Vacio(actual)) return;
    // Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será
    // el nodo raiz
-   if(Vacio(padre)) raiz = new NodoA(dat);
+   if(Vacio(padre)) raiz = new NodoA(lib);
    // Si el int es menor que el que contiene el nodo padre, lo insertamos
    // en la rama izquierda
-   else if(dat < padre->dato) padre->izquierdo = new NodoA(dat);
+   else if(lib < padre->dato) padre->izquierdo = new NodoA(lib);
    // Si el int es mayor que el que contiene el nodo padre, lo insertamos
    // en la rama derecha
-   else if(dat > padre->dato) padre->derecho = new NodoA(dat);
+   else if(lib > padre->dato) padre->derecho = new NodoA(lib);
 }
 
 // Eliminar un elemento de un árbol ABB
-void ArbolABB::Borrar(const int dat)
+void ArbolABB::Borrar(const Libreria lib)
 {
    NodoA *padre = NULL;
    NodoA *nodo;
@@ -226,7 +227,7 @@ void ArbolABB::Borrar(const int dat)
    actual = raiz;
    // Mientras sea posible que el valor esté en el árbol
    while(!Vacio(actual)) {
-      if(dat == actual->dato) { // Si el valor está en el nodo actual
+      if(lib == actual->libreria) { // Si el valor está en el nodo actual
          if(EsHoja(actual)) { // Y si además es un nodo hoja: lo borramos
             if(padre){ // Si tiene padre (no es el nodo raiz)
                // Anulamos el puntero que le hace referencia
@@ -262,16 +263,16 @@ void ArbolABB::Borrar(const int dat)
             // y continuar, cerrando el bucle. El nodo encontrado no tiene
             // por qué ser un nodo hoja, cerrando el bucle nos aseguramos
             // de que sólo se eliminan nodos hoja.
-            aux = actual->dato;
-            actual->dato = nodo->dato;
-            nodo->dato = aux;
+            aux = actual->libreria;
+            actual->libreria = nodo->libreria;
+            nodo->libreria = aux;
             actual = nodo;
          }
       }
       else { // Todavía no hemos encontrado el valor, seguir buscándolo
          padre = actual;
-         if(dat > actual->dato) actual = actual->derecho;
-         else if(dat < actual->dato) actual = actual->izquierdo;
+         if(lib > actual->libreria) actual = actual->derecho;
+         else if(lib < actual->libreria) actual = actual->izquierdo;
       }
    }
 }
@@ -295,7 +296,7 @@ void ArbolABB::PreOrden(void (*func)(int), NodoA *nodo, bool r)
 {
       if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
-   func(nodo->dato);
+   func(nodo->libreria);
    if(nodo->izquierdo) PreOrden(func, nodo->izquierdo, false);
    if(nodo->derecho) PreOrden(func, nodo->derecho, false);
 }
@@ -309,36 +310,36 @@ void ArbolABB::PostOrden(void (*func)(int), NodoA *nodo, bool r)
    if(r) nodo = raiz;
    if(nodo->izquierdo) PostOrden(func, nodo->izquierdo, false);
    if(nodo->derecho) PostOrden(func, nodo->derecho, false);
-   func(nodo->dato);
+   func(nodo->libreria);
 }
 
 // Buscar un valor en el árbol
-bool ArbolABB::Buscar(const int dat)
+bool ArbolABB::Buscar(const Libreria lib)
 {
    actual = raiz;
 
    // Todavía puede aparecer, ya que quedan nodos por mirar
    while(!Vacio(actual)) {
-      if(dat == actual->dato) return true; // int encontrado
-      else if(dat > actual->dato) actual = actual->derecho; // Seguir
-      else if(dat < actual->dato) actual = actual->izquierdo;
+      if(lib == actual->libreria) return true; // int encontrado
+      else if(lib > actual->libreria) actual = actual->derecho; // Seguir
+      else if(lib < actual->libreria) actual = actual->izquierdo;
    }
    return false; // No está en árbol
 }
 
-// Calcular la altura del nodo que contiene el int dat
-int ArbolABB::Altura(const int dat)
+// Calcular la altura del nodo que contiene la libreria lib
+int ArbolABB::Altura(const Libreria lib)
 {
    int altura = 0;
    actual = raiz;
 
    // Todavía puede aparecer, ya que quedan nodos por mirar
    while(!Vacio(actual)) {
-      if(dat == actual->dato) return altura; // int encontrado
+      if(lib == actual->libreria) return altura; // int encontrado
       else {
          altura++; // Incrementamos la altura, seguimos buscando
-         if(dat > actual->dato) actual = actual->derecho;
-         else if(dat < actual->dato) actual = actual->izquierdo;
+         if(lib > actual->libreria) actual = actual->derecho;
+         else if(lib < actual->libreria) actual = actual->izquierdo;
       }
    }
    return -1; // No está en árbol
@@ -349,7 +350,7 @@ const int ArbolABB::NumeroNodos()
 {
    contador = 0;
 
-   auxContador(raiz); // FUnción auxiliar
+   auxContador(raiz); // Función auxiliar
    return contador;
 }
 

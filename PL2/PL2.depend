@@ -1,3 +1,11 @@
 # depslib dependency file v1.0
 1764000333 source:c:\users\admin\documents\github\eedd-pel1\pl2\ccontrol.cpp
 
+1764007670 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\main.cpp
+	<iostream>
+	<ctime>
+	"ccontrol.h"
+
+1764008601 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.h
+	<ctime>
+
