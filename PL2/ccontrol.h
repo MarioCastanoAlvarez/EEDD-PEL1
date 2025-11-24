@@ -1,28 +1,9 @@
 #ifndef CCONTROL_H_INCLUDED
 #define CCONTROL_H_INCLUDED
 
-#define MAX_TITULOS 10
-#define N_PEDIDOS_PASO 12
-#define TAM_LOTE 10
-#define LIBRERIAS 6
-#define CAP_CAJA 5
-#define VACIO Pedido{0, "", "", "", 0, ""}
+//Estructura de árbol binario
 
-#include <ctime>
-
-
-//Estructura de un pedido
-struct Pedido{
-    int id_libreria;
-    string id_pedido;
-    string cod_libro;
-    string materia;
-    int unidades;
-    time_t fechaEnvio;
-};
-
-//Clase nodo
-class NodoB
+class Nodo
 {
     private:
         // Miembros:
@@ -38,7 +19,18 @@ class NodoB
 
 };
 
-//Clase de árbol binario
+class Cola
+{
+public:
+    Cola() : frente(NULL), final(NULL) {}
+    ~Cola();
+    void encolar(int v);
+    int desencolar();
+private:
+    pnodo frente, final;
+};
+
+
 class ArbolABB
 {
     private:

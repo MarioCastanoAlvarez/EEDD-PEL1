@@ -1,7 +1,4 @@
-#include ccontrol.h
-#include <iostream>
-#include <ctime>
-#include "iomanip"
+#include "arboles.h"
 
 using namespace std;
 
@@ -12,6 +9,37 @@ bool esEntero(string entrada){
         if(!isdigit(c))return false;
     } return true;
 };
+
+//Funciones de cola
+//Destructor
+Cola::~Cola()
+{
+    while(frente) desencolar();
+}
+
+//Encolar elemento
+void Cola::encolar(int v)
+{
+    pnodo nuevo;
+    nuevo = new Nodo(v);
+    if(final) final->siguiente = nuevo;
+    final= nuevo;
+    if(!frente) frente = nuevo;
+}
+
+//Desencolar elemento
+int Cola::desencolar()
+{
+    pnodo nodo;
+    int v;
+    nodo = frente;
+    frente = nodo->siguiente;
+
+    v = nodo->valor;
+    delete nodo;
+    if(!frente) final = NULL;
+    return v;
+}
 
 
 //Funciones de arbol binario
