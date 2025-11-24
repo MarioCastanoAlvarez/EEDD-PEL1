@@ -6,6 +6,8 @@ using namespace std;
 
 int main()
 {
+    string entrada;
+    int i;
     do{
     cout<<"=== MENU ==="<<endl
     <<"1) Insertar una librería de forma manual."<<endl
@@ -21,8 +23,7 @@ int main()
     <<"Opcion: ";
 
 //Seleccion de opcion
-    string entrada;
-    int i;
+
     getline(cin, entrada); cout<<endl;
     if (esEntero(entrada)){
         i = stoi(entrada);
