@@ -7,7 +7,7 @@ using namespace std;
 
 //Destructor de Lista.
 Lista::~Lista(){
-pnodo aux;
+pnodoL aux;
 esCabeza();
 while(cabeza){
     aux = cabeza;
@@ -18,36 +18,36 @@ cabeza=NULL;
 actual=NULL;
 final=NULL;
 }
-//Inserta un Nodo en la lista.
+//Inserta un NodoL en la lista.
 void Lista::insertarNodo(int v, char c)
 {
-pnodo aux;
+pnodoL aux;
 char tipoInsercion;
 tipoInsercion=c;
 if(listaVacia()) { // Si la lista está vacía
-    aux = new Nodo(v,NULL,NULL);
+    aux = new NodoL(v,NULL,NULL);
     final=cabeza=aux;
     }
 else if (tipoInsercion=='f') {//Inserción por el final
-    aux= new Nodo(v,NULL,NULL);
+    aux= new NodoL(v,NULL,NULL);
     aux->anterior=final;
     final->siguiente=aux;
     final=aux;
     }
 else if (tipoInsercion=='p') {//Inserción por el principio
-    aux= new Nodo(v,NULL,NULL);
+    aux= new NodoL(v,NULL,NULL);
     aux->siguiente=cabeza;
     cabeza->anterior=aux;
     cabeza=aux;
     }
 }
 
-//Elimina un Nodo de la lista
+//Elimina un NodoL de la lista
 void Lista::borrarNodo(char c)
 {
 char tipoBorrado; tipoBorrado=c;
 if(tipoBorrado=='f') {      //Eliminación por el final
-    pnodo aux=NULL;
+    pnodoL aux=NULL;
     if((cabeza==final)) {       //Sólo hay elemento
         aux=final;
         cabeza = final = NULL;
@@ -63,7 +63,7 @@ if(tipoBorrado=='f') {      //Eliminación por el final
         }
     }
 else if(tipoBorrado=='p') { //Eliminación por el Principio
-    pnodo aux=NULL;
+    pnodoL aux=NULL;
     if((cabeza==final)) {       //Sólo hay elemento
     aux=cabeza;
     cabeza = final = NULL;
@@ -82,7 +82,7 @@ else if(tipoBorrado=='p') { //Eliminación por el Principio
 
 //Recorre toda la lista mostrando sus valores por pantalla
 void Lista::recorrerLista (int orden){
-pnodo aux;
+pnodoL aux;
 if (orden == ASCENDENTE) {
     esCabeza();
     aux = cabeza;
@@ -161,13 +161,13 @@ ArbolABB::~ArbolABB()
         }
 
 //Árbol vacío
-bool ArbolABB::Vacio(Nodo *r)
+bool ArbolABB::Vacio(NodoA *r)
         {
             return r==NULL;
         }
 
-//Nodo es de tipo hoja
-bool ArbolABB::EsHoja(Nodo *r)
+//NodoA es de tipo hoja
+bool ArbolABB::EsHoja(NodoA *r)
         {
             return !r->derecho && !r->izquierdo;
         }
@@ -179,7 +179,7 @@ void ArbolABB::Raiz()
         }
 
 // Poda: borrar todos los nodos a partir de uno incluido
-void ArbolABB::Podar(Nodo* &nodo)
+void ArbolABB::Podar(NodoA* &nodo)
 {
    // Algoritmo recursivo, recorrido en postorden
    if(nodo) {
@@ -193,7 +193,7 @@ void ArbolABB::Podar(Nodo* &nodo)
 // Insertar un int en el árbol ABB
 void ArbolABB::Insertar(const int dat)
 {
-   Nodo *padre = NULL;
+   NodoA *padre = NULL;
 
    actual = raiz;
    // Buscar el int en el árbol, manteniendo un puntero al nodo padre
@@ -207,20 +207,20 @@ void ArbolABB::Insertar(const int dat)
    if(!Vacio(actual)) return;
    // Si padre es NULL, entonces el árbol estaba vacío, el nuevo nodo será
    // el nodo raiz
-   if(Vacio(padre)) raiz = new Nodo(dat);
+   if(Vacio(padre)) raiz = new NodoA(dat);
    // Si el int es menor que el que contiene el nodo padre, lo insertamos
    // en la rama izquierda
-   else if(dat < padre->dato) padre->izquierdo = new Nodo(dat);
+   else if(dat < padre->dato) padre->izquierdo = new NodoA(dat);
    // Si el int es mayor que el que contiene el nodo padre, lo insertamos
    // en la rama derecha
-   else if(dat > padre->dato) padre->derecho = new Nodo(dat);
+   else if(dat > padre->dato) padre->derecho = new NodoA(dat);
 }
 
 // Eliminar un elemento de un árbol ABB
 void ArbolABB::Borrar(const int dat)
 {
-   Nodo *padre = NULL;
-   Nodo *nodo;
+   NodoA *padre = NULL;
+   NodoA *nodo;
    int aux;
 
    actual = raiz;
@@ -279,7 +279,7 @@ void ArbolABB::Borrar(const int dat)
 // Recorrido de árbol en inorden, aplicamos la función func, que tiene
 // el prototipo:
 // void func(int&);
-void ArbolABB::InOrden(void (*func)(int) , Nodo *nodo, bool r)
+void ArbolABB::InOrden(void (*func)(int) , NodoA *nodo, bool r)
 {
   if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
@@ -291,7 +291,7 @@ void ArbolABB::InOrden(void (*func)(int) , Nodo *nodo, bool r)
 // Recorrido de árbol en preorden, aplicamos la función func, que tiene
 // el prototipo:
 // void func(int&);
-void ArbolABB::PreOrden(void (*func)(int), Nodo *nodo, bool r)
+void ArbolABB::PreOrden(void (*func)(int), NodoA *nodo, bool r)
 {
       if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
@@ -303,7 +303,7 @@ void ArbolABB::PreOrden(void (*func)(int), Nodo *nodo, bool r)
 // Recorrido de árbol en postorden, aplicamos la función func, que tiene
 // el prototipo:
 // void func(int&);
-void ArbolABB::PostOrden(void (*func)(int), Nodo *nodo, bool r)
+void ArbolABB::PostOrden(void (*func)(int), NodoA *nodo, bool r)
 {
       if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
@@ -355,7 +355,7 @@ const int ArbolABB::NumeroNodos()
 
 // Función auxiliar para contar nodos. Función recursiva de recorrido en
 //   preorden, el proceso es aumentar el contador
-void ArbolABB::auxContador(Nodo *nodo)
+void ArbolABB::auxContador(NodoA *nodo)
 {
    contador++;  // Otro nodo
    // Continuar recorrido
@@ -375,7 +375,7 @@ const int ArbolABB::AlturaArbol()
 // Función auxiliar para calcular altura. Función recursiva de recorrido en
 // postorden, el proceso es actualizar la altura sólo en nodos hojas de mayor
 // altura de la máxima actual
-void ArbolABB::auxAltura(Nodo *nodo, int a)
+void ArbolABB::auxAltura(NodoA *nodo, int a)
 {
    // Recorrido postorden
    if(nodo->izquierdo) auxAltura(nodo->izquierdo, a+1);
