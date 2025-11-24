@@ -1,0 +1,6 @@
+#ifndef CCONTROL_H_INCLUDED
+#define CCONTROL_H_INCLUDED
+
+
+
+#endif // CCONTROL_H_INCLUDED
