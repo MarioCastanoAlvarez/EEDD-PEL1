@@ -6,12 +6,25 @@ int main()
 {
     do{
     cout<<"=== MENU ==="<<endl
-    <<"1) Generar N pedidos"<<endl
-    <<"2) Paso (una FASE)"<<endl
-    <<"3) Mostrar estado"<<endl
-    <<"4) Ver caja de una libreria"<<endl
-    <<"0) Salir"<<endl<<endl
+    <<"1) Insertar una librería de forma manual."<<endl
+    <<"2) Borrar una librería del árbol."<<endl
+    <<"3) Mostrar los datos de los pedidos de una librería dada."<<endl
+    <<"4) Buscar un pedido concreto por su ID."<<endl
+    <<"5) Extraer un pedido concreto."<<endl
+    <<"6) Llevar un pedido concreto de una librería a otra."<<endl
+    <<"7) Mostrar una estadística de las librerías."<<endl
+    <<"8) Continuar con la distribución de pedidos."<<endl
+    <<"0) Salir del programa."<<endl
+    <<endl
     <<"Opcion: ";
+
+
+
+
+
+
+
+
 
 
 //Seleccion de opcion
@@ -48,23 +61,23 @@ int main()
 
             break;}
 
-//Opcion 4: Mostrar pedidos contenidos en una de las cajas deseada.
+//Opcion 5: Mostrar pedidos contenidos en una de las cajas deseada.
         case 5:{
             cout<<"Se ha elegido: 4)"<<endl<<endl;
 
             break;}
-//Opcion 4: Mostrar pedidos contenidos en una de las cajas deseada.
-        case 5:{
-            cout<<"Se ha elegido: 4)"<<endl<<endl;
-
-            break;}
-//Opcion 4: Mostrar pedidos contenidos en una de las cajas deseada.
+//Opcion 6: Mostrar pedidos contenidos en una de las cajas deseada.
         case 6:{
             cout<<"Se ha elegido: 4)"<<endl<<endl;
 
             break;}
-//Opcion 4: Mostrar pedidos contenidos en una de las cajas deseada.
+//Opcion 7: Mostrar pedidos contenidos en una de las cajas deseada.
         case 7:{
+            cout<<"Se ha elegido: 4)"<<endl<<endl;
+
+            break;}
+//Opcion 8: Mostrar pedidos contenidos en una de las cajas deseada.
+        case 8:{
             cout<<"Se ha elegido: 4)"<<endl<<endl;
 
             break;}
