@@ -35,6 +35,8 @@
 		<Unit filename="ccontrol.cpp" />
 		<Unit filename="ccontrol.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="test.cpp" />
+		<Unit filename="test.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
