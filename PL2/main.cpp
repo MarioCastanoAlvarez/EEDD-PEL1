@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include "ccontrol.h"
 
 using namespace std;
 
