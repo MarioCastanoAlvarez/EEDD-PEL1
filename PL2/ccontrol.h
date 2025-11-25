@@ -58,6 +58,7 @@ class Lista
         bool esActual();
         Pedido valorActual();
         void recorrerLista(int);
+        int contarLista();
 };
 
 //Estructura de una librería
@@ -140,5 +141,6 @@ string cod_libroRandom();
 string materiaRandom();
 int unidadesRandom();
 Libreria generarLibreria();
+void mostrarLibrería(Libreria lib);
 
 #endif // CCONTROL_H_INCLUDED

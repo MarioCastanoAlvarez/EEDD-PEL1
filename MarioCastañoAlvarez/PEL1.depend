@@ -50,3 +50,16 @@
 	<ctime>
 	"editorial.h"
 
+1764054320 source:c:\users\admin\documents\universidad\2º\1er cuatrimestre\edd (c++)\eedd-pel1\mariocastañoalvarez\editorial.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+	"iomanip"
+
+1764054320 c:\users\admin\documents\universidad\2º\1er cuatrimestre\edd (c++)\eedd-pel1\mariocastañoalvarez\editorial.h
+
+1764054320 source:c:\users\admin\documents\universidad\2º\1er cuatrimestre\edd (c++)\eedd-pel1\mariocastañoalvarez\main.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+

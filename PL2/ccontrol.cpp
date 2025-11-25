@@ -147,6 +147,16 @@ if (!listaVacia()) return actual->pedido;
 else return VACIO;
 }
 
+//Cuenta los pedidos de una libreria
+int Lista::contarLista(){
+    actual=cabeza;
+    int contador=0;
+    while(actual){
+        contador++;
+        actual=actual->siguiente;
+    }
+    return contador;
+};
 
 //Funcion para verificar si una entrada es un entero o no.
 bool esEntero(string entrada){
@@ -155,7 +165,11 @@ bool esEntero(string entrada){
         if(!isdigit(c))return false;
     } return true;
 };
-
+//Funciones de lista
+//Muestra los atributos de una libreria por pantalla
+void mostrarLibrería(Libreria lib){
+    cout<<"ID: "<<lib.id_lib<<" Localidad: "<<setw(11)<<lib.localidad<<" Num Pedidos: "<<setw(5)<<lib.lista.contarLista()<<endl;
+};
 
 //Funciones de arbol binario
 //Destructor
