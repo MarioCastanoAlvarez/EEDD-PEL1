@@ -116,9 +116,9 @@ class ArbolABB
         // Moverse al nodo raiz:
         void Raiz();
         // Aplicar una función a cada elemento del árbol:
-        void InOrden(void (*func)(int), NodoA *nodo=NULL, bool r=true);
-        void PreOrden(void (*func)(int), NodoA *nodo=NULL, bool r=true);
-        void PostOrden(void (*func)(int), NodoA *nodo=NULL, bool r=true);
+        void InOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
+        void PreOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
+        void PostOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
 
     private:
         // Funciones auxiliares

@@ -222,7 +222,7 @@ void ArbolABB::Borrar(const Libreria lib)
 {
    NodoA *padre = NULL;
    NodoA *nodo;
-   int aux;
+   Libreria aux;
 
    actual = raiz;
    // Mientras sea posible que el valor esté en el árbol
@@ -280,7 +280,7 @@ void ArbolABB::Borrar(const Libreria lib)
 // Recorrido de árbol en inorden, aplicamos la función func, que tiene
 // el prototipo:
 // void func(int&);
-void ArbolABB::InOrden(void (*func)(int) , NodoA *nodo, bool r)
+void ArbolABB::InOrden(void (*func)(Libreria) , NodoA *nodo, bool r)
 {
   if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
@@ -292,7 +292,7 @@ void ArbolABB::InOrden(void (*func)(int) , NodoA *nodo, bool r)
 // Recorrido de árbol en preorden, aplicamos la función func, que tiene
 // el prototipo:
 // void func(int&);
-void ArbolABB::PreOrden(void (*func)(int), NodoA *nodo, bool r)
+void ArbolABB::PreOrden(void (*func)(Libreria), NodoA *nodo, bool r)
 {
       if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
@@ -304,7 +304,7 @@ void ArbolABB::PreOrden(void (*func)(int), NodoA *nodo, bool r)
 // Recorrido de árbol en postorden, aplicamos la función func, que tiene
 // el prototipo:
 // void func(int&);
-void ArbolABB::PostOrden(void (*func)(int), NodoA *nodo, bool r)
+void ArbolABB::PostOrden(void (*func)(Libreria), NodoA *nodo, bool r)
 {
       if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
