@@ -6,7 +6,6 @@
 #define N_LIBRERIAS 10
 #define N_PEDIDOS 30
 #define VACIO Pedido{0, "", "", "", 0, ""}
-
 #include <ctime>
 
 using namespace std;

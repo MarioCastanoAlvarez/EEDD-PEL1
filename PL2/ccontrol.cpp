@@ -198,10 +198,10 @@ void ArbolABB::Insertar(const Libreria lib)
 
    actual = raiz;
    // Buscar el int en el árbol, manteniendo un puntero al nodo padre
-   while(!Vacio(actual) && lib != actual->libreria) {
+   while(!Vacio(actual) && lib.id_lib != actual->libreria.id_lib) {
       padre = actual;
-      if(lib > actual->libreria) actual = actual->derecho;
-      else if(lib < actual->libreria) actual = actual->izquierdo;
+      if(lib.id_lib > actual->libreria.id_lib) actual = actual->derecho;
+      else if(lib.id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
    }
 
    // Si se ha encontrado el elemento, regresar sin insertar
@@ -211,10 +211,10 @@ void ArbolABB::Insertar(const Libreria lib)
    if(Vacio(padre)) raiz = new NodoA(lib);
    // Si el int es menor que el que contiene el nodo padre, lo insertamos
    // en la rama izquierda
-   else if(lib < padre->dato) padre->izquierdo = new NodoA(lib);
+   else if(lib.id_lib < padre->libreria.id_lib) padre->izquierdo = new NodoA(lib);
    // Si el int es mayor que el que contiene el nodo padre, lo insertamos
    // en la rama derecha
-   else if(lib > padre->dato) padre->derecho = new NodoA(lib);
+   else if(lib.id_lib > padre->libreria.id_lib) padre->derecho = new NodoA(lib);
 }
 
 // Eliminar un elemento de un árbol ABB
@@ -227,12 +227,12 @@ void ArbolABB::Borrar(const Libreria lib)
    actual = raiz;
    // Mientras sea posible que el valor esté en el árbol
    while(!Vacio(actual)) {
-      if(lib == actual->libreria) { // Si el valor está en el nodo actual
+      if(lib.id_lib == actual->libreria.id_lib) { // Si el valor está en el nodo actual
          if(EsHoja(actual)) { // Y si además es un nodo hoja: lo borramos
             if(padre){ // Si tiene padre (no es el nodo raiz)
                // Anulamos el puntero que le hace referencia
-               if(padre->derecho == actual) padre->derecho = NULL;
-               else if(padre->izquierdo == actual) padre->izquierdo = NULL;
+               if(padre->derecho->libreria.id_lib == actual->libreria.id_lib) padre->derecho = NULL;
+               else if(padre->izquierdo->libreria.id_lib == actual->libreria.id_lib) padre->izquierdo = NULL;
             }
             else raiz=NULL;
 
@@ -271,8 +271,8 @@ void ArbolABB::Borrar(const Libreria lib)
       }
       else { // Todavía no hemos encontrado el valor, seguir buscándolo
          padre = actual;
-         if(lib > actual->libreria) actual = actual->derecho;
-         else if(lib < actual->libreria) actual = actual->izquierdo;
+         if(lib.id_lib > actual->libreria.id_lib) actual = actual->derecho;
+         else if(lib.id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
       }
    }
 }
@@ -285,7 +285,7 @@ void ArbolABB::InOrden(void (*func)(int) , NodoA *nodo, bool r)
   if (raiz==NULL) {cout<<"Arbol vacio"<<endl; return;}
    if(r) nodo = raiz;
    if(nodo->izquierdo) InOrden(func, nodo->izquierdo, false);
-   func(nodo->dato);
+   func(nodo->libreria);
    if(nodo->derecho) InOrden(func, nodo->derecho, false);
 }
 
@@ -320,9 +320,9 @@ bool ArbolABB::Buscar(const Libreria lib)
 
    // Todavía puede aparecer, ya que quedan nodos por mirar
    while(!Vacio(actual)) {
-      if(lib == actual->libreria) return true; // int encontrado
-      else if(lib > actual->libreria) actual = actual->derecho; // Seguir
-      else if(lib < actual->libreria) actual = actual->izquierdo;
+      if(lib.id_lib == actual->libreria.id_lib) return true; // int encontrado
+      else if(lib.id_lib > actual->libreria.id_lib) actual = actual->derecho; // Seguir
+      else if(lib.id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
    }
    return false; // No está en árbol
 }
@@ -335,11 +335,11 @@ int ArbolABB::Altura(const Libreria lib)
 
    // Todavía puede aparecer, ya que quedan nodos por mirar
    while(!Vacio(actual)) {
-      if(lib == actual->libreria) return altura; // int encontrado
+      if(lib.id_lib == actual->libreria.id_lib) return altura; // int encontrado
       else {
          altura++; // Incrementamos la altura, seguimos buscando
-         if(lib > actual->libreria) actual = actual->derecho;
-         else if(lib < actual->libreria) actual = actual->izquierdo;
+         if(lib.id_lib > actual->libreria.id_lib) actual = actual->derecho;
+         else if(lib.id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
       }
    }
    return -1; // No está en árbol
