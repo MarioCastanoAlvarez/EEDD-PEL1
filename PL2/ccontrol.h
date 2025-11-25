@@ -10,13 +10,6 @@
 
 using namespace std;
 
-class Lista;
-//Estructura de una librería
-struct Libreria{
-    int id_lib;
-    string localidad;
-    Lista *lista;
-};
 
 //Estructura de un pedido
 struct Pedido{
@@ -28,24 +21,7 @@ struct Pedido{
     string estado;
 };
 
-//Estructura de árbol binario
-class NodoA
-{
-    private:
-        // Miembros:
-        Libreria libreria;
-        NodoA *izquierdo;
-        NodoA *derecho;
-        friend class ArbolABB;
-
-    public:
-        // Constructor:
-        NodoA(const Libreria lib, NodoA *izq=NULL, NodoA *der=NULL) :
-            libreria(lib), izquierdo(izq), derecho(der) {}
-
-};
-typedef NodoA *pnodoA;
-
+//Clase nodo para listas
 class NodoL
 {
     private:
@@ -84,7 +60,32 @@ class Lista
         void recorrerLista(int);
 };
 
+//Estructura de una librería
+struct Libreria{
+    int id_lib;
+    string localidad;
+    Lista *lista;
+};
 
+//Clase nodo para arboles
+class NodoA
+{
+    private:
+        // Miembros:
+        Libreria libreria;
+        NodoA *izquierdo;
+        NodoA *derecho;
+        friend class ArbolABB;
+
+    public:
+        // Constructor:
+        NodoA(const Libreria lib, NodoA *izq=NULL, NodoA *der=NULL) :
+            libreria(lib), izquierdo(izq), derecho(der) {}
+
+};
+typedef NodoA *pnodoA;
+
+//Estructura de árbol binario
 class ArbolABB
 {
     private:
@@ -138,6 +139,6 @@ string id_pedidoRandom();
 string cod_libroRandom();
 string materiaRandom();
 int unidadesRandom();
-Pedido generarPedido();
+void generarLibreria()
 
 #endif // CCONTROL_H_INCLUDED

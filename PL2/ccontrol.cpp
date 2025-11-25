@@ -5,6 +5,9 @@
 
 using namespace std;
 
+//Array con todas las localidades
+string LOCALIDADES [20]={"Mostoles", "Alcala", "Leganes", "Fuenlabrada", "Getafe", "Alcorcon","Torrejon", "Parla", "Alcobendas", "Coslada", "Pozuelo", "Rivas", "Valdemoro","Majadahonda","Aranjuez", "Arganda", "Boadilla", "Pinto", "Colmenar", "Tres Cantos"};
+
 //Destructor de Lista.
 Lista::~Lista(){
 pnodoL aux;
@@ -390,4 +393,13 @@ void ArbolABB::auxAltura(NodoA *nodo, int a)
 void Mostrar(int d)
 {
    cout << d << ",";
+}
+
+//Funcion para la generación de una librería pseudoaleatoria
+Libreria generarLibreria(){
+    Libreria lib;
+    lib.id_lib=rand()%999;
+    lib.lista= new(Lista);
+    lib.localidad=LOCALIDADES[rand()%20];
+    return lib;
 }
