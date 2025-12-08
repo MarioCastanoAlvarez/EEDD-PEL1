@@ -50,12 +50,49 @@ libs.InOrden(mostrarLibreria, nullptr, true);
 //Opcion 1:
         case 1:{
             cout<<"Se ha elegido: 1) Insertar una librería de forma manual."<<endl<<endl;
+            bool ready=false;
+            int id;
+            cout<<"Introduzca el id de la librería: ";
+            do{
+                getline(cin, entrada); cout<<endl;
+                if (esEntero(entrada)){
+                    id = stoi(entrada);
+                    if(!libs.Buscar(id)){
+                        cout<<"El id introducido corresponde a una libreria ya existente."<<endl<<
+                        "Por favor, introduzca otro valor: "<<endl<<endl;
+                    } else{
+                        ready=true;
+                    }
+                } else { cout<<"¡Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
+                }
+            }while(!ready);
+            cout<<"Introduzca el nombre de la locaclidad donde se ubica la libreria: ";
+            getline(cin, entrada); cout<<endl;
+            Libreria lib = generarLibreria();
+            lib.id_lib=id;
+            lib.localidad=entrada;
+            libs.Insertar(lib);
+            cout<<"La libreria fue insertada con exito."<<endl;
             break;}
 
 //Opcion 2:
         case 2:{
-            cout<<"Se ha elegido: 2) Borrar una librería del árbol."<<endl<<endl;
-
+            cout<<"Se ha elegido: 2) Borrar una librería del árbol."<<endl<<endl
+            <<"Introduzca el id de la libreria que desea borrar: ";
+            bool ready=false;
+            do{
+            getline(cin, entrada); cout<<endl;
+            if (esEntero(entrada)){
+                    id = stoi(entrada);
+                    if(libs.Buscar(id)){
+                        libs.Borrar(id);
+                        ready=true;
+                    }else{cout<<"La libreria seleccionada no existe."<<endl;
+                    }
+            } else{ cout<<"¡Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
+            }
+            }while(!ready);
+            cout<<"La libreria ha sido borrada con exito."<<endl;
             break;}
 
 //Opcion 3:
