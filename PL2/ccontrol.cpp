@@ -4,15 +4,51 @@
 #include "ccontrol.h"
 
 using namespace std;
+int digitoRandom(){
+    int resultado = rand()%10;
+    return resultado;
+};
 
+//Devuleve un string (PXXXXX; P="literalmente la letra 'P'"; X="un número entero 0-9") aleatorio que representa la id del pedido. Está comprobado que funciona correctamente.
+string id_pedidoRandom(){
+    string resultado = "P";
+    for(int i = 0; i<5; ++i)
+        resultado+=to_string(digitoRandom());
+    return resultado;
+};
+
+
+//Devuleve un string (XXXKXX; X="un número entero 0-9; K="Es una letra aleatoria de entre todo el alfabeto") aleatorio que representa el codigo del libro. Está comprobado que funciona correctamente.
+string cod_libroRandom(){
+    string resultado="";
+    for(int i = 0; i<3; ++i)
+        resultado+=to_string(digitoRandom());
+    string alfabeto[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+    resultado+=alfabeto[rand()%26];
+    for(int i = 0; i<2; ++i)
+        resultado+=to_string(digitoRandom());
+    return resultado;
+};
+
+//Devuleve un string aleatorio que representa una materia de entre las siguietes: Matemáticas, Física, Tecnología, Música, Historia y Lengua. Está comprobado que funciona correctamente.
+string materiaRandom(){
+    string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
+    string resultado = materias[rand()%6];
+    return resultado;
+};
+
+//Devuleve un int (0-20) aleatorio que representa las unidades. Está comprobado que funciona correctamente.
+int unidadesRandom(){
+    int resultado = rand()%21;
+    return resultado;
+};
 //Array con todas las localidades
 string LOCALIDADES [20]={"Mostoles", "Alcala", "Leganes", "Fuenlabrada", "Getafe", "Alcorcon","Torrejon", "Parla", "Alcobendas", "Coslada", "Pozuelo", "Rivas", "Valdemoro","Majadahonda","Aranjuez", "Arganda", "Boadilla", "Pinto", "Colmenar", "Tres Cantos"};
 
 //Fecha random de 2025 (modificable)
-string fechaRand(){
+time_t fechaRand(){
     srand(time(NULL));
     struct tm datetime;
-    time_t time;
 
     datetime.tm_year = 2025 - 1900; // Number of years since 1900
     datetime.tm_mon = rand()%12 + 1; // Number of months since January
@@ -26,26 +62,82 @@ string fechaRand(){
     datetime.tm_min = rand()%60;
     datetime.tm_sec = rand()%60;
 
-
-    datetime.tm_isdst = -1;
-
-    time = mktime(&datetime);
-    return ctime(&time);
+    return mktime(&datetime);
 }
-string crearFecha(int a, int m, int d){
+time_t crearFecha(int a, int m, int d){
     srand(time(NULL));
     struct tm datetime;
-    time_t time;
 
     datetime.tm_year = a - 1900;
     datetime.tm_mon = m;
     datetime.tm_mday = d;
 
-    datetime.tm_isdst = -1;
+    return mktime(&datetime);
 
-    time = mktime(&datetime);
-    return ctime(&time);
+}
+//Funciones de listas simples
+ListaS::~ListaS()
+{
+    pnodoLS aux;
+    while(cabeza)
+    {
+        aux = cabeza;
+        cabeza = cabeza->siguiente;
+        delete aux;
+    }
+    actual = NULL;
+}
+void ListaS::insertarNodo(int v)
+{
+    pnodoLS aux;
+    if (listaVacia())
+    {
+        cabeza = new NodoLS(v, NULL);
+        final=cabeza;
+    }
+    else
+    {
+        aux= new NodoLS(v,NULL);
+        final->siguiente=aux;
+        final=aux;
+    }
+}
 
+void ListaS::borrarNodo(int v)
+{
+    pnodoLS anterior; actual = cabeza;
+    while (actual->valor!=v && (actual->siguiente)!=NULL)
+    {
+        anterior=actual;
+        actual=actual->siguiente;
+    }
+    if(actual==cabeza) // Primer elemento
+        cabeza = actual->siguiente;
+    else
+    {
+        anterior->siguiente = actual->siguiente;
+        if(actual==final) final=anterior;
+    }
+    actual->siguiente=NULL;
+    delete actual;
+}
+
+bool ListaS::listaVacia()
+{
+    return cabeza == NULL;
+}
+
+int ListaS::getValor(int pos)
+{
+    if(!this->listaVacia()){
+        actual = cabeza;
+        while (actual->siguiente && pos > 0) {actual = actual->siguiente; pos--;}
+        if(pos>0){
+            return -1;
+        }
+        return actual->valor;
+    }
+    return -1;
 }
 
 //Destructor de Lista.
@@ -198,6 +290,17 @@ int Lista::contarLista(){
     return contador;
 };
 
+void Lista::concatenar(Lista &lista)
+{
+    if(final && lista.cabeza){
+    final->siguiente = lista.cabeza;
+    lista.cabeza->anterior = final;
+    final = lista.final;
+    }
+    else if (lista.cabeza){
+        cabeza = lista.cabeza; final = lista.final; actual = lista.actual;
+    }
+}
 //Funcion para verificar si una entrada es un entero o no.
 bool esEntero(string entrada){
     if(entrada.empty())return false;
@@ -221,9 +324,25 @@ ArbolABB::~ArbolABB()
 //Árbol vacío
 bool ArbolABB::Vacio(NodoA *r)
         {
+
             return r==NULL;
         }
-
+ListaS ArbolABB::getListaIDs()
+{
+    return id_libs;
+}
+Libreria ArbolABB::getLibreria(int id_lib)
+{
+    if(this->Buscar(id_lib)) {
+        actual = raiz;
+        while (id_lib != actual->libreria.id_lib) {
+            if (id_lib < raiz->libreria.id_lib) {actual = actual->izquierdo;}
+            else if (id_lib > raiz->libreria.id_lib) {actual = actual->derecho;}
+        }
+        return actual->libreria;
+    }
+    return LIBVACIO;
+}
 //NodoA es de tipo hoja
 bool ArbolABB::EsHoja(NodoA *r)
         {
@@ -275,7 +394,7 @@ void ArbolABB::Insertar(const Libreria lib)
 }
 
 // Eliminar un elemento de un árbol ABB
-void ArbolABB::Borrar(const Libreria lib)
+void ArbolABB::Borrar(const int id_lib)
 {
    NodoA *padre = NULL;
    NodoA *nodo;
@@ -284,7 +403,7 @@ void ArbolABB::Borrar(const Libreria lib)
    actual = raiz;
    // Mientras sea posible que el valor esté en el árbol
    while(!Vacio(actual)) {
-      if(lib.id_lib == actual->libreria.id_lib) { // Si el valor está en el nodo actual
+      if(id_lib == actual->libreria.id_lib) { // Si el valor está en el nodo actual
          if(EsHoja(actual)) { // Y si además es un nodo hoja: lo borramos
             if(padre){ // Si tiene padre (no es el nodo raiz)
                // Anulamos el puntero que le hace referencia
@@ -328,8 +447,8 @@ void ArbolABB::Borrar(const Libreria lib)
       }
       else { // Todavía no hemos encontrado el valor, seguir buscándolo
          padre = actual;
-         if(lib.id_lib > actual->libreria.id_lib) actual = actual->derecho;
-         else if(lib.id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
+         if(id_lib > actual->libreria.id_lib) actual = actual->derecho;
+         else if(id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
       }
    }
 }
@@ -371,15 +490,15 @@ void ArbolABB::PostOrden(void (*func)(Libreria), NodoA *nodo, bool r)
 }
 
 // Buscar un valor en el árbol
-bool ArbolABB::Buscar(const Libreria lib)
+bool ArbolABB::Buscar(const int id_lib)
 {
    actual = raiz;
 
    // Todavía puede aparecer, ya que quedan nodos por mirar
    while(!Vacio(actual)) {
-      if(lib.id_lib == actual->libreria.id_lib) return true; // int encontrado
-      else if(lib.id_lib > actual->libreria.id_lib) actual = actual->derecho; // Seguir
-      else if(lib.id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
+      if(id_lib == actual->libreria.id_lib) return true; // int encontrado
+      else if(id_lib > actual->libreria.id_lib) actual = actual->derecho; // Seguir
+      else if(id_lib < actual->libreria.id_lib) actual = actual->izquierdo;
    }
    return false; // No está en árbol
 }
@@ -457,3 +576,17 @@ Libreria generarLibreria(){
     lib.localidad=LOCALIDADES[rand()%20];
     return lib;
 }
+
+Pedido generarPedido(ArbolABB libs){
+
+        ListaS librerias = libs.getListaIDs();
+
+        Pedido p;
+        p.id_libreria = librerias.getValor(rand()%libs.NumeroNodos());
+        p.id_pedido=id_pedidoRandom();
+        p.cod_libro=cod_libroRandom();
+        p.materia=materiaRandom();
+        p.fecha=fechaRand();
+
+        return p;
+};

@@ -12,23 +12,23 @@ ArbolABB libs;
 
 for (int i = 0; i < N_LIBRERIAS; i++){
     Libreria lib = generarLibreria();
+    libs.getListaIDs().insertarNodo(lib.id_lib);
     libs.Insertar(lib);
 
 }
-libs.InOrden(mostrarLibreria, nullptr, true);
 
     string entrada;
     int i;
     do{
     cout<<"=== MENU ==="<<endl
-    <<"1) Insertar una librería de forma manual."<<endl
-    <<"2) Borrar una librería del árbol."<<endl
-    <<"3) Mostrar los datos de los pedidos de una librería dada."<<endl
+    <<"1) Insertar una libreria de forma manual."<<endl
+    <<"2) Borrar una libreria del arbol."<<endl
+    <<"3) Mostrar los datos de los pedidos de una libreria dada."<<endl
     <<"4) Buscar un pedido concreto por su ID."<<endl
     <<"5) Extraer un pedido concreto."<<endl
-    <<"6) Llevar un pedido concreto de una librería a otra."<<endl
-    <<"7) Mostrar una estadística de las librerías."<<endl
-    <<"8) Continuar con la distribución de pedidos."<<endl
+    <<"6) Llevar un pedido concreto de una libreria a otra."<<endl
+    <<"7) Mostrar una estadistica de las librerias."<<endl
+    <<"8) Continuar con la distribucion de pedidos."<<endl
     <<"0) Salir del programa."<<endl
     <<endl
     <<"Opcion: ";
@@ -49,10 +49,10 @@ libs.InOrden(mostrarLibreria, nullptr, true);
 
 //Opcion 1:
         case 1:{
-            cout<<"Se ha elegido: 1) Insertar una librería de forma manual."<<endl<<endl;
+            cout<<"Se ha elegido: 1) Insertar una libreria de forma manual."<<endl<<endl;
             bool ready=false;
             int id;
-            cout<<"Introduzca el id de la librería: ";
+            cout<<"Introduzca el id de la libreria: ";
             do{
                 getline(cin, entrada); cout<<endl;
                 if (esEntero(entrada)){
@@ -77,9 +77,10 @@ libs.InOrden(mostrarLibreria, nullptr, true);
 
 //Opcion 2:
         case 2:{
-            cout<<"Se ha elegido: 2) Borrar una librería del árbol."<<endl<<endl
+            cout<<"Se ha elegido: 2) Borrar una libreria del arbol."<<endl<<endl
             <<"Introduzca el id de la libreria que desea borrar: ";
             bool ready=false;
+            int id;
             do{
             getline(cin, entrada); cout<<endl;
             if (esEntero(entrada)){
@@ -97,7 +98,7 @@ libs.InOrden(mostrarLibreria, nullptr, true);
 
 //Opcion 3:
         case 3:{
-            cout<<"Se ha elegido: 3) Mostrar los datos de los pedidos de una librería dada."<<endl<<endl;
+            cout<<"Se ha elegido: 3) Mostrar los datos de los pedidos de una libreria dada."<<endl<<endl;
 
             break;}
 
@@ -114,18 +115,22 @@ libs.InOrden(mostrarLibreria, nullptr, true);
             break;}
 //Opcion 6:
         case 6:{
-            cout<<"Se ha elegido: 6) Llevar un pedido concreto de una librería a otra."<<endl<<endl;
+            cout<<"Se ha elegido: 6) Llevar un pedido concreto de una libreria a otra."<<endl<<endl;
 
             break;}
 //Opcion 7:
         case 7:{
-            cout<<"Se ha elegido: 7) Mostrar una estadística de las librerías."<<endl<<endl;
+            cout<<"Se ha elegido: 7) Mostrar una estadistica de las librerias."<<endl<<endl;
 
             break;}
 //Opcion 8:
         case 8:{
-            cout<<"Se ha elegido: 8) Continuar con la distribución de pedidos."<<endl<<endl;
-
+            cout<<"Se ha elegido: 8) Continuar con la distribucion de pedidos."<<endl<<endl;
+            for (int j = 0; j < N_PEDIDOS; j++){
+                Pedido pd = generarPedido(libs);
+                int id_lib = pd.id_libreria;
+                libs.getLibreria(id_lib).lista->insertarNodo(pd,'f');
+                }
             break;}
         default:
 //Control de errores

@@ -5,7 +5,8 @@
 #define DESCENDENTE 1
 #define N_LIBRERIAS 10
 #define N_PEDIDOS 30
-#define VACIO Pedido{0, "", "", "", 0, ""}
+#define VACIO Pedido{0, "", "", "", 0, 0}
+#define LIBVACIO Libreria{-1, "", NULL}
 #include <ctime>
 
 using namespace std;
@@ -18,7 +19,7 @@ struct Pedido{
     string cod_libro;
     string materia;
     int unidades;
-    string estado;
+    time_t fecha;
 };
 
 //Clase nodo para listas
@@ -59,6 +60,7 @@ class Lista
         Pedido valorActual();
         void recorrerLista(int);
         int contarLista();
+        void concatenar(Lista &lista);
 };
 
 //Estructura de una librería
@@ -66,6 +68,39 @@ struct Libreria{
     int id_lib;
     string localidad;
     Lista *lista;
+};
+
+//Clase nodo para listas simples
+class NodoLS
+{
+private:
+    int valor;
+    NodoLS *siguiente;
+    friend class ListaS;
+public:
+    NodoLS(int v, NodoLS *sig = NULL)
+    {
+        valor = v;
+        siguiente = sig;
+    }
+};
+typedef NodoLS *pnodoLS;
+
+//Clase lista smple
+class ListaS
+{
+private:
+    pnodoLS cabeza, actual, final;
+public:
+    ListaS()
+    {
+        cabeza = actual = final = NULL;
+    }
+    ~ListaS();
+    void insertarNodo(int v);
+    void borrarNodo(int v);
+    bool listaVacia();
+    int getValor(int pos);
 };
 
 //Clase nodo para arboles
@@ -95,6 +130,7 @@ class ArbolABB
         NodoA *actual;
         int contador;
         int altura;
+        ListaS id_libs;
 
     public:
         // Constructor y destructor básicos:
@@ -103,11 +139,15 @@ class ArbolABB
          // Insertar en árbol ordenado:
         void Insertar(const Libreria lib);
         // Borrar un elemento del árbol:
-        void Borrar(const Libreria lib);
+        void Borrar(const int id_lib);
         // Función de búsqueda:
-        bool Buscar(const Libreria lib);
+        bool Buscar(const int id_lib);
         // Comprobar si el árbol está vacío:
         bool Vacio(NodoA *r);
+        //Devolver una lista simple con todos los ids de las librerías
+        ListaS getListaIDs();
+        //Devolver una libreria dada su id
+        Libreria getLibreria(int id_lib);
         // Comprobar si es un nodo hoja:
         bool EsHoja(NodoA *r);
         // Contar número de nodos:
@@ -121,6 +161,7 @@ class ArbolABB
         void InOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
         void PreOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
         void PostOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
+
 
     private:
         // Funciones auxiliares
@@ -142,6 +183,8 @@ string materiaRandom();
 int unidadesRandom();
 Libreria generarLibreria();
 void mostrarLibreria(Libreria lib);
-
+Pedido generarPedido(ArbolABB libs);
+time_t crearFecha();
+time_t fechaRand();
 
 #endif // CCONTROL_H_INCLUDED

@@ -260,7 +260,7 @@ void Pila::imprimirPila()
 
 //Funciones de ejecución segun la opcion seleccionada en el menu.
 //Fucion para generar un libro de un pedido.
-Pedido generarPedido(){
+Pedido generarPedido(arbol libs){
 
         Pedido p;
         p.id_libreria=id_libreriaRandom();
