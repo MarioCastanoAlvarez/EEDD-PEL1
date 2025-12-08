@@ -4,8 +4,19 @@
 
 using namespace std;
 
+
+
 int main()
 {
+ArbolABB libs;
+
+for (int i = 0; i < N_LIBRERIAS; i++){
+    Libreria lib = generarLibreria();
+    libs.Insertar(lib);
+
+}
+libs.InOrden(mostrarLibreria, nullptr, true);
+
     string entrada;
     int i;
     do{

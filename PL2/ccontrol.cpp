@@ -8,6 +8,46 @@ using namespace std;
 //Array con todas las localidades
 string LOCALIDADES [20]={"Mostoles", "Alcala", "Leganes", "Fuenlabrada", "Getafe", "Alcorcon","Torrejon", "Parla", "Alcobendas", "Coslada", "Pozuelo", "Rivas", "Valdemoro","Majadahonda","Aranjuez", "Arganda", "Boadilla", "Pinto", "Colmenar", "Tres Cantos"};
 
+//Fecha random de 2025 (modificable)
+string fechaRand(){
+    srand(time(NULL));
+    struct tm datetime;
+    time_t time;
+
+    datetime.tm_year = 2025 - 1900; // Number of years since 1900
+    datetime.tm_mon = rand()%12 + 1; // Number of months since January
+    if (datetime.tm_mon == 1 || datetime.tm_mon == 3 || datetime.tm_mon == 5 || datetime.tm_mon == 7 || datetime.tm_mon == 8 || datetime.tm_mon == 10 || datetime.tm_mon == 12 )
+        { datetime.tm_mday = rand()%31 + 1; }
+    else if (datetime.tm_mon == 4 || datetime.tm_mon == 6 || datetime.tm_mon == 8 || datetime.tm_mon == 9 || datetime.tm_mon == 11)
+        { datetime.tm_mday = rand()%30 + 1;}
+    else { if(datetime.tm_year % 4 == 0){datetime.tm_mday = rand()%28 + 1;}
+            else {datetime.tm_mday = rand()%28 + 1;} }
+    datetime.tm_hour = rand()%24;
+    datetime.tm_min = rand()%60;
+    datetime.tm_sec = rand()%60;
+
+
+    datetime.tm_isdst = -1;
+
+    time = mktime(&datetime);
+    return ctime(&time);
+}
+string crearFecha(int a, int m, int d){
+    srand(time(NULL));
+    struct tm datetime;
+    time_t time;
+
+    datetime.tm_year = a - 1900;
+    datetime.tm_mon = m;
+    datetime.tm_mday = d;
+
+    datetime.tm_isdst = -1;
+
+    time = mktime(&datetime);
+    return ctime(&time);
+
+}
+
 //Destructor de Lista.
 Lista::~Lista(){
 pnodoL aux;
@@ -167,8 +207,8 @@ bool esEntero(string entrada){
 };
 //Funciones de lista
 //Muestra los atributos de una libreria por pantalla
-void mostrarLibrería(Libreria lib){
-    cout<<"ID: "<<lib.id_lib<<" Localidad: "<<setw(11)<<lib.localidad<<" Num Pedidos: "<<setw(5)<<lib.lista.contarLista()<<endl;
+void mostrarLibreria(Libreria lib){
+    cout<<"ID: "<<lib.id_lib<<" Localidad: "<<setw(11)<<lib.localidad<<" Num Pedidos: "<<setw(5)<<lib.lista->contarLista()<<endl;
 };
 
 //Funciones de arbol binario

@@ -141,6 +141,7 @@ string cod_libroRandom();
 string materiaRandom();
 int unidadesRandom();
 Libreria generarLibreria();
-void mostrarLibrería(Libreria lib);
+void mostrarLibreria(Libreria lib);
+
 
 #endif // CCONTROL_H_INCLUDED
