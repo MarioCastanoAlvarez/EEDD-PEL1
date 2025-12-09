@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1765298965 source:c:\users\admin\documents\github\eedd-pel1\pl2\ccontrol.cpp
+1765304291 source:c:\users\admin\documents\github\eedd-pel1\pl2\ccontrol.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
@@ -21,10 +21,10 @@
 	<string>
 	"ccontrol.h"
 
-1765298349 c:\users\admin\documents\github\eedd-pel1\pl2\ccontrol.h
+1765303880 c:\users\admin\documents\github\eedd-pel1\pl2\ccontrol.h
 	<ctime>
 
-1765299251 source:c:\users\admin\documents\github\eedd-pel1\pl2\main.cpp
+1765303677 source:c:\users\admin\documents\github\eedd-pel1\pl2\main.cpp
 	<iostream>
 	<ctime>
 	"ccontrol.h"

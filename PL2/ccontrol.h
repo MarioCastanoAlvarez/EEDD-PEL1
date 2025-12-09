@@ -62,6 +62,7 @@ class Lista
         void recorrerLista(int);
         int contarLista();
         void concatenar(Lista &lista);
+        Pedido buscarPedidoL(string entrada);
 };
 
 //Estructura de una librería
@@ -144,6 +145,8 @@ class ArbolABB
         void Borrar(const int id_lib);
         // Función de búsqueda:
         bool Buscar(const int id_lib);
+        //Busca un pedido por su id_pedido:
+        Pedido buscarPedidoA(string entrada);
         // Comprobar si el árbol está vacío:
         bool Vacio(NodoA *r);
         //Devolver una lista simple con todos los ids de las librerías
@@ -172,6 +175,7 @@ class ArbolABB
         void Podar(NodoA* &);
         void auxContador(NodoA*);
         void auxAltura(NodoA*, int);
+        Pedido auxBuscarPedidoA(NodoA*,string);
 };
 
 

@@ -341,6 +341,14 @@ void Lista::concatenar(Lista &lista)
         cabeza = lista.cabeza; final = lista.final; actual = lista.actual;
     }
 }
+
+Pedido Lista::buscarPedidoL(string entrada){
+    pnodoL aux = cabeza;
+    while(aux){
+        if(aux->pedido.id_pedido==entrada)return aux->pedido;
+        else aux = aux->siguiente;
+    } return VACIO;
+}
 //Funcion para verificar si una entrada es un entero o no.
 bool esEntero(string entrada){
     if(entrada.empty())return false;
@@ -391,17 +399,21 @@ bool ArbolABB::Vacio(NodoA *r)
             return r==NULL;
         }
 
-Libreria ArbolABB::getLibreria(int id_lib)
+Libreria* ArbolABB::getLibreria(int id_lib)
 {
+    Libreria libreria;
     if(this->Buscar(id_lib)) {
         actual = raiz;
         while (id_lib != actual->libreria.id_lib) {
             if (id_lib < actual->libreria.id_lib) {actual = actual->izquierdo;}
             else if (id_lib > actual->libreria.id_lib) {actual = actual->derecho;}
         }
-        return actual->libreria;
+        libreria = actual->libreria;
+    } else {
+        libreria.id_lib = -1;
     }
-    return LIBVACIO;
+    return &(actual->libreria);
+
 }
 //NodoA es de tipo hoja
 bool ArbolABB::EsHoja(NodoA *r)
@@ -622,6 +634,27 @@ void ArbolABB::auxAltura(NodoA *nodo, int a)
    // árbol, actualizamos la altura actual del árbol
    if(EsHoja(nodo) && a > altura) altura = a;
 }
+Pedido ArbolABB::buscarPedidoA(string entrada){
+    NodoA* nodo = raiz;
+    return auxBuscarPedidoA(nodo,entrada);
+};
+Pedido ArbolABB::auxBuscarPedidoA(NodoA* nodo,string entrada){
+    if(nodo==NULL)return VACIO;
+
+    Pedido pedido=nodo->libreria.lista->buscarPedidoL(entrada);
+    if(pedido.cod_libro!=""){
+        return pedido;
+    }
+    pedido=auxBuscarPedidoA(nodo->izquierdo, entrada);
+    if (pedido.cod_libro!=""){
+        return pedido;
+    }
+    pedido=auxBuscarPedidoA(nodo->derecho, entrada);
+    if (pedido.cod_libro!=""){
+        return pedido;
+    }
+    return VACIO;
+};
 
 pnodoA ArbolABB::getRaiz()
 {
@@ -673,9 +706,19 @@ void imprimirLibreria(Libreria libreria)
 }
 void imprimirPedido(Pedido pedido)
 {
-    string fecha = ctime(&pedido.fecha);
+    char fecha[50];
+    strftime(fecha, sizeof(fecha), "%d/%m/%Y", localtime(&pedido.fecha));
     cout << setw(11) << pedido.id_libreria << "|" << setw(9) << pedido.id_pedido << "|"
         << setw(9) << pedido.cod_libro << "|" << setw(12) << pedido.materia << "|" << setw(7)
         << pedido.unidades << "|" << setw(10) << fecha << "|";
 }
 
+void imprimirEstadistica(Libreria lib, int contador[])
+{
+    string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
+    cout << setw(20) <<"===Cantidad de pedidos por materia==="<<endl;
+    for (int i = 0; i < sizeof(materias); i++){
+        cout << "Materia: " << setw(3) << materias[i] << " || " << "Pedidos: " << contador[i] << endl;
+
+    }
+}

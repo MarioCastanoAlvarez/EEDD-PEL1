@@ -127,7 +127,7 @@ cout << "=================================================" << endl << endl;
                 if (esEntero(entrada)){
                     id = stoi(entrada);
                     if(!libs.Buscar(id)){
-                        cout<<"El id no corresponde a ninguna libreria del sistema."<<endl<<endl<<"Por favor, introduzca otro valor: ";
+                        cout<<"El id no corresponde a ninguna libreria del sistema."<<endl<<"Por favor, introduzca otro valor: ";
                     } else{
                         ready=true;
                     }
@@ -150,7 +150,12 @@ cout << "=================================================" << endl << endl;
               else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido: ";
                 }
             }while(!ready);
-
+            Pedido pedido = libs.buscarPedidoA(entrada);
+            if(pedido.cod_libro==""){
+                cout<<"El pedido seleccionado no se ha encontrado en la base de datos."<<endl;
+            }else{
+                imprimirPedido(pedido);
+            }
             break;}
 
 //Opcion 5:
@@ -205,34 +210,4 @@ cout << "=================================================" << endl << endl;
     }while (i!=0);
 }
 
-/*
-cambios cpp
-char fecha[50];
-strftime(fecha, sizeof(fecha), "%d/%m/%Y", localtime(&pedido.fecha)); - 680
 
-Libreria* ArbolABB::getLibreria(int id_lib)
-{
-    Libreria libreria;
-    if(this->Buscar(id_lib)) {
-        actual = raiz;
-        while (id_lib != actual->libreria.id_lib) {
-            if (id_lib < actual->libreria.id_lib) {actual = actual->izquierdo;}
-            else if (id_lib > actual->libreria.id_lib) {actual = actual->derecho;}
-        }
-        libreria = actual->libreria;
-    } else {
-        libreria.id_lib = -1;
-    }
-    return &(actual->libreria);
-
-} 400
-
-void imprimirEstadistica(Libreria lib, int contador[])
-{
-    cout << setw(20) <<"===Cantidad de pedidos por materia==="<<endl;
-    for (int i = 0; i < sizeof(materias); i++){
-        cout << "Materia: " << setw(3) << materias[i] << " || " << "Pedidos: " << contador[i] << endl;
-
-    }
-}
-*/
