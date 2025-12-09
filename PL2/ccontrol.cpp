@@ -76,6 +76,7 @@ time_t crearFecha(int a, int m, int d){
 
 }
 //Funciones de listas simples
+
 ListaS::~ListaS()
 {
     pnodoLS aux;
@@ -138,6 +139,18 @@ int ListaS::getValor(int pos)
         return actual->valor;
     }
     return -1;
+}
+int ListaS::getFinal()
+{
+    return final->valor;
+}
+
+int ListaS::contar()
+{
+    int cont = 0;
+    actual = cabeza;
+    while(actual) {cont++; actual = actual->siguiente;}
+    return cont;
 }
 
 //Destructor de Lista.
@@ -292,6 +305,7 @@ int Lista::contarLista(){
 
 void Lista::concatenar(Lista &lista)
 {
+
     if(final && lista.cabeza){
     final->siguiente = lista.cabeza;
     lista.cabeza->anterior = final;
@@ -327,10 +341,7 @@ bool ArbolABB::Vacio(NodoA *r)
 
             return r==NULL;
         }
-ListaS ArbolABB::getListaIDs()
-{
-    return id_libs;
-}
+
 Libreria ArbolABB::getLibreria(int id_lib)
 {
     if(this->Buscar(id_lib)) {
@@ -391,6 +402,7 @@ void ArbolABB::Insertar(const Libreria lib)
    // Si el int es mayor que el que contiene el nodo padre, lo insertamos
    // en la rama derecha
    else if(lib.id_lib > padre->libreria.id_lib) padre->derecho = new NodoA(lib);
+
 }
 
 // Eliminar un elemento de un árbol ABB
@@ -577,16 +589,15 @@ Libreria generarLibreria(){
     return lib;
 }
 
-Pedido generarPedido(ArbolABB libs){
+Pedido generarPedido(ListaS &lista_id){
 
-        ListaS librerias = libs.getListaIDs();
-
-        Pedido p;
-        p.id_libreria = librerias.getValor(rand()%libs.NumeroNodos());
-        p.id_pedido=id_pedidoRandom();
-        p.cod_libro=cod_libroRandom();
-        p.materia=materiaRandom();
-        p.fecha=fechaRand();
-
-        return p;
+    Pedido pd;
+    pd.cod_libro = cod_libroRandom();
+    pd.id_libreria = lista_id.getValor(rand()%lista_id.contar());
+    pd.fecha = fechaRand();
+    pd.materia = materiaRandom();
+    pd.unidades = unidadesRandom();
+    pd.id_pedido = id_pedidoRandom();
+    lista_id.insertarNodo(pd.id_libreria);
+    return pd;
 };

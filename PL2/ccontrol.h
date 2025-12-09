@@ -58,7 +58,7 @@ class Lista
         void esAnterior();
         bool esActual();
         Pedido valorActual();
-        void recorrerLista(int);
+        //void recorrerLista(int);
         int contarLista();
         void concatenar(Lista &lista);
 };
@@ -101,6 +101,8 @@ public:
     void borrarNodo(int v);
     bool listaVacia();
     int getValor(int pos);
+    int getFinal();
+    int contar();
 };
 
 //Clase nodo para arboles
@@ -130,7 +132,6 @@ class ArbolABB
         NodoA *actual;
         int contador;
         int altura;
-        ListaS id_libs;
 
     public:
         // Constructor y destructor básicos:
@@ -145,7 +146,7 @@ class ArbolABB
         // Comprobar si el árbol está vacío:
         bool Vacio(NodoA *r);
         //Devolver una lista simple con todos los ids de las librerías
-        ListaS getListaIDs();
+        //ListaS getListaIDs();
         //Devolver una libreria dada su id
         Libreria getLibreria(int id_lib);
         // Comprobar si es un nodo hoja:
@@ -183,7 +184,7 @@ string materiaRandom();
 int unidadesRandom();
 Libreria generarLibreria();
 void mostrarLibreria(Libreria lib);
-Pedido generarPedido(ArbolABB libs);
+Pedido generarPedido(ListaS &lista_id);
 time_t crearFecha();
 time_t fechaRand();
 

@@ -9,12 +9,12 @@ using namespace std;
 int main()
 {
 ArbolABB libs;
+ListaS lista_id;
 
 for (int i = 0; i < N_LIBRERIAS; i++){
     Libreria lib = generarLibreria();
-    libs.getListaIDs().insertarNodo(lib.id_lib);
     libs.Insertar(lib);
-
+    lista_id.insertarNodo(lib.id_lib);
 }
 
     string entrada;
@@ -42,7 +42,7 @@ for (int i = 0; i < N_LIBRERIAS; i++){
 //Funciones del sistema
         switch(i){
 
-//Opción 0: finaliza el programa.
+//Opciï¿½n 0: finaliza el programa.
         case 0:{
             cout<<"Se ha elegido: 0) Salir del programa."<<endl<<endl;
             break;}
@@ -57,13 +57,13 @@ for (int i = 0; i < N_LIBRERIAS; i++){
                 getline(cin, entrada); cout<<endl;
                 if (esEntero(entrada)){
                     id = stoi(entrada);
-                    if(!libs.Buscar(id)){
+                    if(libs.Buscar(id)){
                         cout<<"El id introducido corresponde a una libreria ya existente."<<endl<<
                         "Por favor, introduzca otro valor: "<<endl<<endl;
                     } else{
                         ready=true;
                     }
-                } else { cout<<"¡Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
+                } else { cout<<"ï¿½Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
                 }
             }while(!ready);
             cout<<"Introduzca el nombre de la locaclidad donde se ubica la libreria: ";
@@ -90,7 +90,7 @@ for (int i = 0; i < N_LIBRERIAS; i++){
                         ready=true;
                     }else{cout<<"La libreria seleccionada no existe."<<endl;
                     }
-            } else{ cout<<"¡Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
+            } else{ cout<<"ï¿½Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
             }
             }while(!ready);
             cout<<"La libreria ha sido borrada con exito."<<endl;
@@ -126,10 +126,8 @@ for (int i = 0; i < N_LIBRERIAS; i++){
 //Opcion 8:
         case 8:{
             cout<<"Se ha elegido: 8) Continuar con la distribucion de pedidos."<<endl<<endl;
-            for (int j = 0; j < N_PEDIDOS; j++){
-                Pedido pd = generarPedido(libs);
-                int id_lib = pd.id_libreria;
-                libs.getLibreria(id_lib).lista->insertarNodo(pd,'f');
+                for (int j = 0; j < N_PEDIDOS; j++){
+                    Pedido pd = generarPedido(lista_id);
                 }
             break;}
         default:
