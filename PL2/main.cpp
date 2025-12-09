@@ -180,7 +180,7 @@ cout << "=================================================" << endl << endl;
                         pedidosL = *lib.lista;
                         for(int k = 0; k < pedidosL.contarLista(); k++){
                             string materia = pedidosL.getValor(k, ASCENDENTE).materia;
-                            for (int l = 0; l<sizeof(materias); l++) {
+                            for (int l = 0; l<6; l++) {
                                 if (materia == materias[l]) {contador[l]++; break;}
                             }
                         }

@@ -717,7 +717,7 @@ void imprimirEstadistica(Libreria lib, int contador[])
 {
     string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
     cout << setw(20) <<"===Cantidad de pedidos por materia==="<<endl;
-    for (int i = 0; i < sizeof(materias); i++){
+    for (int i = 0; i < 6; i++){
         cout << "Materia: " << setw(3) << materias[i] << " || " << "Pedidos: " << contador[i] << endl;
 
     }
