@@ -347,6 +347,24 @@ bool esEntero(string entrada){
         if(!isdigit(c))return false;
     } return true;
 };
+
+bool esLocalidad(string entrada){
+    for(int i=0;i<20;i++){
+        if(entrada == LOCALIDADES[i])return true;
+
+    }return false;
+};
+
+void mostrarLocalidades(){
+    cout<<"Localidades controladas por el centro: "<<endl<<"| ";
+    for(int i=0;i<10;i++){
+       cout<<LOCALIDADES[i]<<" | ";
+    }
+    cout<<endl<<"| ";
+    for(int i=10;i<20;i++){
+       cout<<LOCALIDADES[i]<<" | ";
+    }
+};
 //Funciones de lista
 //Muestra los atributos de una libreria por pantalla
 void mostrarLibreria(Libreria lib){

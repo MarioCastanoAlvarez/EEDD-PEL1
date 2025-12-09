@@ -179,6 +179,8 @@ class ArbolABB
 bool esEntero(string entrada);
 //Prototipos de funciones
 bool esEntero(string entrada);
+bool esLocalidad(string entrada);
+void mostrarLocalidades();
 int digitoRandom();
 int id_libreriaRandom();
 string id_pedidoRandom();
