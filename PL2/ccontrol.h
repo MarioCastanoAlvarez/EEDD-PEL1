@@ -52,13 +52,14 @@ class Lista
         void insertarNodo(Pedido v, char c);
         void borrarNodo(char c);
         bool listaVacia();
+        Pedido getValor(int pos, int orden);
         void esCabeza();
         void esFinal();
         void esSiguiente();
         void esAnterior();
         bool esActual();
         Pedido valorActual();
-        //void recorrerLista(int);
+        void recorrerLista(int);
         int contarLista();
         void concatenar(Lista &lista);
 };
@@ -158,6 +159,8 @@ class ArbolABB
         int Altura(const Libreria lib);
         // Moverse al nodo raiz:
         void Raiz();
+        //Devuelve la raiz del arbol
+        pnodoA getRaiz();
         // Aplicar una función a cada elemento del árbol:
         void InOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
         void PreOrden(void (*func)(Libreria), NodoA *nodo=NULL, bool r=true);
@@ -185,6 +188,8 @@ int unidadesRandom();
 Libreria generarLibreria();
 void mostrarLibreria(Libreria lib);
 Pedido generarPedido(ListaS &lista_id);
+void imprimirLibreria(Libreria libreria);
+void imprimirPedido(Pedido pedido);
 time_t crearFecha();
 time_t fechaRand();
 

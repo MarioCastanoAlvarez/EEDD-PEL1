@@ -229,13 +229,13 @@ else if(tipoBorrado=='p') { //Eliminación por el Principio
 }
 
 //Recorre toda la lista mostrando sus valores por pantalla
-/* void Lista::recorrerLista (int orden){
+ void Lista::recorrerLista (int orden){
 pnodoL aux;
 if (orden == ASCENDENTE) {
     esCabeza();
     aux = cabeza;
     while(aux){
-        cout << aux->valor << "-> ";
+        imprimirPedido(aux->pedido);
         aux = aux->siguiente;
         }
     }
@@ -243,19 +243,44 @@ else {
     esFinal();
     aux = final;
     while(aux) {
-        cout << aux->valor << "-> "; aux = aux->anterior;
+        cout << aux->pedido.id_pedido << "-> "; aux = aux->anterior;
         }
     }
 cout << endl;
 }
-*/
 
 //Mira si el puntero Cabeza es Null.
 bool Lista::listaVacia()
 {
 return cabeza == NULL;
 }
-
+//Devuelve el valor de la posición del parámetro pos
+Pedido Lista::getValor(int pos, int orden)
+{
+    if (orden == ASCENDENTE){
+        if(!this->listaVacia()){
+        actual = cabeza;
+        while (actual->siguiente && pos > 0) {actual = actual->siguiente; pos--;}
+        if(pos>0){
+            return VACIO;
+        }
+        return actual->pedido;
+    }
+    return VACIO;
+    }
+    if (orden == DESCENDENTE) {
+        if(!this->listaVacia()){
+        actual = final;
+        while (actual->anterior && pos > 0) {actual = actual->anterior; pos--;}
+        if(pos>0){
+            return VACIO;
+        }
+        return actual->pedido;
+    }
+    return VACIO;
+    }
+    return VACIO;
+}
 //Apunta Actual al Siguiente de actual si este no apunta a Null actualmente.
 void Lista::esSiguiente()
 {
@@ -325,7 +350,7 @@ bool esEntero(string entrada){
 //Funciones de lista
 //Muestra los atributos de una libreria por pantalla
 void mostrarLibreria(Libreria lib){
-    cout<<"ID: "<<lib.id_lib<<" Localidad: "<<setw(11)<<lib.localidad<<" Num Pedidos: "<<setw(5)<<lib.lista->contarLista()<<endl;
+    cout<<"ID: " <<setw(3)<<lib.id_lib<<" Localidad: "<<setw(11)<<lib.localidad<<" Num Pedidos: "<<setw(5)<<lib.lista->contarLista()<<endl;
 };
 
 //Funciones de arbol binario
@@ -347,8 +372,8 @@ Libreria ArbolABB::getLibreria(int id_lib)
     if(this->Buscar(id_lib)) {
         actual = raiz;
         while (id_lib != actual->libreria.id_lib) {
-            if (id_lib < raiz->libreria.id_lib) {actual = actual->izquierdo;}
-            else if (id_lib > raiz->libreria.id_lib) {actual = actual->derecho;}
+            if (id_lib < actual->libreria.id_lib) {actual = actual->izquierdo;}
+            else if (id_lib > actual->libreria.id_lib) {actual = actual->derecho;}
         }
         return actual->libreria;
     }
@@ -574,6 +599,10 @@ void ArbolABB::auxAltura(NodoA *nodo, int a)
    if(EsHoja(nodo) && a > altura) altura = a;
 }
 
+pnodoA ArbolABB::getRaiz()
+{
+    return raiz;
+}
 // Función de prueba para recorridos del árbol
 void Mostrar(int d)
 {
@@ -591,6 +620,8 @@ Libreria generarLibreria(){
 
 Pedido generarPedido(ListaS &lista_id){
 
+
+
     Pedido pd;
     pd.cod_libro = cod_libroRandom();
     pd.id_libreria = lista_id.getValor(rand()%lista_id.contar());
@@ -601,3 +632,26 @@ Pedido generarPedido(ListaS &lista_id){
     lista_id.insertarNodo(pd.id_libreria);
     return pd;
 };
+void imprimirLibreria(Libreria libreria)
+{
+    cout << "------------------------------------------------------------------------------" << endl;
+    cout << "|ID Libreria|" << "ID Pedido|"
+    << setw(8) << "Cod Libro|" << setw(13) << "Materia|" << setw(8)
+    << "U|" << setw(24) << "Fecha|" << endl;
+    cout << "------------------------------------------------------------------------------" << endl;
+
+    Lista pedidos = *libreria.lista;
+
+    for (int j = 0; j<pedidos.contarLista();j++){
+            if (j==0){cout<<"|";}
+        imprimirPedido(pedidos.getValor(j, ASCENDENTE));
+    }
+}
+void imprimirPedido(Pedido pedido)
+{
+    string fecha = ctime(&pedido.fecha);
+    cout << setw(11) << pedido.id_libreria << "|" << setw(9) << pedido.id_pedido << "|"
+        << setw(9) << pedido.cod_libro << "|" << setw(12) << pedido.materia << "|" << setw(7)
+        << pedido.unidades << "|" << setw(10) << fecha << "|";
+}
+

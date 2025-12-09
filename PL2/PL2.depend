@@ -5,15 +5,15 @@
 	<iomanip>
 	"ccontrol.h"
 
-1765270190 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\main.cpp
+1765285970 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\main.cpp
 	<iostream>
 	<ctime>
 	"ccontrol.h"
 
-1765270292 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.h
+1765283308 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.h
 	<ctime>
 
-1765268174 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.cpp
+1765285794 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
