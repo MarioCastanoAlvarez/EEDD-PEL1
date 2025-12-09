@@ -57,10 +57,10 @@ cout << "=================================================" << endl << endl;
 
 //Opcion 1:
         case 1:{
-            cout<<"Se ha elegido: 1) Insertar una libreria de forma manual."<<endl<<endl;
+            cout<<"Se ha elegido: 1) Insertar una libreria de forma manual."<<endl
+            <<"Introduzca el id de la libreria: ";
             bool ready=false;
             int id;
-            cout<<"Introduzca el id de la libreria: ";
             do{
                 getline(cin, entrada);
                 if (esEntero(entrada)){
@@ -96,7 +96,7 @@ cout << "=================================================" << endl << endl;
 
 //Opcion 2:
         case 2:{
-            cout<<"Se ha elegido: 2) Borrar una libreria del arbol."<<endl<<endl
+            cout<<"Se ha elegido: 2) Borrar una libreria del arbol."<<endl
             <<"Introduzca el id de la libreria que desea borrar: ";
             bool ready=false;
             int id;
@@ -123,12 +123,11 @@ cout << "=================================================" << endl << endl;
             cout<<"Se ha elegido: 3) Mostrar los datos de los pedidos de una libreria dada."<<endl<<endl;
             cout<<"Introduzca el id de la libreria: ";
             do{
-                getline(cin, entrada); cout<<endl;
+                getline(cin, entrada);
                 if (esEntero(entrada)){
                     id = stoi(entrada);
                     if(!libs.Buscar(id)){
-                        cout<<"El id no corresponde a ninguna libreria del sistema."<<endl<<
-                        "Por favor, introduzca otro valor: "<<endl<<endl;
+                        cout<<"El id no corresponde a ninguna libreria del sistema."<<endl<<endl<<"Por favor, introduzca otro valor: ";
                     } else{
                         ready=true;
                     }
@@ -142,7 +141,15 @@ cout << "=================================================" << endl << endl;
 
 //Opcion 4:
         case 4:{
-            cout<<"Se ha elegido: 4) Buscar un pedido concreto por su ID."<<endl<<endl;
+            cout<<"Se ha elegido: 4) Buscar un pedido concreto por su ID."<<endl;
+            bool ready = false;
+            cout<<"Introduzca el id del pedido deseado: ";
+            do{
+              getline(cin, entrada);
+              if(esIdPedido(entrada))ready=true;
+              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido: ";
+                }
+            }while(!ready);
 
             break;}
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctime>
 #include <iomanip>
+#include <string> // para esIdPedido()
 #include "ccontrol.h"
 
 using namespace std;
@@ -354,7 +355,12 @@ bool esLocalidad(string entrada){
 
     }return false;
 };
-
+bool esIdPedido(string entrada){
+    if(entrada.length()!=6)return false;
+    if(entrada[0]!='P')return false;
+    else for(int i=1;i<6;i++)if(!isdigit(entrada[i]))return false;
+    return true;
+};
 void mostrarLocalidades(){
     cout<<"Localidades controladas por el centro: "<<endl<<"| ";
     for(int i=0;i<10;i++){

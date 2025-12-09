@@ -180,6 +180,7 @@ bool esEntero(string entrada);
 //Prototipos de funciones
 bool esEntero(string entrada);
 bool esLocalidad(string entrada);
+bool esIdPedido(string entrada);
 void mostrarLocalidades();
 int digitoRandom();
 int id_libreriaRandom();
