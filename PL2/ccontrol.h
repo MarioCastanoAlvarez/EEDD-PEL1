@@ -149,7 +149,7 @@ class ArbolABB
         //Devolver una lista simple con todos los ids de las librerías
         //ListaS getListaIDs();
         //Devolver una libreria dada su id
-        Libreria getLibreria(int id_lib);
+        Libreria* getLibreria(int id_lib);
         // Comprobar si es un nodo hoja:
         bool EsHoja(NodoA *r);
         // Contar número de nodos:
@@ -193,6 +193,7 @@ void mostrarLibreria(Libreria lib);
 Pedido generarPedido(ListaS &lista_id);
 void imprimirLibreria(Libreria libreria);
 void imprimirPedido(Pedido pedido);
+void imprimirEstadistica(Libreria lib, int contador[]);
 time_t crearFecha();
 time_t fechaRand();
 

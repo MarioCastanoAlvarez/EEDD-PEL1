@@ -135,8 +135,8 @@ cout << "=================================================" << endl << endl;
                 }
             }while(!ready);
 
-            Libreria libreria = libs.getLibreria(id);
-            imprimirLibreria(libreria);
+            Libreria *libreria = libs.getLibreria(id);
+            imprimirLibreria(*libreria);
             break;}
 
 //Opcion 4:
@@ -166,7 +166,21 @@ cout << "=================================================" << endl << endl;
 //Opcion 7:
         case 7:{
             cout<<"Se ha elegido: 7) Mostrar una estadistica de las librerias."<<endl<<endl;
-
+            string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
+            int contador[6] = {0,0,0,0,0,0};
+            Libreria lib;
+            Lista pedidosL;
+                    for(int j = 0; j<lista_id.contar(); j++){
+                        lib = *libs.getLibreria(lista_id.getValor(j));
+                        pedidosL = *lib.lista;
+                        for(int k = 0; k < pedidosL.contarLista(); k++){
+                            string materia = pedidosL.getValor(k, ASCENDENTE).materia;
+                            for (int l = 0; l<sizeof(materias); l++) {
+                                if (materia == materias[l]) {contador[l]++; break;}
+                            }
+                        }
+                    }
+            imprimirEstadistica(lib, contador);
             break;}
 //Opcion 8:
         case 8:{
@@ -174,15 +188,13 @@ cout << "=================================================" << endl << endl;
                 for (int j = 0; j < N_PEDIDOS; j++){
                     Pedido pd = generarPedido(lista_id);
                     int id = pd.id_libreria;
-                    libs.getLibreria(id).lista->insertarNodo(pd, 'f');
+                    libs.getLibreria(id)->lista->insertarNodo(pd, 'f');
                 }
             break;}
 //Opcion 9:
         case 9:{
             cout<<"Se ha elegido: 9) Mostrar librerias."<<endl<<endl;
-                for (int j = 0; j < lista_id.contar(); j++){
-                    mostrarLibreria(libs.getLibreria(lista_id.getValor(j)));
-                }
+                libs.InOrden(mostrarLibreria);
             break;}
         default:
 //Control de errores
@@ -192,3 +204,35 @@ cout << "=================================================" << endl << endl;
     cout<<"================================================="<<endl<<endl;};
     }while (i!=0);
 }
+
+/*
+cambios cpp
+char fecha[50];
+strftime(fecha, sizeof(fecha), "%d/%m/%Y", localtime(&pedido.fecha)); - 680
+
+Libreria* ArbolABB::getLibreria(int id_lib)
+{
+    Libreria libreria;
+    if(this->Buscar(id_lib)) {
+        actual = raiz;
+        while (id_lib != actual->libreria.id_lib) {
+            if (id_lib < actual->libreria.id_lib) {actual = actual->izquierdo;}
+            else if (id_lib > actual->libreria.id_lib) {actual = actual->derecho;}
+        }
+        libreria = actual->libreria;
+    } else {
+        libreria.id_lib = -1;
+    }
+    return &(actual->libreria);
+
+} 400
+
+void imprimirEstadistica(Libreria lib, int contador[])
+{
+    cout << setw(20) <<"===Cantidad de pedidos por materia==="<<endl;
+    for (int i = 0; i < sizeof(materias); i++){
+        cout << "Materia: " << setw(3) << materias[i] << " || " << "Pedidos: " << contador[i] << endl;
+
+    }
+}
+*/
