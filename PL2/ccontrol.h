@@ -63,6 +63,7 @@ class Lista
         int contarLista();
         void concatenar(Lista &lista);
         Pedido buscarPedidoL(string entrada);
+        void extraerPedidoL(string entrada);
 };
 
 //Estructura de una librería

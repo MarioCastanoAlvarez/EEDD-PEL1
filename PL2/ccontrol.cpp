@@ -348,7 +348,25 @@ Pedido Lista::buscarPedidoL(string entrada){
         if(aux->pedido.id_pedido==entrada)return aux->pedido;
         else aux = aux->siguiente;
     } return VACIO;
-}
+};
+
+void Lista::extraerPedidoL(string entrada){
+    NodoL* aux=cabeza;
+    bool ready=false;
+    while(aux){
+        if(aux->pedido.id_pedido==entrada){
+            aux->anterior->siguiente=aux->siguiente;
+            aux->siguiente->anterior=aux->anterior;
+            aux->anterior=NULL;
+            aux->siguiente=NULL;
+            delete aux;
+            ready=true;
+            cout<<"El pedido ha sido correctamente extraido."<<endl;
+        }else aux=aux->siguiente;
+    }
+    if(!ready)cout<<"Ha surgido un error. El pedido no se ha encontrado."<<endl;
+};
+
 //Funcion para verificar si una entrada es un entero o no.
 bool esEntero(string entrada){
     if(entrada.empty())return false;
@@ -656,6 +674,7 @@ Pedido ArbolABB::auxBuscarPedidoA(NodoA* nodo,string entrada){
     return VACIO;
 };
 
+
 pnodoA ArbolABB::getRaiz()
 {
     return raiz;
@@ -691,26 +710,25 @@ Pedido generarPedido(ListaS &lista_id){
 };
 void imprimirLibreria(Libreria libreria)
 {
-    cout << "------------------------------------------------------------------------------" << endl;
+    cout << "-------------------------------------------------------------------" << endl;
     cout << "|ID Libreria|" << "ID Pedido|"
     << setw(8) << "Cod Libro|" << setw(13) << "Materia|" << setw(8)
-    << "U|" << setw(24) << "Fecha|" << endl;
-    cout << "------------------------------------------------------------------------------" << endl;
+    << "U|" << setw(13) << "Fecha|" << endl;
+    cout << "-------------------------------------------------------------------" << endl;
 
     Lista pedidos = *libreria.lista;
 
     for (int j = 0; j<pedidos.contarLista();j++){
-            if (j==0){cout<<"|";}
-        imprimirPedido(pedidos.getValor(j, ASCENDENTE));
+        imprimirPedido(pedidos.getValor(j, ASCENDENTE));cout<<endl;
     }
 }
 void imprimirPedido(Pedido pedido)
 {
     char fecha[50];
     strftime(fecha, sizeof(fecha), "%d/%m/%Y", localtime(&pedido.fecha));
-    cout << setw(11) << pedido.id_libreria << "|" << setw(9) << pedido.id_pedido << "|"
+    cout << "|" <<setw(11) << pedido.id_libreria << "|" << setw(9) << pedido.id_pedido << "|"
         << setw(9) << pedido.cod_libro << "|" << setw(12) << pedido.materia << "|" << setw(7)
-        << pedido.unidades << "|" << setw(10) << fecha << "|";
+        << pedido.unidades << "|" << setw(12) << fecha << "|";
 }
 
 void imprimirEstadistica(Libreria lib, int contador[])

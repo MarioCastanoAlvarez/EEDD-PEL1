@@ -137,6 +137,7 @@ cout << "=================================================" << endl << endl;
 
             Libreria *libreria = libs.getLibreria(id);
             imprimirLibreria(*libreria);
+            cout<<"==================================================================="<<endl<<endl;
             break;}
 
 //Opcion 4:
@@ -161,6 +162,19 @@ cout << "=================================================" << endl << endl;
 //Opcion 5:
         case 5:{
             cout<<"Se ha elegido: 5) Extraer un pedido concreto."<<endl<<endl;
+            bool ready = false;
+            cout<<"Introduzca el id del pedido que desee extraer: ";
+            do{
+              getline(cin, entrada);
+              if(esIdPedido(entrada))ready=true;
+              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido: ";
+                }
+            }while(!ready);
+            Pedido pedido = libs.buscarPedidoA(entrada);
+            if (pedido.cod_libro=="")cout<<"El pedido no se ha encontrado en la base de datos."<<endl;
+            else{Libreria* lib = libs.getLibreria(pedido.id_libreria);
+            lib->lista->extraerPedidoL(pedido.id_pedido);
+            }
 
             break;}
 //Opcion 6:
