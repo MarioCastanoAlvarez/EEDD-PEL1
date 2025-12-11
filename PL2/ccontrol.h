@@ -106,6 +106,7 @@ public:
     int getValor(int pos);
     int getFinal();
     int contar();
+    bool esta(int v);
 };
 
 //Clase nodo para arboles
@@ -198,7 +199,7 @@ void mostrarLibreria(Libreria lib);
 Pedido generarPedido(ListaS &lista_id);
 void imprimirLibreria(Libreria libreria);
 void imprimirPedido(Pedido pedido);
-void imprimirEstadistica(Libreria lib, int contador[]);
+void imprimirEstadistica(int contador[]);
 time_t crearFecha();
 time_t fechaRand();
 

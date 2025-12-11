@@ -180,26 +180,49 @@ cout << "=================================================" << endl << endl;
 //Opcion 6:
         case 6:{
             cout<<"Se ha elegido: 6) Llevar un pedido concreto de una libreria a otra."<<endl<<endl;
+            bool ready = false;
+            cout<<"Introduzca el id del pedido que desee extraer: ";
+            do{
+              getline(cin, entrada);
+              if(esIdPedido(entrada))ready=true;
+              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido: ";
+                }
+            }while(!ready);
+            ready = false;
+            cout << "Introduzca el id de la libreria a la que desea insertar el pedido: ";
+            do{
+              getline(cin, entrada);
+              if(lista_id.esta(stoi(entrada)))ready=true;
+              else { cout<<"Error. El valor introducido no corresponde a ninguna libreria."<<endl<<endl<<"Por favor, introduzca un id de libreria: ";
+                }
+            }while(!ready);
+            Pedido pedido = libs.buscarPedidoA(entrada);
+            if (pedido.cod_libro=="")cout<<"El pedido no se ha encontrado en la base de datos."<<endl;
+            else{Libreria* lib = libs.getLibreria(pedido.id_libreria);
+            lib->lista->extraerPedidoL(pedido.id_pedido);
+            libs.getLibreria(pedido.id_libreria)->lista->insertarNodo(pedido, 'f');
+            }
 
             break;}
 //Opcion 7:
         case 7:{
             cout<<"Se ha elegido: 7) Mostrar una estadistica de las librerias."<<endl<<endl;
             string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
-            int contador[6] = {0,0,0,0,0,0};
             Libreria lib;
-            Lista pedidosL;
+            Lista* pedidosL;
+            int contador[6] = {0,0,0,0,0,0};
                     for(int j = 0; j<lista_id.contar(); j++){
-                        lib = *libs.getLibreria(lista_id.getValor(j));
-                        pedidosL = *lib.lista;
-                        for(int k = 0; k < pedidosL.contarLista(); k++){
-                            string materia = pedidosL.getValor(k, ASCENDENTE).materia;
+                        int id = lista_id.getValor(j);
+                        lib = *libs.getLibreria(id);
+                        pedidosL = lib.lista;
+                        for(int k = 0; k < pedidosL->contarLista(); k++){
+                            string materia = pedidosL->getValor(k, ASCENDENTE).materia;
                             for (int l = 0; l<6; l++) {
                                 if (materia == materias[l]) {contador[l]++; break;}
                             }
                         }
                     }
-            imprimirEstadistica(lib, contador);
+            imprimirEstadistica(contador);
             break;}
 //Opcion 8:
         case 8:{

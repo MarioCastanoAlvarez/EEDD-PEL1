@@ -48,7 +48,6 @@ string LOCALIDADES [20]={"Mostoles", "Alcala", "Leganes", "Fuenlabrada", "Getafe
 
 //Fecha random de 2025 (modificable)
 time_t fechaRand(){
-    srand(time(NULL));
     struct tm datetime;
 
     datetime.tm_year = 2025 - 1900; // Number of years since 1900
@@ -66,7 +65,6 @@ time_t fechaRand(){
     return mktime(&datetime);
 }
 time_t crearFecha(int a, int m, int d){
-    srand(time(NULL));
     struct tm datetime;
 
     datetime.tm_year = a - 1900;
@@ -133,7 +131,7 @@ int ListaS::getValor(int pos)
 {
     if(!this->listaVacia()){
         actual = cabeza;
-        while (actual->siguiente && pos > 0) {actual = actual->siguiente; pos--;}
+        while (actual->siguiente && pos > 0){actual = actual->siguiente; pos--;}
         if(pos>0){
             return -1;
         }
@@ -152,6 +150,13 @@ int ListaS::contar()
     actual = cabeza;
     while(actual) {cont++; actual = actual->siguiente;}
     return cont;
+}
+bool ListaS::esta(int v)
+{
+    if (this->listaVacia()){return false;}
+    bool comp = false;
+    for (int i = 0; i < this->contar(); i++) {if (this->getValor(i) == v){comp = true;}}
+    return comp;
 }
 
 //Destructor de Lista.
@@ -351,7 +356,7 @@ Pedido Lista::buscarPedidoL(string entrada){
 };
 
 void Lista::extraerPedidoL(string entrada){
-    NodoL* aux=cabeza;
+    pnodoL aux=cabeza;
     bool ready=false;
     while(aux){
         if(aux->pedido.id_pedido==entrada){
@@ -695,9 +700,6 @@ Libreria generarLibreria(){
 }
 
 Pedido generarPedido(ListaS &lista_id){
-
-
-
     Pedido pd;
     pd.cod_libro = cod_libroRandom();
     pd.id_libreria = lista_id.getValor(rand()%lista_id.contar());
@@ -705,7 +707,6 @@ Pedido generarPedido(ListaS &lista_id){
     pd.materia = materiaRandom();
     pd.unidades = unidadesRandom();
     pd.id_pedido = id_pedidoRandom();
-    lista_id.insertarNodo(pd.id_libreria);
     return pd;
 };
 void imprimirLibreria(Libreria libreria)
@@ -731,12 +732,12 @@ void imprimirPedido(Pedido pedido)
         << pedido.unidades << "|" << setw(12) << fecha << "|";
 }
 
-void imprimirEstadistica(Libreria lib, int contador[])
+void imprimirEstadistica(int contador[])
 {
     string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
-    cout << setw(20) <<"===Cantidad de pedidos por materia==="<<endl;
+    cout << setw(41) <<"======Cantidad de pedidos por materia============"<<endl<<endl;
     for (int i = 0; i < 6; i++){
-        cout << "Materia: " << setw(3) << materias[i] << " || " << "Pedidos: " << contador[i] << endl;
+        cout << "Materia: " << setw(12) << materias[i] << " || " << "Pedidos: " << contador[i] << endl;
 
     }
 }
