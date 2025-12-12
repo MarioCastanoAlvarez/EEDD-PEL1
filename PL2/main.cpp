@@ -58,38 +58,43 @@ cout << "=================================================" << endl << endl;
 //Opcion 1:
         case 1:{
             cout<<"Se ha elegido: 1) Insertar una libreria de forma manual."<<endl
-            <<"Introduzca el id de la libreria: ";
+            <<"Introduzca el id de la libreria ('s' para salir): ";
             bool ready=false;
             int id;
             do{
                 getline(cin, entrada);
-                if (esEntero(entrada)){
+                if(entrada=="s")ready=true;
+                else if (esEntero(entrada)){
                     id = stoi(entrada);
                     if(libs.Buscar(id)){
                         cout<<"El id introducido corresponde a una libreria ya existente."<<endl<<endl<<
-                        "Por favor, introduzca otro valor: ";
+                        "Por favor, introduzca otro valor ('s' para salir): ";
                     } else{
                         ready=true;
                     }
-                } else { cout<<"Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
+                } else { cout<<"Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero ('s' para salir): ";
                 }
             }while(!ready);
-            cout<<"Introduzca el nombre de la locaclidad donde se ubica la libreria: ";
+            if(entrada=="s")break;
+            cout<<"Introduzca el nombre de la locaclidad donde se ubica la libreria ('s' para salir): ";
 
             ready=false;
             do{
                 getline(cin, entrada);
-                if(esLocalidad(entrada)){
+                if(entrada=="s")ready=true;
+                else if(esLocalidad(entrada)){
                     ready=true;
                 }else {cout<<"La localidad seleccionada no esta contemplada en este centro de control."<<endl<<endl;
                 mostrarLocalidades();
-                cout<<endl<<endl<<"Por favor, seleccione otra localidad: ";
+                cout<<endl<<endl<<"Por favor, seleccione otra localidad ('s' para salir): ";
                 }
             }while(!ready);
+            if (entrada=="s")break;
             Libreria lib = generarLibreria();
             lib.id_lib=id;
             lib.localidad=entrada;
             libs.Insertar(lib);
+            lista_id.insertarNodo(id);
             cout<<"La libreria fue insertada con exito."<<endl<<endl<<"================================================="<<endl;
             libs.InOrden(mostrarLibreria,nullptr,true);
             break;}
@@ -97,21 +102,23 @@ cout << "=================================================" << endl << endl;
 //Opcion 2:
         case 2:{
             cout<<"Se ha elegido: 2) Borrar una libreria del arbol."<<endl
-            <<"Introduzca el id de la libreria que desea borrar: ";
+            <<"Introduzca el id de la libreria que desea borrar ('s' para salir): ";
             bool ready=false;
             int id;
             do{
             getline(cin, entrada);
-            if (esEntero(entrada)){
+            if(entrada=="s")ready=true;
+            else if (esEntero(entrada)){
                     id = stoi(entrada);
                     if(libs.Buscar(id)){
                         libs.Borrar(id);
                         ready=true;
-                    }else{cout<<"La libreria seleccionada no existe."<<endl<<endl<<"Por favor, introduzca otro valor: ";
+                    }else{cout<<"La libreria seleccionada no existe."<<endl<<endl<<"Por favor, introduzca otro valor ('s' para salir): ";
                     }
-            } else{ cout<<"Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
+            } else{ cout<<"Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero con formato XXX ('s' para salir): ";
             }
             }while(!ready);
+            if(entrada=="s")break;
             cout<<"La libreria ha sido borrada con exito."<<endl<<endl<<"================================================="<<endl;
             libs.InOrden(mostrarLibreria,nullptr,true);
             break;}
@@ -121,20 +128,21 @@ cout << "=================================================" << endl << endl;
             int id;
             bool ready = false;
             cout<<"Se ha elegido: 3) Mostrar los datos de los pedidos de una libreria dada."<<endl<<endl;
-            cout<<"Introduzca el id de la libreria: ";
+            cout<<"Introduzca el id de la libreria ('s' para salir): ";
             do{
                 getline(cin, entrada);
-                if (esEntero(entrada)){
+                if(entrada=="s")ready=true;
+                else if (esEntero(entrada)){
                     id = stoi(entrada);
                     if(!libs.Buscar(id)){
-                        cout<<"El id no corresponde a ninguna libreria del sistema."<<endl<<"Por favor, introduzca otro valor: ";
+                        cout<<"El id no corresponde a ninguna libreria del sistema."<<endl<<endl<<"Por favor, introduzca otro valor ('s' para salir): ";
                     } else{
                         ready=true;
                     }
-                } else { cout<<"Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero: ";
+                } else { cout<<"Error. El valor introducido no es un entero."<<endl<<endl<<"Por favor, introduzca un entero con formato XXX ('s' para salir): ";
                 }
             }while(!ready);
-
+            if(entrada=="s")break;
             Libreria *libreria = libs.getLibreria(id);
             imprimirLibreria(*libreria);
             cout<<"==================================================================="<<endl<<endl;
@@ -144,19 +152,22 @@ cout << "=================================================" << endl << endl;
         case 4:{
             cout<<"Se ha elegido: 4) Buscar un pedido concreto por su ID."<<endl;
             bool ready = false;
-            cout<<"Introduzca el id del pedido deseado: ";
+            cout<<"Introduzca el id del pedido deseado ('s' para salir): ";
             do{
               getline(cin, entrada);
-              if(esIdPedido(entrada))ready=true;
-              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido: ";
+              if(entrada=="s")ready=true;
+              else if(esIdPedido(entrada)){
+                Pedido pedido = libs.buscarPedidoA(entrada);
+                if(pedido.cod_libro==""){
+                    cout<<"El pedido seleccionado no se ha encontrado en la base de datos."<<endl<<endl<<"Introduzca otro id del pedido que desea eliminar ('s' para salir): ";
+                }else{
+                    ready=true;
+                    imprimirPedido(pedido);
+                }
+              }
+              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido ('s' para salir): ";
                 }
             }while(!ready);
-            Pedido pedido = libs.buscarPedidoA(entrada);
-            if(pedido.cod_libro==""){
-                cout<<"El pedido seleccionado no se ha encontrado en la base de datos."<<endl;
-            }else{
-                imprimirPedido(pedido);
-            }
             break;}
 
 //Opcion 5:
