@@ -45,8 +45,7 @@ int unidadesRandom(){
     return resultado;
 };
 //Array con todas las localidades
-string LOCALIDADES [20]={"Mostoles", "Alcala", "Leganes", "Fuenlabrada", "Getafe", "Alcorcon","Torrejon", "Parla", "Alcobendas", "Coslada", "Pozuelo", "Rivas", "Valdemoro","Majadahonda","Aranjuez", "Arganda", "Boadilla", "Pinto", "Colmenar", "Tres Cantos"};
-
+string LOCALIDADES [20]={"Alcala", "Alcobendas", "Alcorcon", "Aranjuez", "Arganda", "Boadilla", "Colmenar", "Coslada", "Fuenlabrada", "Getafe", "Leganes", "Majadahonda", "Mostoles", "Parla", "Pinto", "Pozuelo", "Rivas", "Torrejon", "Tres Cantos", "Valdemoro"};
 //Fecha random de 2025 (modificable)
 time_t fechaRand(){
     struct tm datetime;
@@ -425,16 +424,14 @@ bool ArbolABB::Vacio(NodoA *r)
 
 Libreria* ArbolABB::getLibreria(int id_lib)
 {
-    Libreria libreria;
+    actual = raiz;
     if(this->Buscar(id_lib)) {
-        actual = raiz;
         while (id_lib != actual->libreria.id_lib) {
             if (id_lib < actual->libreria.id_lib) {actual = actual->izquierdo;}
             else if (id_lib > actual->libreria.id_lib) {actual = actual->derecho;}
         }
-        libreria = actual->libreria;
     } else {
-        libreria.id_lib = -1;
+        return NULL;
     }
     return &(actual->libreria);
 
