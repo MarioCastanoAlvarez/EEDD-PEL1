@@ -6,20 +6,21 @@
 	<string>
 	"ccontrol.h"
 
-1765307694 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\main.cpp
+1765535129 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\main.cpp
 	<iostream>
 	<ctime>
 	"ccontrol.h"
 
-1765306846 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.h
+1765535129 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.h
 	<ctime>
 
-1765307368 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.cpp
+1765535683 source:c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\pl2\ccontrol.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
 	<string>
 	"ccontrol.h"
+	<cmath>
 
 1765475633 c:\users\admin\documents\github\eedd-pel1\pl2\ccontrol.h
 	<ctime>

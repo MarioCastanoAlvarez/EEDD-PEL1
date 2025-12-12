@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string> // para esIdPedido()
 #include "ccontrol.h"
+#include <cmath>
 
 using namespace std;
 int digitoRandom(){
@@ -736,8 +737,12 @@ void imprimirEstadistica(int contador[])
 {
     string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
     cout << setw(41) <<"======Cantidad de pedidos por materia============"<<endl<<endl;
+    int total = 0;
+    float resultados;
+    for (int i = 0; i < 6; i++){total+=contador[i];}
     for (int i = 0; i < 6; i++){
-        cout << "Materia: " << setw(12) << materias[i] << " || " << "Pedidos: " << contador[i] << endl;
+        resultados = round(100.0*contador[i]/total);
+        cout << "Materia: " << setw(12) << materias[i] << " || " << "Pedidos: " << contador[i] << " (" << resultados << "%)" << endl;
 
     }
 }
