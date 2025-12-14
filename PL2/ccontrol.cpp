@@ -358,14 +358,28 @@ Pedido Lista::buscarPedidoL(string entrada){
 void Lista::extraerPedidoL(string entrada){
     pnodoL aux=cabeza;
     bool ready=false;
-    while(aux){
+    while(aux && !ready){
         if(aux->pedido.id_pedido==entrada){
-            aux->anterior->siguiente=aux->siguiente;
-            aux->siguiente->anterior=aux->anterior;
-            aux->anterior=NULL;
-            aux->siguiente=NULL;
-            delete aux;
             ready=true;
+            if(aux==cabeza && aux==final){
+                cabeza=NULL;
+                final=NULL;
+            }
+            else if(aux==cabeza){
+                cabeza=aux->siguiente;
+                cabeza->anterior=NULL;
+            }
+            else if(aux==final){
+                final=aux->anterior;
+                final->siguiente=NULL;
+            }
+            else{
+                aux->anterior->siguiente=aux->siguiente;
+                aux->siguiente->anterior=aux->anterior;
+            }
+
+            delete aux;
+
             cout<<"El pedido ha sido correctamente extraido."<<endl;
         }else aux=aux->siguiente;
     }
@@ -715,16 +729,16 @@ void imprimirLibreria(Libreria libreria)
     << "U|" << setw(13) << "Fecha|" << endl;
     cout << "-------------------------------------------------------------------" << endl;
 
-    Lista pedidos = *libreria.lista;
+    Lista* pedidos = libreria.lista;
 
-    for (int j = 0; j<pedidos.contarLista();j++){
-        imprimirPedido(pedidos.getValor(j, ASCENDENTE));cout<<endl;
+    for (int j = 0; j<pedidos->contarLista();j++){
+        imprimirPedido(pedidos->getValor(j, ASCENDENTE));cout<<endl;
     }
 }
 void imprimirPedido(Pedido pedido)
 {
     char fecha[50];
-    strftime(fecha, sizeof(fecha), "%d/%m/%Y", localtime(&pedido.fecha));
+    strftime(fecha, sizeof(fecha), "%d-%m-%Y", localtime(&pedido.fecha));
     cout << "|" <<setw(11) << pedido.id_libreria << "|" << setw(9) << pedido.id_pedido << "|"
         << setw(9) << pedido.cod_libro << "|" << setw(12) << pedido.materia << "|" << setw(7)
         << pedido.unidades << "|" << setw(12) << fecha << "|";

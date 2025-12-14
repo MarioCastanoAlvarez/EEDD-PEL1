@@ -159,7 +159,7 @@ cout << "=================================================" << endl << endl;
               else if(esIdPedido(entrada)){
                 Pedido pedido = libs.buscarPedidoA(entrada);
                 if(pedido.cod_libro==""){
-                    cout<<"El pedido seleccionado no se ha encontrado en la base de datos."<<endl<<endl<<"Introduzca otro id del pedido que desea eliminar ('s' para salir): ";
+                    cout<<"El pedido seleccionado no se ha encontrado en la base de datos."<<endl<<endl<<"Introduzca otro id de pedido que desee eliminar ('s' para salir): ";
                 }else{
                     ready=true;
                     imprimirPedido(pedido);
@@ -174,46 +174,72 @@ cout << "=================================================" << endl << endl;
         case 5:{
             cout<<"Se ha elegido: 5) Extraer un pedido concreto."<<endl<<endl;
             bool ready = false;
-            cout<<"Introduzca el id del pedido que desee extraer: ";
+            cout<<"Introduzca el id del pedido que desee extraer ('s' para salir): ";
             do{
               getline(cin, entrada);
-              if(esIdPedido(entrada))ready=true;
-              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido: ";
+              if(entrada=="s")ready=true;
+              else if(esIdPedido(entrada))ready=true;
+              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido ('s' para salir): ";
                 }
             }while(!ready);
+            if(entrada=="s")break;
             Pedido pedido = libs.buscarPedidoA(entrada);
             if (pedido.cod_libro=="")cout<<"El pedido no se ha encontrado en la base de datos."<<endl;
-            else{Libreria* lib = libs.getLibreria(pedido.id_libreria);
-            lib->lista->extraerPedidoL(pedido.id_pedido);
+            else{
+                Libreria* lib = libs.getLibreria(pedido.id_libreria);
+                lib->lista->extraerPedidoL(pedido.id_pedido);
             }
 
             break;}
 //Opcion 6:
         case 6:{
             cout<<"Se ha elegido: 6) Llevar un pedido concreto de una libreria a otra."<<endl<<endl;
-            bool ready = false;
-            cout<<"Introduzca el id del pedido que desee extraer: ";
+            bool ready=false;
+            Pedido pedido;
+            cout<<"Introduzca el id del pedido deseado ('s' para salir): ";
             do{
-              getline(cin, entrada);
-              if(esIdPedido(entrada))ready=true;
-              else { cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido: ";
+                getline(cin, entrada);
+                if(entrada=="s")ready=true;
+                else if(esIdPedido(entrada)){
+                    pedido = libs.buscarPedidoA(entrada);
+                    if (pedido.cod_libro==""){
+                        cout<<"El pedido no se ha encontrado en la base de datos."<<endl<<endl<<"Por favor, introduzca otro valor ('s' para salir): ";
+                    }else{
+                        ready=true;
+                    }
+                }else{
+                    cout<<"Error. El valor introducido no es del formato PXXXXX."<<endl<<endl<<"Por favor, introduzca un id de pedido ('s' para salir): ";
                 }
             }while(!ready);
-            ready = false;
-            cout << "Introduzca el id de la libreria a la que desea insertar el pedido: ";
+            if(entrada=="s")break;
+            ready=false;
+            int id_libDestino;
+            cout<<endl<<"Introduzca el id de la libreria de destino ('s' para salir): ";
             do{
-              getline(cin, entrada);
-              if(lista_id.esta(stoi(entrada)))ready=true;
-              else { cout<<"Error. El valor introducido no corresponde a ninguna libreria."<<endl<<endl<<"Por favor, introduzca un id de libreria: ";
+                getline(cin, entrada);
+                if(entrada=="s")ready=true;
+                else if(esEntero(entrada)){
+                    id_libDestino = stoi(entrada);
+                    if(lista_id.esta(id_libDestino)){
+                       if(id_libDestino!=pedido.id_libreria){
+                            ready=true;
+                       }else{
+                           cout<<"El pedido ya se encuentra en esa libreria."<<endl<<endl<<"Por favor, introduzca el id de otra libreria ('s' para salir): ";
+                       }
+                    }else{
+                        cout<<"La libreria seleccionada no existe."<<endl<<endl<<"Por favor, introduzca el id de otra libreria ('s' para salir): ";
+                    }
+                }else{
+                    cout<<"Error. El valor introducido debe ser un entero."<<endl<<endl<<"Por favor, introduzca un entero ('s' para salir): ";
                 }
             }while(!ready);
-            Pedido pedido = libs.buscarPedidoA(entrada);
-            if (pedido.cod_libro=="")cout<<"El pedido no se ha encontrado en la base de datos."<<endl;
-            else{Libreria* lib = libs.getLibreria(pedido.id_libreria);
-            lib->lista->extraerPedidoL(pedido.id_pedido);
-            libs.getLibreria(pedido.id_libreria)->lista->insertarNodo(pedido, 'f');
-            }
-
+            if(entrada=="s")break;
+            Libreria* libOrigen = libs.getLibreria(pedido.id_libreria);
+            libOrigen->lista->extraerPedidoL(pedido.id_pedido);
+            pedido.id_libreria=id_libDestino;
+            Libreria* libDestino = libs.getLibreria(id_libDestino);
+            libDestino->lista->insertarNodo(pedido,'f');
+            cout<<"El pedido ha sido introducido en la libreria deseada con exito."<<endl;
             break;}
 //Opcion 7:
         case 7:{
