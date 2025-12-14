@@ -469,6 +469,7 @@ void ArbolABB::Podar(NodoA* &nodo)
    if(nodo) {
       Podar(nodo->izquierdo); // Podar izquierdo
       Podar(nodo->derecho);   // Podar derecho
+      delete nodo->libreria.lista; // Eliminamos la lista de pedidos.
       delete nodo;            // Eliminar nodo
       nodo = NULL;
    }
@@ -520,6 +521,7 @@ void ArbolABB::Borrar(const int id_lib)
             }
             else raiz=NULL;
 
+            delete actual->libreria.lista; // Borrar la lista de pedidos
             delete actual; // Borrar el nodo
             actual = NULL;
             return;
@@ -723,7 +725,7 @@ Pedido generarPedido(ListaS &lista_id){
 };
 void imprimirLibreria(Libreria libreria)
 {
-    cout << "-------------------------------------------------------------------" << endl;
+    cout<<endl << "-------------------------------------------------------------------" << endl;
     cout << "|ID Libreria|" << "ID Pedido|"
     << setw(8) << "Cod Libro|" << setw(13) << "Materia|" << setw(8)
     << "U|" << setw(13) << "Fecha|" << endl;
@@ -747,7 +749,7 @@ void imprimirPedido(Pedido pedido)
 void imprimirEstadistica(int contador[])
 {
     string materias[]={"Matematicas", "Fisica", "Tecnologia", "Musica", "Historia", "Lengua"};
-    cout << setw(41) <<"======Cantidad de pedidos por materia============"<<endl<<endl;
+    cout << setw(41) <<"=========Cantidad de pedidos por materia========="<<endl;
     int total = 0;
     float resultados;
     for (int i = 0; i < 6; i++){total+=contador[i];}
