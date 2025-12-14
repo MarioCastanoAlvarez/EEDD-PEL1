@@ -70,3 +70,16 @@
 
 1763999596 c:\users\blamo\documents\curso 2\estructuradatos(c++)\github\eedd-pel1\mariocastañoalvarez\editorial.h
 
+1765470951 source:c:\users\blamo\documents\eedd\eedd-pel1\mariocastañoalvarez\editorial.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+	"iomanip"
+
+1765470951 c:\users\blamo\documents\eedd\eedd-pel1\mariocastañoalvarez\editorial.h
+
+1765470951 source:c:\users\blamo\documents\eedd\eedd-pel1\mariocastañoalvarez\main.cpp
+	<iostream>
+	<ctime>
+	"editorial.h"
+

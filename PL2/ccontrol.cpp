@@ -64,16 +64,6 @@ time_t fechaRand(){
 
     return mktime(&datetime);
 }
-time_t crearFecha(int a, int m, int d){
-    struct tm datetime;
-
-    datetime.tm_year = a - 1900;
-    datetime.tm_mon = m;
-    datetime.tm_mday = d;
-
-    return mktime(&datetime);
-
-}
 //Funciones de listas simples
 
 ListaS::~ListaS()

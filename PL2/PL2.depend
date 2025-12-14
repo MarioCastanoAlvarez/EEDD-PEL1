@@ -32,18 +32,20 @@
 	<iomanip>
 	"ccontrol.h"
 
-1765483136 source:c:\users\blamo\documents\eedd\eedd-pel1\pl2\ccontrol.cpp
+1765735754 source:c:\users\blamo\documents\eedd\eedd-pel1\pl2\ccontrol.cpp
 	<iostream>
 	<ctime>
 	<iomanip>
 	<string>
 	"ccontrol.h"
+	<cmath>
 
-1765484482 c:\users\blamo\documents\eedd\eedd-pel1\pl2\ccontrol.h
+1765736705 c:\users\blamo\documents\eedd\eedd-pel1\pl2\ccontrol.h
 	<ctime>
 
-1765483803 source:c:\users\blamo\documents\eedd\eedd-pel1\pl2\main.cpp
+1765726966 source:c:\users\blamo\documents\eedd\eedd-pel1\pl2\main.cpp
 	<iostream>
 	<ctime>
+	<iomanip>
 	"ccontrol.h"
 
